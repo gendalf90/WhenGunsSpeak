@@ -1,0 +1,6 @@
+﻿{
+  "IPTimeouts": {
+    "IPTimeoutInMilliseconds": 5000,
+    "IPCheckIntervalInMilliseconds" : 1000
+  }
+}
