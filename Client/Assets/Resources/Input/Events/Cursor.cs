@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace Input
 {
-    public class MouseEvent
+    public class CursorEvent
     {
-        public MouseEvent(Vector2 worldPosition, Vector2 screenPosition)
+        public CursorEvent(Vector2 worldPosition, Vector2 screenPosition)
         {
             WorldPosition = worldPosition;
             ScreenPosition = screenPosition;

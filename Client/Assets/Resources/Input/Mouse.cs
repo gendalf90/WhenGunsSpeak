@@ -5,7 +5,7 @@ using UnityCamera = UnityEngine.Camera;
 
 namespace Input
 {
-    public class Mouse : MonoBehaviour
+    class Mouse : MonoBehaviour
     {
         private Observable observable;
 
@@ -14,9 +14,9 @@ namespace Input
             observable = FindObjectOfType<Observable>();
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
-            observable.Publish(new MouseEvent(WorldPosition, ScreenPosition));
+            observable.Publish(new CursorEvent(WorldPosition, ScreenPosition));
         }
 
         private Vector2 ScreenPosition

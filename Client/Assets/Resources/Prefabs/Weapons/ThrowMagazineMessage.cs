@@ -1,16 +1,16 @@
-﻿using UnityEngine;
-using System.Collections;
-using System;
+﻿//using UnityEngine;
+//using System.Collections;
+//using System;
 
-namespace Weapons
-{
-    class ThrowMagazineMessage
-    {
-        public ThrowMagazineMessage(Guid parentId)
-        {
-            ParentId = parentId;
-        }
+//namespace Weapons
+//{
+//    class ThrowMagazineMessage
+//    {
+//        public ThrowMagazineMessage(Guid parentId)
+//        {
+//            ParentId = parentId;
+//        }
 
-        public Guid ParentId { get; private set; }
-    }
-}
+//        public Guid ParentId { get; private set; }
+//    }
+//}

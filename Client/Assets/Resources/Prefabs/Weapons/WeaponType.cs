@@ -1,10 +1,10 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿//using UnityEngine;
+//using System.Collections;
 
-namespace Weapons
-{
-    public enum WeaponType
-    {
-        AK47 = 1
-    }
-}
+//namespace Weapons
+//{
+//    public enum WeaponType
+//    {
+//        AK47 = 1
+//    }
+//}

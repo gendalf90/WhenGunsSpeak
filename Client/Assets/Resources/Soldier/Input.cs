@@ -3,38 +3,70 @@ using Messages;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using HeadRotation = Soldier.Head.Rotation;
-using BodyRotation = Soldier.Body.Rotation;
 
 namespace Soldier
 {
-    class Input : MonoBehaviour   //дизаблить этот бихейвор если не isPlayer. Управлять будет корневой soldier. Или вообще удалить; подписка будет сразу в soldier.
+    class Input : MonoBehaviour   //дизаблить этот бихейвор если не isPlayer. Управлять будет корневой soldier.
     {
         private Observable observable;
-        private HeadRotation headRotation;
-        private BodyRotation bodyRotation;
+        private Rotation rotation;
+        private Motion motion;
 
         private void Awake()
         {
             observable = FindObjectOfType<Observable>();
-            headRotation = GetComponentInChildren<HeadRotation>();
-            bodyRotation = GetComponentInChildren<BodyRotation>();
+            rotation = GetComponent<Rotation>();
+            motion = GetComponent<Motion>();
         }
 
         private void OnEnable()
         {
-            observable.Subscribe<MouseEvent>(MouseHandle);
+            observable.Subscribe<CursorEvent>(CursorHandle);
+            observable.Subscribe<StartRightEvent>(StartRightHandle);
+            observable.Subscribe<StopRightEvent>(StopRightHandle);
+            observable.Subscribe<StartLeftEvent>(StartLeftHandle);
+            observable.Subscribe<StopLeftEvent>(StopLeftHandle);
+            observable.Subscribe<JumpEvent>(JumpHandle);
         }
 
         private void OnDisable()
         {
-            observable.Unsubscribe<MouseEvent>(MouseHandle);
+            observable.Unsubscribe<CursorEvent>(CursorHandle);
+            observable.Unsubscribe<StartRightEvent>(StartRightHandle);
+            observable.Unsubscribe<StopRightEvent>(StopRightHandle);
+            observable.Unsubscribe<StartLeftEvent>(StartLeftHandle);
+            observable.Unsubscribe<StopLeftEvent>(StopLeftHandle);
+            observable.Unsubscribe<JumpEvent>(JumpHandle);
         }
 
-        private void MouseHandle(MouseEvent e)
+        private void CursorHandle(CursorEvent e)
         {
-            headRotation.LookAt = e.WorldPosition;
-            bodyRotation.Aim = e.WorldPosition;
+            rotation.ToPosition = e.WorldPosition;
+        }
+
+        private void StartRightHandle(StartRightEvent e)
+        {
+            motion.MoveRight();
+        }
+
+        private void StopRightHandle(StopRightEvent e)
+        {
+            motion.StopRight();
+        }
+
+        private void StartLeftHandle(StartLeftEvent e)
+        {
+            motion.MoveLeft();
+        }
+
+        private void StopLeftHandle(StopLeftEvent e)
+        {
+            motion.StopLeft();
+        }
+
+        private void JumpHandle(JumpEvent e)
+        {
+            motion.Jump();
         }
     }
 }

@@ -2,8 +2,6 @@
 using System.IO;
 using System;
 using System.Runtime.Serialization.Formatters.Binary;
-using Network;
-using System.Net;
 
 public class BinaryDataBuilder
 {

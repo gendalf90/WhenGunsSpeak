@@ -1,10 +1,10 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿//using UnityEngine;
+//using System.Collections;
 
-namespace Weapons
-{
-    enum MagazineType
-    {
-        AK47 = 1
-    }
-}
+//namespace Weapons
+//{
+//    enum MagazineType
+//    {
+//        AK47 = 1
+//    }
+//}
