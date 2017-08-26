@@ -5,6 +5,7 @@ using HeadRotation = Soldier.Head.Rotation;
 using BodyRotation = Soldier.Body.Rotation;
 using BodyFlip = Soldier.Body.Flip;
 using HeadFlip = Soldier.Head.Flip;
+using LegsFlip = Soldier.Legs.Flip;
 
 namespace Soldier
 {
@@ -14,6 +15,7 @@ namespace Soldier
         private BodyRotation bodyRotation;
         private BodyFlip bodyFlip;
         private HeadFlip headFlip;
+        private LegsFlip legsFlip;
 
         private Vector2 toPosition;
 
@@ -23,6 +25,7 @@ namespace Soldier
             bodyRotation = GetComponentInChildren<BodyRotation>();
             headFlip = GetComponentInChildren<HeadFlip>();
             bodyFlip = GetComponentInChildren<BodyFlip>();
+            legsFlip = GetComponentInChildren<LegsFlip>();
         }
 
         public Vector2 ToPosition
@@ -54,14 +57,26 @@ namespace Soldier
         {
             if (Angle <= 90 || Angle >= 270)
             {
-                headFlip.SetLookAtRight();
-                bodyFlip.SetLookAtRight();
+                LookAtRight();
             }
             else
             {
-                headFlip.SetLookAtLeft();
-                bodyFlip.SetLookAtLeft();
+                LookAtLeft();
             }
+        }
+
+        private void LookAtRight()
+        {
+            headFlip.SetLookAtRight();
+            bodyFlip.SetLookAtRight();
+            legsFlip.ToRight();
+        }
+
+        private void LookAtLeft()
+        {
+            headFlip.SetLookAtLeft();
+            bodyFlip.SetLookAtLeft();
+            legsFlip.ToLeft();
         }
 
         private float Angle

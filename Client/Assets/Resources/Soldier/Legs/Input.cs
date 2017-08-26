@@ -1,70 +1,56 @@
 ﻿using Input;
 using Messages;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-namespace Soldier
+namespace Soldier.Legs
 {
-    class Input : MonoBehaviour   //дизаблить этот бихейвор если не isPlayer. Управлять будет корневой soldier.
+    public class Input : MonoBehaviour
     {
         private Observable observable;
-        private Rotation rotation;
-        private Motion motion;
+        private Animation legsAnimation;
 
         private void Awake()
         {
             observable = FindObjectOfType<Observable>();
-            rotation = GetComponent<Rotation>();
-            motion = GetComponent<Motion>();
+            legsAnimation = GetComponentInChildren<Animation>();
         }
 
         private void OnEnable()
         {
-            observable.Subscribe<CursorEvent>(CursorHandle);
             observable.Subscribe<StartRightEvent>(StartRightHandle);
             observable.Subscribe<StopRightEvent>(StopRightHandle);
             observable.Subscribe<StartLeftEvent>(StartLeftHandle);
             observable.Subscribe<StopLeftEvent>(StopLeftHandle);
-            observable.Subscribe<JumpEvent>(JumpHandle);
         }
 
         private void OnDisable()
         {
-            observable.Unsubscribe<CursorEvent>(CursorHandle);
             observable.Unsubscribe<StartRightEvent>(StartRightHandle);
             observable.Unsubscribe<StopRightEvent>(StopRightHandle);
             observable.Unsubscribe<StartLeftEvent>(StartLeftHandle);
             observable.Unsubscribe<StopLeftEvent>(StopLeftHandle);
-            observable.Unsubscribe<JumpEvent>(JumpHandle);
-        }
-
-        private void CursorHandle(CursorEvent e)
-        {
-            rotation.ToPosition = e.WorldPosition;
         }
 
         private void StartRightHandle(StartRightEvent e)
         {
-            motion.MoveRight();
+            legsAnimation.IsRightMoving = true;
         }
 
         private void StopRightHandle(StopRightEvent e)
         {
-            motion.StopRight();
+            legsAnimation.IsRightMoving = false;
         }
 
         private void StartLeftHandle(StartLeftEvent e)
         {
-            motion.MoveLeft();
+            legsAnimation.IsLeftMoving = true;
         }
 
         private void StopLeftHandle(StopLeftEvent e)
         {
-            motion.StopLeft();
-        }
-
-        private void JumpHandle(JumpEvent e)
-        {
-            motion.Jump();
+            legsAnimation.IsLeftMoving = false;
         }
     }
 }
