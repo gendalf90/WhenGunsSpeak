@@ -1,25 +1,24 @@
 ﻿using Input;
 using Messages;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-namespace Soldier
+namespace Soldier.Motion
 {
     class Input : MonoBehaviour   //дизаблить этот бихейвор если не isPlayer. Управлять будет корневой soldier.
     {
         private Observable observable;
-        private Rotation rotation;
-        private Motion motion;
+        private Movement movement;
 
         private void Awake()
         {
             observable = FindObjectOfType<Observable>();
-            rotation = GetComponent<Rotation>();
-            motion = GetComponent<Motion>();
+            movement = GetComponent<Movement>();
         }
 
         private void OnEnable()
         {
-            observable.Subscribe<CursorEvent>(CursorHandle);
             observable.Subscribe<StartRightEvent>(StartRightHandle);
             observable.Subscribe<StopRightEvent>(StopRightHandle);
             observable.Subscribe<StartLeftEvent>(StartLeftHandle);
@@ -29,7 +28,6 @@ namespace Soldier
 
         private void OnDisable()
         {
-            observable.Unsubscribe<CursorEvent>(CursorHandle);
             observable.Unsubscribe<StartRightEvent>(StartRightHandle);
             observable.Unsubscribe<StopRightEvent>(StopRightHandle);
             observable.Unsubscribe<StartLeftEvent>(StartLeftHandle);
@@ -37,34 +35,29 @@ namespace Soldier
             observable.Unsubscribe<JumpEvent>(JumpHandle);
         }
 
-        private void CursorHandle(CursorEvent e)
-        {
-            rotation.ToPosition = e.WorldPosition;
-        }
-
         private void StartRightHandle(StartRightEvent e)
         {
-            motion.MoveRight();
+            movement.MoveRight();
         }
 
         private void StopRightHandle(StopRightEvent e)
         {
-            motion.StopRight();
+            movement.StopRight();
         }
 
         private void StartLeftHandle(StartLeftEvent e)
         {
-            motion.MoveLeft();
+            movement.MoveLeft();
         }
 
         private void StopLeftHandle(StopLeftEvent e)
         {
-            motion.StopLeft();
+            movement.StopLeft();
         }
 
         private void JumpHandle(JumpEvent e)
         {
-            motion.Jump();
+            movement.Jump();
         }
     }
 }

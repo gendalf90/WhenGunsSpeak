@@ -11,12 +11,10 @@ namespace Soldier.Network
     class PlayerSender : MonoBehaviour //из клиента плайера на сервер. у сервера плайера (сервер всегда плайер) отключено.
     {
         private Observable observable;
-        private Rotation headRotation;
 
         private void Awake()
         {
             observable = FindObjectOfType<Observable>();
-            headRotation = GetComponentInChildren<Rotation>();
         }
 
         private void Update()

@@ -11,12 +11,10 @@ namespace Soldier.Network
     public class Receiver : MonoBehaviour //включен везде и у всех
     {
         private Observable observable;
-        private Rotation headRotation;
 
         private void Awake()
         {
             observable = FindObjectOfType<Observable>();
-            headRotation = GetComponentInChildren<Rotation>();
         }
 
         private void Receive(OnReceiveEvent e)

@@ -3,21 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Shells
+namespace Soldier.Rotation
 {
-    public class ThrowBulletCommand
+    public class LookEvent
     {
-        public ThrowBulletCommand(Guid guid, Vector2 position, float rotation)
+        public LookEvent(Guid guid, Vector2 position, LookDirection direction)
         {
             Guid = guid;
             Position = position;
-            Rotation = rotation;
+            Direction = direction;
         }
 
         public Guid Guid { get; private set; }
 
         public Vector2 Position { get; private set; }
 
-        public float Rotation { get; private set; }
+        public LookDirection Direction { get; private set; }
     }
 }

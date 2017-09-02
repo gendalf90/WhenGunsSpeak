@@ -16,6 +16,12 @@ namespace Input
 
         private void FixedUpdate()
         {
+            UpdateCursor();
+            UpdateFire();
+        }
+
+        private void UpdateCursor()
+        {
             observable.Publish(new CursorEvent(WorldPosition, ScreenPosition));
         }
 
@@ -32,6 +38,19 @@ namespace Input
             get
             {
                 return UnityCamera.main.ScreenToWorldPoint(ScreenPosition);
+            }
+        }
+
+        private void UpdateFire()
+        {
+            if (UnityInput.GetMouseButtonDown(0))
+            {
+                observable.Publish(new StartFireEvent());
+            }
+
+            if (UnityInput.GetMouseButtonUp(0))
+            {
+                observable.Publish(new EndFireEvent());
             }
         }
     }

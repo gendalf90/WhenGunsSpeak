@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Soldier.Legs
 {
-    public class Flip : MonoBehaviour
+    class Flip : MonoBehaviour
     {
         private Transform legsTransform;
 

@@ -81,7 +81,7 @@ namespace Shells
 
         private bool IsClient { get; set; }
 
-        private void CreateAndThrowBullet(ThrowBulletCommand command)
+        private void CreateAndThrowBullet(Throw7dot62Command command)
         {
             SetGuid(command.Guid);
             Load();

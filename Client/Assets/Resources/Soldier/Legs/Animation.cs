@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Soldier.Legs
 {
-    public class Animation : MonoBehaviour
+    class Animation : MonoBehaviour
     {
         private Animator animator;
         private Transform legsTransform;

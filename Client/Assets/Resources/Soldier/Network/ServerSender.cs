@@ -11,12 +11,10 @@ namespace Soldier.Network
     class ServerSender : MonoBehaviour //из сервера на клиенты. включено у сервера.
     {
         private Observable observable;
-        private Rotation headRotation;
 
         private void Awake()
         {
             observable = FindObjectOfType<Observable>();
-            headRotation = GetComponentInChildren<Rotation>();
         }
 
         private void Update()

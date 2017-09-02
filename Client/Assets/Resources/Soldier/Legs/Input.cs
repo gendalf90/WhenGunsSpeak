@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Soldier.Legs
 {
-    public class Input : MonoBehaviour
+    class Input : MonoBehaviour
     {
         private Observable observable;
         private Animation legsAnimation;

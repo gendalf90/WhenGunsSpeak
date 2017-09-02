@@ -20,7 +20,7 @@ namespace Input
             observable = FindObjectOfType<Observable>();
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
             UpdateRightAndLeft();
             UpdateJump();
@@ -82,7 +82,7 @@ namespace Input
 
         private void UpdateJump()
         {
-            var isPressed = UnityInput.GetKeyDown(KeyCode.Space);
+            var isPressed = UnityInput.GetButtonDown("Jump");
 
             if (isPressed)
             {
