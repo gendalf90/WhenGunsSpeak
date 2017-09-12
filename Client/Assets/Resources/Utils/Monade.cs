@@ -37,15 +37,6 @@ public static class Monade
         return failureFunction == null ? default(R) : failureFunction();
     }
 
-    public static R Return<T, R>(this T subject, Func<T, R> resultFunction, R failureValue = default(R)) where T : class
-    {
-        if (subject != null)
-        {
-            return resultFunction(subject);
-        }
-        return failureValue;
-    }
-
     public static bool ReturnSuccess<T>(this T subject) where T : class
     {
         return subject != null;

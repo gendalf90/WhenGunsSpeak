@@ -9,7 +9,7 @@ namespace Server
     {
         private SimpleTimer timeoutTimer;
 
-        public Guid Guid { get; private set; }
+        public string Session { get; private set; }
 
         public bool IsTimeout
         {
@@ -24,11 +24,11 @@ namespace Server
             timeoutTimer.Restart();
         }
 
-        public static Connection StartConnection(Guid guid, float timeoutSeconds)
+        public static Connection StartConnection(string session, float timeoutSeconds)
         {
             return new Connection
             {
-                Guid = guid,
+                Session = session,
                 timeoutTimer = SimpleTimer.StartNew(timeoutSeconds)
             };
         }

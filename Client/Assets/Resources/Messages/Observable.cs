@@ -63,33 +63,14 @@ namespace Messages
             }
         }
 
-        private void DeleteObserversByCurrentType()
-        {
-            observers.Remove(currentType);
-        }
-
         private void AddActionToCurrentDelegate<T>(Action<T> action)
         {
-            if (currentDelegate != null)
-            {
-                var currentAction = (Action<T>)currentDelegate;
-                currentAction += action;
-                currentDelegate = currentAction;
-            }
-            else
-            {
-                currentDelegate = action;
-            }
+            currentDelegate = Delegate.Combine(currentDelegate, action);
         }
 
         private void RemoveActionFromCurrentDelegate<T>(Action<T> action)
         {
-            if (currentDelegate != null)
-            {
-                var currentAction = (Action<T>)currentDelegate;
-                currentAction -= action;
-                currentDelegate = currentAction;
-            }
+            currentDelegate = Delegate.Remove(currentDelegate, action);
         }
 
         private void SafeInvokeCurrentDelegateWithMessage<T>(T message)

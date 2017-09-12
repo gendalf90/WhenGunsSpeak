@@ -7,8 +7,11 @@ namespace Server
 {
     public class StartAsClientCommand
     {
-        public Guid Guid { get; private set; }
+        public StartAsClientCommand(string connectToSession)
+        {
+            ConnectToSession = connectToSession;
+        }
 
-        public Guid ConnectTo { get; private set; }
+        public string ConnectToSession { get; private set; }
     }
 }

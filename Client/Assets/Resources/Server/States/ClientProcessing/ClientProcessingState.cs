@@ -13,7 +13,7 @@ namespace Server
 
         private Observable observable;
         private Udp udp;
-        private ReceiveFromHandler receiveFromHandler;
+        private SendHandler receiveFromHandler;
         private ConnectionsHandler connectionsHandler;
 
         private bool isConnect;
@@ -24,7 +24,7 @@ namespace Server
         {
             observable = FindObjectOfType<Observable>();
             udp = FindObjectOfType<Udp>();
-            receiveFromHandler = GetComponent<ReceiveFromHandler>();
+            receiveFromHandler = GetComponent<SendHandler>();
             connectionsHandler = GetComponent<ConnectionsHandler>();
         }
 
@@ -73,18 +73,18 @@ namespace Server
             }
         }
 
-        public Guid MyGuid { get; set; }
+        public string CurrentSession { get; set; }
 
-        public Guid ServerGuid { get; set; }
+        public string ServerSession { get; set; }
 
         private void SendTo(SendToCommand command)
         {
-            udp.Send(new SendToDecorator(command.Data, MyGuid, command.To));
+            udp.Send(new SendDecorator(command.Data, MyGuid, command.To));
         }
 
         private void SendToServer(SendToServerCommand command)
         {
-            udp.Send(new SendToDecorator(command.Data, MyGuid, ServerGuid));
+            udp.Send(new SendDecorator(command.Data, MyGuid, ServerGuid));
         }
 
         private void Stop(StopCommand command)
@@ -131,7 +131,7 @@ namespace Server
             }
 
             isConnect = true;
-            observable.Publish(new OnConnectEvent(ServerGuid));
+            observable.Publish(new OnConnectToServerEvent(ServerGuid));
         }
 
         private void Disconnect(object sender, ConnectionEventArgs args)

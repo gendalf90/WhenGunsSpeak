@@ -21,7 +21,6 @@ namespace Server
 
         public Udp()
         {
-            client = new UdpClient();
             received = new ConcurrentQueue<IPacket>();
             sending = new ConcurrentQueue<IPacket>();
         }
@@ -35,12 +34,14 @@ namespace Server
 
         private void Run()
         {
+            client = new UdpClient();
             isRunning = true;
         }
 
         private void Stop()
         {
             isRunning = false;
+            client.Close();
         }
 
         private void StartBackground(ThreadStart action)
@@ -125,7 +126,6 @@ namespace Server
         private void OnDestroy()
         {
             Stop();
-            client.Close();
         }
     }
 }

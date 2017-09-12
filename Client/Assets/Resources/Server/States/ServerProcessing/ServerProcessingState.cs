@@ -13,7 +13,7 @@ namespace Server
 
         private Observable observable;
         private Udp udp;
-        private ReceiveFromHandler receiveFromHandler;
+        private SendHandler receiveFromHandler;
         private ConnectionsHandler connectionsHandler;
 
         private HashSet<Guid> clients;
@@ -25,7 +25,7 @@ namespace Server
 
         private void Awake()
         {
-            receiveFromHandler = GetComponent<ReceiveFromHandler>();
+            receiveFromHandler = GetComponent<SendHandler>();
             connectionsHandler = GetComponent<ConnectionsHandler>();
             observable = FindObjectOfType<Observable>();
             udp = FindObjectOfType<Udp>();
@@ -58,7 +58,7 @@ namespace Server
             observable.Unsubscribe<StopCommand>(Stop);
         }
 
-        public Guid Guid { get; set; }
+        public string CurrentSession { get; set; }
 
         private void Receive(object sender, ReceiveFromEventArgs args)
         {
@@ -89,12 +89,12 @@ namespace Server
 
         private void SendTo(SendToCommand command)
         {
-            udp.Send(new SendToDecorator(command.Data, Guid, command.To));
+            udp.Send(new SendDecorator(command.Data, Guid, command.To));
         }
 
         private void SendToClients(SendToClientsCommand command)
         {
-            udp.Send(new SendToDecorator(command.Data, Guid, clients));
+            udp.Send(new SendDecorator(command.Data, Guid, clients));
         }
 
         private void Register(RegisterCommand command)

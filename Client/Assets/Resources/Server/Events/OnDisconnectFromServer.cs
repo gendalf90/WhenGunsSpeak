@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Server
 {
-    public class StartAsServerCommand
+    public class OnDisconnectFromServerEvent
     {
     }
 }

@@ -7,19 +7,19 @@ namespace Server
 {
     class Ping : IPacket
     {
-        public Ping(Guid initiator, Guid responder)
+        public Ping(string fromSession, string toSession)
         {
-            Initiator = initiator;
-            Responder = responder;
+            FromSession = fromSession;
+            ToSession = toSession;
         }
 
-        public Guid Initiator { get; private set; }
+        public string FromSession { get; private set; }
 
-        public Guid Responder { get; private set; }
+        public string ToSession { get; private set; }
 
         public byte[] GetBytes()
         {
-            var ping = new { Action = "ping", Initiator = Initiator.ToMinString(), Responder = Responder.ToMinString() };
+            var ping = new { Action = "ping", From = FromSession, To = ToSession };
             return new BinaryDataBuilder().WriteAsJson(ping).Build();
         }
     }

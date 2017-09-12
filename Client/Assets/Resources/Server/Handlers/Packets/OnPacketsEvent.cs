@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Server
 {
-    class ReceivePacketsEventArgs : EventArgs
+    public class OnPacketsEvent
     {
-        public ReceivePacketsEventArgs(IEnumerable<IPacket> packets)
+        public OnPacketsEvent(IEnumerable<IPacket> packets)
         {
             Packets = packets;
         }

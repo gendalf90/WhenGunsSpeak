@@ -7,19 +7,19 @@ namespace Server
 {
     class Registration : IPacket
     {
-        public Registration(Guid guid, string description)
+        public Registration(string session, string description)
         {
-            Guid = guid;
+            Session = session;
             Description = description;
         }
 
-        public Guid Guid { get; private set; }
+        public string Session { get; private set; }
 
         public string Description { get; private set; }
 
         public byte[] GetBytes()
         {
-            var registration = new { Action = "registration", From = Guid.ToMinString(), Description = Description };
+            var registration = new { Action = "registration", Session = Session, Description = Description };
             return new BinaryDataBuilder().WriteAsJson(registration).Build();
         }
     }

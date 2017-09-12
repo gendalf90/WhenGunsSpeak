@@ -1,5 +1,4 @@
 ﻿using Messages;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +6,7 @@ using UnityEngine;
 
 namespace Server
 {
-    class PingHandler : MonoBehaviour
+    class SessionHandler : MonoBehaviour
     {
         private Observable observable;
 
@@ -28,27 +27,27 @@ namespace Server
 
         private void Receive(OnPacketsEvent e)
         {
-            e.Packets.Select(AsPingHeader)
+            e.Packets.Select(AsSessionHeader)
                      .Where(header => header != null)
-                     .Select(header => header.From)
+                     .Select(header => header.Session)
                      .Distinct()
-                     .Select(from => new OnPingEvent(from))
+                     .Select(session => new OnSessionEvent(session))
                      .ForEach(observable.Publish);
         }
 
-        private PingHeader AsPingHeader(IPacket packet)
+        private SessionHeader AsSessionHeader(IPacket packet)
         {
             using (var reader = packet.ToReader())
             {
-                return reader.ReadFromJson<PingHeader>().If(header => header.Action == "ping");
+                return reader.ReadFromJson<SessionHeader>().If(header => header.Action == "session");
             }
         }
 
-        class PingHeader
+        class SessionHeader
         {
             public string Action { get; set; }
 
-            public string From { get; set; }
+            public string Session { get; set; }
         }
     }
 }

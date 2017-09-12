@@ -9,13 +9,13 @@ namespace Server
     class InactiveState : MonoBehaviour
     {
         private Observable observable;
-        private Guid connectingGuid;
-        private Guid startingGuid;
-        private Role startingRole;
+        private string clientConnectingSession;
+        private GameObject nextStatePrefab;
 
         private void Awake()
         {
             observable = FindObjectOfType<Observable>();
+            nextStatePrefab = Resources.Load<GameObject>("Server/States/GetSession");
         }
 
         private void Start()
@@ -40,59 +40,46 @@ namespace Server
             UnsubscribeAll();
             InitializeCommand(command);
             StartUdp();
-            StartClient();
-            NotifyThatHasStarted();
+            ConfigureNextStateAsClient();
+            StartNextState();
             Destroy(gameObject);
         }
 
         private void OnServerStartEventHandler(StartAsServerCommand command)
         {
             UnsubscribeAll();
-            InitializeCommand(command);
             StartUdp();
-            StartServer();
-            NotifyThatHasStarted();
+            ConfigureNextStateAsServer();
+            StartNextState();
             Destroy(gameObject);
         }
 
         private void InitializeCommand(StartAsClientCommand command)
         {
-            connectingGuid = command.ConnectTo;
-            startingGuid = command.Guid;
-            startingRole = Role.Client;
+            clientConnectingSession = command.ConnectToSession;
         }
 
-        private void InitializeCommand(StartAsServerCommand command)
+        private void ConfigureNextStateAsClient()
         {
-            startingGuid = command.Guid;
-            startingRole = Role.Server;
+            var nextState = nextStatePrefab.GetComponent<GetSessionState>();
+            nextState.SetAsClient(clientConnectingSession);
+
         }
 
-        private void StartServer()
+        private void ConfigureNextStateAsServer()
         {
-            var prefab = Resources.Load<GameObject>("Server/States/ServerProcessing");
-            var state = prefab.GetComponent<ServerProcessingState>();
-            state.Guid = startingGuid;
-            Instantiate(prefab);
+            var nextState = nextStatePrefab.GetComponent<GetSessionState>();
+            nextState.SetAsServer();
         }
 
-        private void StartClient()
+        private void StartNextState()
         {
-            var prefab = Resources.Load<GameObject>("Server/States/ClientProcessing");
-            var state = prefab.GetComponent<ClientProcessingState>();
-            state.MyGuid = startingGuid;
-            state.ServerGuid = connectingGuid;
-            Instantiate(prefab);
+            Instantiate(nextStatePrefab);
         }
 
         private void StartUdp()
         {
             Instantiate(Resources.Load<GameObject>("Server/Udp/Udp"));
-        }
-
-        private void NotifyThatHasStarted()
-        {
-            observable.Publish(new OnStartedEvent(startingGuid, startingRole));
         }
     }
 }

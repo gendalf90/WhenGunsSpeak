@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Server
 {
-    class PingHandler : MonoBehaviour
+    class SendHandler : MonoBehaviour
     {
         private Observable observable;
 
@@ -28,27 +28,35 @@ namespace Server
 
         private void Receive(OnPacketsEvent e)
         {
-            e.Packets.Select(AsPingHeader)
-                     .Where(header => header != null)
-                     .Select(header => header.From)
-                     .Distinct()
-                     .Select(from => new OnPingEvent(from))
+            e.Packets.Select(AsSendData)
+                     .Where(data => data != null)
+                     .GroupBy(data => data.From, data => data.Packet)
+                     .Select(group => new OnSendEvent(group.Key, group))
                      .ForEach(observable.Publish);
         }
 
-        private PingHeader AsPingHeader(IPacket packet)
+        private SendData AsSendData(IPacket packet)
         {
             using (var reader = packet.ToReader())
             {
-                return reader.ReadFromJson<PingHeader>().If(header => header.Action == "ping");
+                return reader.ReadFromJson<SendHeader>()
+                             .If(header => header.Action == "send")
+                             .Return(header => new SendData { From = header.From, Packet = reader.ReadBytes().ToPacket() });
             }
         }
 
-        class PingHeader
+        class SendHeader
         {
             public string Action { get; set; }
 
             public string From { get; set; }
+        }
+
+        class SendData
+        {
+            public string From { get; set; }
+
+            public IPacket Packet { get; set; }
         }
     }
 }

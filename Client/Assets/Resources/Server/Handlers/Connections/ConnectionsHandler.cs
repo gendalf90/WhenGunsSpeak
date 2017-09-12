@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Messages;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,22 +12,31 @@ namespace Server
         [SerializeField]
         private float connectionTimeout;
 
-        private PingHandler pingHandler;
-
         private List<Connection> connections;
 
-        private Guid currentGuid;
+        private string currentSession;
         private Connection currentConnection;
+
+        private Observable observable;
+
+        public ConnectionsHandler()
+        {
+            connections = new List<Connection>();
+        }
 
         private void Awake()
         {
-            pingHandler = GetComponent<PingHandler>();
+            observable = FindObjectOfType<Observable>();
         }
 
         private void Start()
         {
-            connections = new List<Connection>();
-            pingHandler.OnPingReceive += PingReceive;
+            observable.Subscribe<OnPingEvent>(Receive);
+        }
+
+        private void OnDestroy()
+        {
+            observable.Unsubscribe<OnPingEvent>(Receive);
         }
 
         private void Update()
@@ -41,26 +51,22 @@ namespace Server
             foreach (var connection in timeoutConnections)
             {
                 connections.Remove(connection);
-                OnDisconnect.SafeRaise(this, new ConnectionEventArgs(connection.Guid));
+                observable.Publish(new OnDisconnectionEvent(connection.Session));
             }
         }
 
-        private void PingReceive(object sender, ReceivePingEventArgs args)
+        private void Receive(OnPingEvent e)
         {
-            currentGuid = args.From;
+            currentSession = e.FromSession;
 
             TryFindConnection();
             TryUpdateConnection();
             TryAddConnection();
         }
 
-        public event EventHandler<ConnectionEventArgs> OnConnect;
-
-        public event EventHandler<ConnectionEventArgs> OnDisconnect;
-
         private void TryFindConnection()
         {
-            currentConnection = connections.Find(connection => connection.Guid == currentGuid);
+            currentConnection = connections.Find(connection => connection.Session == currentSession);
         }
 
         private void TryUpdateConnection()
@@ -78,14 +84,9 @@ namespace Server
                 return;
             }
 
-            var newConnection = Connection.StartConnection(currentGuid, connectionTimeout);
+            var newConnection = Connection.StartConnection(currentSession, connectionTimeout);
             connections.Add(newConnection);
-            OnConnect.SafeRaise(this, new ConnectionEventArgs(newConnection.Guid));
-        }
-
-        private void OnDestroy()
-        {
-            pingHandler.OnPingReceive -= PingReceive;
+            observable.Publish(new OnConnectionEvent(newConnection.Session));
         }
     }
 }
