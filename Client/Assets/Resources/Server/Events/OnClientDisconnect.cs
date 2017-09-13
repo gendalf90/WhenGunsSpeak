@@ -7,11 +7,11 @@ namespace Server
 {
     public class OnClientDisconnectEvent
     {
-        public OnClientDisconnectEvent(Guid guid)
+        public OnClientDisconnectEvent(string session)
         {
-            Guid = guid;
+            Session = session;
         }
 
-        public Guid Guid { get; private set; }
+        public string Session { get; private set; }
     }
 }

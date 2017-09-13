@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace Server
 {
-    public class RegisterCommand
+    public class RegisterRoomCommand
     {
-        public RegisterCommand(string description)
+        public RegisterRoomCommand(string description)
         {
             Description = description;
         }

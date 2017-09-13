@@ -7,11 +7,11 @@ namespace Server
 {
     public class OnClientConnectEvent
     {
-        public OnClientConnectEvent(Guid guid)
+        public OnClientConnectEvent(string session)
         {
-            Guid = guid;
+            Session = session;
         }
 
-        public Guid Guid { get; private set; }
+        public string Session { get; private set; }
     }
 }

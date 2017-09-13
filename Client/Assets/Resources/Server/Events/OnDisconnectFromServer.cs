@@ -7,5 +7,11 @@ namespace Server
 {
     public class OnDisconnectFromServerEvent
     {
+        public OnDisconnectFromServerEvent(string serverSession)
+        {
+            ServerSession = serverSession;
+        }
+
+        public string ServerSession { get; private set; }
     }
 }

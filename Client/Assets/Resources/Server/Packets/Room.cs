@@ -5,9 +5,9 @@ using UnityEngine;
 
 namespace Server
 {
-    class Registration : IPacket
+    class Room : IPacket
     {
-        public Registration(string session, string description)
+        public Room(string session, string description)
         {
             Session = session;
             Description = description;
@@ -19,7 +19,7 @@ namespace Server
 
         public byte[] GetBytes()
         {
-            var registration = new { Action = "registration", Session = Session, Description = Description };
+            var registration = new { Action = "room", Session = Session, Description = Description };
             return new BinaryDataBuilder().WriteAsJson(registration).Build();
         }
     }

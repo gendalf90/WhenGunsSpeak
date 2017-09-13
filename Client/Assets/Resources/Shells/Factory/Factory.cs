@@ -36,7 +36,7 @@ namespace Shells
         private void Start()
         {
             FillCreatedPull();
-            observable.Subscribe<OnStartedEvent>(OnStart);
+            //observable.Subscribe<OnStartedEvent>(OnStart);
             observable.Subscribe<OnStoppedEvent>(OnStop);
         }
 
@@ -55,16 +55,16 @@ namespace Shells
             created.Enqueue(newObject);
         }
 
-        private void OnStart(OnStartedEvent e)
-        {
-            IsServer = e.MyRole == Role.Server;
-            IsClient = e.MyRole == Role.Client;
+        //private void OnStart(OnStartedEvent e)
+        //{
+        //    IsServer = e.MyRole == Role.Server;
+        //    IsClient = e.MyRole == Role.Client;
 
-            if (IsClient)
-            {
-                observable.Subscribe<OnReceiveEvent>(Receive);
-            }
-        }
+        //    if (IsClient)
+        //    {
+        //        observable.Subscribe<OnReceiveEvent>(Receive);
+        //    }
+        //}
 
         private void OnStop(OnStoppedEvent e)
         {
@@ -199,7 +199,7 @@ namespace Shells
 
         private void OnDestroy()
         {
-            observable.Unsubscribe<OnStartedEvent>(OnStart);
+            //observable.Unsubscribe<OnStartedEvent>(OnStart);
             observable.Unsubscribe<OnStoppedEvent>(OnStop);
         }
     }

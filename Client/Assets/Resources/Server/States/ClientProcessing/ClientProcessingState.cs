@@ -8,53 +8,32 @@ namespace Server
 {
     class ClientProcessingState : MonoBehaviour
     {
-        [SerializeField]
-        private float timeoutInSeconds;
-
         private Observable observable;
         private Udp udp;
-        private SendHandler receiveFromHandler;
-        private ConnectionsHandler connectionsHandler;
-
-        private bool isConnect;
-        private bool isStopped;
-        private SimpleTimer connectTimeoutTimer;
 
         private void Awake()
         {
             observable = FindObjectOfType<Observable>();
             udp = FindObjectOfType<Udp>();
-            receiveFromHandler = GetComponent<SendHandler>();
-            connectionsHandler = GetComponent<ConnectionsHandler>();
         }
 
         private void Start()
         {
-            StartTimeoutTimer();
             SubscribeAll();
-        }
-
-        private void StartTimeoutTimer()
-        {
-            connectTimeoutTimer = SimpleTimer.StartNew(timeoutInSeconds);
         }
 
         private void SubscribeAll()
         {
-            receiveFromHandler.OnReceiveFrom += Receive;
-            connectionsHandler.OnConnect += Connect;
-            connectionsHandler.OnDisconnect += Disconnect;
-            observable.Subscribe<SendToCommand>(SendTo);
+            observable.Subscribe<OnDisconnectionEvent>(OnDisconnect);
+            observable.Subscribe<OnSendEvent>(ReceiveFromServer);
             observable.Subscribe<SendToServerCommand>(SendToServer);
             observable.Subscribe<StopCommand>(Stop);
         }
 
         private void UnsubscribeAll()
         {
-            receiveFromHandler.OnReceiveFrom -= Receive;
-            connectionsHandler.OnConnect -= Connect;
-            connectionsHandler.OnDisconnect -= Disconnect;
-            observable.Unsubscribe<SendToCommand>(SendTo);
+            observable.Unsubscribe<OnDisconnectionEvent>(OnDisconnect);
+            observable.Unsubscribe<OnSendEvent>(ReceiveFromServer);
             observable.Unsubscribe<SendToServerCommand>(SendToServer);
             observable.Unsubscribe<StopCommand>(Stop);
         }
@@ -62,12 +41,11 @@ namespace Server
         private void Update()
         {
             SendPingToServer();
-            StopIfConnectTimeout();
         }
 
-        private void StopIfConnectTimeout()
+        private void OnDisconnect(OnDisconnectionEvent e)
         {
-            if (!isConnect && connectTimeoutTimer.ItIsTime)
+            if (ServerSession == e.Session)
             {
                 Stop();
             }
@@ -77,14 +55,17 @@ namespace Server
 
         public string ServerSession { get; set; }
 
-        private void SendTo(SendToCommand command)
+        private void ReceiveFromServer(OnSendEvent e)
         {
-            udp.Send(new SendDecorator(command.Data, MyGuid, command.To));
+            if (e.FromSession == ServerSession)
+            {
+                observable.Publish(new OnReceiveEvent(e.FromSession, e.Data));
+            }
         }
 
         private void SendToServer(SendToServerCommand command)
         {
-            udp.Send(new SendDecorator(command.Data, MyGuid, ServerGuid));
+            udp.Send(new SendDecorator(command.Data, CurrentSession, ServerSession));
         }
 
         private void Stop(StopCommand command)
@@ -94,61 +75,20 @@ namespace Server
 
         private void Stop()
         {
-            if (!TrySetStopped())
-            {
-                return;
-            }
-
             UnsubscribeAll();
+            NotifyThatDisconnected();
             RunStopping();
             Destroy(gameObject);
         }
 
-        private bool TrySetStopped()
-        {
-            if (isStopped)
-            {
-                return false;
-            }
-
-            isStopped = true;
-            return true;
-        }
-
-        private void Receive(object sender, ReceiveFromEventArgs args)
-        {
-            if (isConnect && args.From == ServerGuid)
-            {
-                observable.Publish(new OnReceiveEvent(args.From, args.Data));
-            }
-        }
-
-        private void Connect(object sender, ConnectionEventArgs args)
-        {
-            if (args.Guid != ServerGuid)
-            {
-                return;
-            }
-
-            isConnect = true;
-            observable.Publish(new OnConnectToServerEvent(ServerGuid));
-        }
-
-        private void Disconnect(object sender, ConnectionEventArgs args)
-        {
-            if (args.Guid != ServerGuid)
-            {
-                return;
-            }
-
-            observable.Publish(new OnDisconnectEvent(ServerGuid));
-            connectTimeoutTimer.Restart();
-            isConnect = false;
-        }
-
         private void SendPingToServer()
         {
-            udp.Send(new Ping(MyGuid, ServerGuid));
+            udp.Send(new Ping(CurrentSession, ServerSession));
+        }
+
+        private void NotifyThatDisconnected()
+        {
+            observable.Publish(new OnDisconnectFromServerEvent(ServerSession));
         }
 
         private void RunStopping()

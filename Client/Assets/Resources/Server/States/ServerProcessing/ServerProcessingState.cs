@@ -13,20 +13,16 @@ namespace Server
 
         private Observable observable;
         private Udp udp;
-        private SendHandler receiveFromHandler;
-        private ConnectionsHandler connectionsHandler;
 
-        private HashSet<Guid> clients;
+        private HashSet<string> clients;
 
         public ServerProcessingState()
         {
-            clients = new HashSet<Guid>();
+            clients = new HashSet<string>();
         }
 
         private void Awake()
         {
-            receiveFromHandler = GetComponent<SendHandler>();
-            connectionsHandler = GetComponent<ConnectionsHandler>();
             observable = FindObjectOfType<Observable>();
             udp = FindObjectOfType<Udp>();
         }
@@ -38,75 +34,80 @@ namespace Server
 
         private void SubscribeAll()
         {
-            receiveFromHandler.OnReceiveFrom += Receive;
-            connectionsHandler.OnConnect += Connect;
-            connectionsHandler.OnDisconnect += Disconnect;
-            observable.Subscribe<RegisterCommand>(Register);
-            observable.Subscribe<SendToCommand>(SendTo);
+            observable.Subscribe<OnConnectionEvent>(OnClientConnect);
+            observable.Subscribe<OnDisconnectionEvent>(OnClientDisconnect);
+            observable.Subscribe<RegisterRoomCommand>(Register);
+            observable.Subscribe<OnSendEvent>(ReceiveFromClient);
             observable.Subscribe<SendToClientsCommand>(SendToClients);
             observable.Subscribe<StopCommand>(Stop);
         }
 
         private void UnsubscribeAll()
         {
-            receiveFromHandler.OnReceiveFrom -= Receive;
-            connectionsHandler.OnConnect -= Connect;
-            connectionsHandler.OnDisconnect -= Disconnect;
-            observable.Unsubscribe<RegisterCommand>(Register);
-            observable.Unsubscribe<SendToCommand>(SendTo);
+            observable.Unsubscribe<OnConnectionEvent>(OnClientConnect);
+            observable.Unsubscribe<OnDisconnectionEvent>(OnClientDisconnect);
+            observable.Unsubscribe<RegisterRoomCommand>(Register);
+            observable.Unsubscribe<OnSendEvent>(ReceiveFromClient);
             observable.Unsubscribe<SendToClientsCommand>(SendToClients);
             observable.Unsubscribe<StopCommand>(Stop);
         }
 
         public string CurrentSession { get; set; }
 
-        private void Receive(object sender, ReceiveFromEventArgs args)
+        private void OnClientConnect(OnConnectionEvent e)
         {
-            if (clients.Contains(args.From))
-            {
-                observable.Publish(new OnReceiveEvent(args.From, args.Data));
-            }
-        }
-
-        private void Connect(object sender, ConnectionEventArgs args)
-        {
-            if (clients.Count == maxConnections)
+            if(clients.Count == maxConnections)
             {
                 return;
             }
 
-            clients.Add(args.Guid);
-            observable.Publish(new OnClientConnectEvent(args.Guid));
+            clients.Add(e.Session);
+            observable.Publish(new OnClientConnectEvent(e.Session));
         }
 
-        private void Disconnect(object sender, ConnectionEventArgs args)
+        private void OnClientDisconnect(OnDisconnectionEvent e)
         {
-            if (clients.Remove(args.Guid))
+            if(!clients.Contains(e.Session))
             {
-                observable.Publish(new OnClientDisconnectEvent(args.Guid));
+                return;
             }
+
+            clients.Remove(e.Session);
+            observable.Publish(new OnClientDisconnectEvent(e.Session));
         }
 
-        private void SendTo(SendToCommand command)
+        private void ReceiveFromClient(OnSendEvent e)
         {
-            udp.Send(new SendDecorator(command.Data, Guid, command.To));
+            if(clients.Contains(e.FromSession))
+            {
+                observable.Publish(new OnReceiveEvent(e.FromSession, e.Data));
+            }
         }
 
         private void SendToClients(SendToClientsCommand command)
         {
-            udp.Send(new SendDecorator(command.Data, Guid, clients));
+            udp.Send(new SendDecorator(command.Data, CurrentSession, clients));
         }
 
-        private void Register(RegisterCommand command)
+        private void Register(RegisterRoomCommand command)
         {
-            udp.Send(new Registration(Guid, command.Description));
+            udp.Send(new Room(CurrentSession, command.Description));
         }
 
         private void Stop(StopCommand command)
         {
             UnsubscribeAll();
+            NotifyThatAllClientsDisconnected();
             RunStopping();
             Destroy(gameObject);
+        }
+
+        private void NotifyThatAllClientsDisconnected()
+        {
+            foreach(var session in clients)
+            {
+                observable.Publish(new OnClientDisconnectEvent(session));
+            }
         }
 
         private void RunStopping()

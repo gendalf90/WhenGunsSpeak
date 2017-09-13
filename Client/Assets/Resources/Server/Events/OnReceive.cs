@@ -7,13 +7,13 @@ namespace Server
 {
     public class OnReceiveEvent
     {
-        public OnReceiveEvent(Guid from, IEnumerable<IPacket> data)
+        public OnReceiveEvent(string fromSession, IEnumerable<IPacket> data)
         {
-            From = from;
+            FromSession = fromSession;
             Data = data;
         }
 
-        public Guid From { get; private set; }
+        public string FromSession { get; private set; }
 
         public IEnumerable<IPacket> Data { get; private set; }
     }
