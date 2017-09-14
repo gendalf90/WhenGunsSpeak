@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Server.Packets
 {
+    //сжатие и шифрация здесь
     class Udp : IPacketReceiveStrategy, IPacketSendStrategy
     {
         private UdpClient client;
