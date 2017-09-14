@@ -4,8 +4,7 @@ using UnityEngine;
 
 namespace Server
 {
-    public class StartRoomsListenCommand //отдельный state от inactive
+    public class StartRoomsListenCommand 
     {
-        
     }
 }

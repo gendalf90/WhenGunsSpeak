@@ -9,13 +9,11 @@ namespace Server
     class InactiveState : MonoBehaviour
     {
         private Observable observable;
-        private string clientConnectingSession;
         private GameObject nextStatePrefab;
 
         private void Awake()
         {
             observable = FindObjectOfType<Observable>();
-            nextStatePrefab = Resources.Load<GameObject>("Server/States/GetSession");
         }
 
         private void Start()
@@ -27,20 +25,30 @@ namespace Server
         {
             observable.Subscribe<StartAsServerCommand>(OnServerStartEventHandler);
             observable.Subscribe<StartAsClientCommand>(OnClientStartEventHandler);
+            observable.Subscribe<StartRoomsListenCommand>(OnRoomsListenStartEventHandler);
         }
 
         private void UnsubscribeAll()
         {
             observable.Unsubscribe<StartAsServerCommand>(OnServerStartEventHandler);
             observable.Unsubscribe<StartAsClientCommand>(OnClientStartEventHandler);
+            observable.Unsubscribe<StartRoomsListenCommand>(OnRoomsListenStartEventHandler);
+        }
+
+        private void OnRoomsListenStartEventHandler(StartRoomsListenCommand command)
+        {
+            UnsubscribeAll();
+            StartUdp();
+            ConfigureNextStateAsRoomsListener();
+            StartNextState();
+            Destroy(gameObject);
         }
 
         private void OnClientStartEventHandler(StartAsClientCommand command)
         {
             UnsubscribeAll();
-            InitializeCommand(command);
             StartUdp();
-            ConfigureNextStateAsClient();
+            ConfigureNextStateAsClient(command.ConnectToSession);
             StartNextState();
             Destroy(gameObject);
         }
@@ -54,20 +62,22 @@ namespace Server
             Destroy(gameObject);
         }
 
-        private void InitializeCommand(StartAsClientCommand command)
+        private void ConfigureNextStateAsRoomsListener()
         {
-            clientConnectingSession = command.ConnectToSession;
+            nextStatePrefab = Resources.Load<GameObject>("Server/States/RoomsListening");
         }
 
-        private void ConfigureNextStateAsClient()
+        private void ConfigureNextStateAsClient(string serverSession)
         {
+            nextStatePrefab = Resources.Load<GameObject>("Server/States/GetSession");
             var nextState = nextStatePrefab.GetComponent<GetSessionState>();
-            nextState.SetAsClient(clientConnectingSession);
+            nextState.SetAsClient(serverSession);
 
         }
 
         private void ConfigureNextStateAsServer()
         {
+            nextStatePrefab = Resources.Load<GameObject>("Server/States/GetSession");
             var nextState = nextStatePrefab.GetComponent<GetSessionState>();
             nextState.SetAsServer();
         }
