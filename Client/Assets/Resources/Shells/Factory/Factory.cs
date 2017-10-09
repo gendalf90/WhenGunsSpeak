@@ -36,8 +36,20 @@ namespace Shells
         private void Start()
         {
             FillCreatedPull();
-            //observable.Subscribe<OnStartedEvent>(OnStart);
+        }
+
+        private void OnEnable()
+        {
+            observable.Subscribe<OnStartedAsClientEvent>(StartAsClient);
+            observable.Subscribe<OnStartedAsServerEvent>(StartAsServer);
             observable.Subscribe<OnStoppedEvent>(OnStop);
+        }
+
+        private void OnDisable()
+        {
+            observable.Unsubscribe<OnStartedAsClientEvent>(StartAsClient);
+            observable.Unsubscribe<OnStartedAsServerEvent>(StartAsServer);
+            observable.Unsubscribe<OnStoppedEvent>(OnStop);
         }
 
         private void FillCreatedPull()
@@ -55,24 +67,26 @@ namespace Shells
             created.Enqueue(newObject);
         }
 
-        //private void OnStart(OnStartedEvent e)
-        //{
-        //    IsServer = e.MyRole == Role.Server;
-        //    IsClient = e.MyRole == Role.Client;
+        private void StartAsClient(OnStartedAsClientEvent e)
+        {
+            observable.Subscribe<OnReceiveEvent>(Receive);
+            IsServer = false;
+            IsClient = true;
+        }
 
-        //    if (IsClient)
-        //    {
-        //        observable.Subscribe<OnReceiveEvent>(Receive);
-        //    }
-        //}
+        private void StartAsServer(OnStartedAsServerEvent e)
+        {
+            observable.Subscribe<OnBulletHitEvent>(OnHit);
+            observable.Subscribe<Throw7dot62Command>(CreateAndThrowBullet);
+            IsServer = true;
+            IsClient = false;
+        }
 
         private void OnStop(OnStoppedEvent e)
         {
-            if (IsClient)
-            {
-                observable.Unsubscribe<OnReceiveEvent>(Receive);
-            }
-
+            observable.Unsubscribe<OnReceiveEvent>(Receive);
+            observable.Unsubscribe<OnBulletHitEvent>(OnHit);
+            observable.Unsubscribe<Throw7dot62Command>(CreateAndThrowBullet);
             IsServer = false;
             IsClient = false;
         }
@@ -159,11 +173,6 @@ namespace Shells
 
         private void Update()
         {
-            if (!IsServer)
-            {
-                return;
-            }
-
             var data = new FactoryData { InstantiatedGuids = instantiated.Keys.ToArray() };
             observable.Publish(new SendToClientsCommand(data.CreateBinaryObjectPacket()));
         }
@@ -195,12 +204,6 @@ namespace Shells
         {
             SetGuid(guid);
             Destroy();
-        }
-
-        private void OnDestroy()
-        {
-            //observable.Unsubscribe<OnStartedEvent>(OnStart);
-            observable.Unsubscribe<OnStoppedEvent>(OnStop);
         }
     }
 }

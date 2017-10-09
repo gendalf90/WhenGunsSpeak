@@ -9,16 +9,20 @@ namespace Server
     class InactiveState : MonoBehaviour
     {
         private Observable observable;
-        private GameObject nextStatePrefab;
 
         private void Awake()
         {
             observable = FindObjectOfType<Observable>();
         }
 
-        private void Start()
+        private void OnEnable()
         {
             SubscribeAll();
+        }
+
+        private void OnDisable()
+        {
+            UnsubscribeAll();
         }
 
         private void SubscribeAll()
@@ -37,59 +41,55 @@ namespace Server
 
         private void OnRoomsListenStartEventHandler(StartRoomsListenCommand command)
         {
-            UnsubscribeAll();
             StartUdp();
-            ConfigureNextStateAsRoomsListener();
-            StartNextState();
-            Destroy(gameObject);
+            StartNextStateAsRoomsListener();
+            Disable();
         }
 
         private void OnClientStartEventHandler(StartAsClientCommand command)
         {
-            UnsubscribeAll();
             StartUdp();
-            ConfigureNextStateAsClient(command.ConnectToSession);
-            StartNextState();
-            Destroy(gameObject);
+            StartNextStateAsClient(command.ConnectToSession);
+            Disable();
         }
 
         private void OnServerStartEventHandler(StartAsServerCommand command)
         {
-            UnsubscribeAll();
             StartUdp();
-            ConfigureNextStateAsServer();
-            StartNextState();
-            Destroy(gameObject);
+            StartNextStateAsServer();
+            Disable();
         }
 
-        private void ConfigureNextStateAsRoomsListener()
+        private void StartNextStateAsRoomsListener()
         {
-            nextStatePrefab = Resources.Load<GameObject>("Server/States/RoomsListening");
+            var state = GetComponent<RoomsListeningState>();
+            state.enabled = true;
         }
 
-        private void ConfigureNextStateAsClient(string serverSession)
+        private void StartNextStateAsClient(string serverSession)
         {
-            nextStatePrefab = Resources.Load<GameObject>("Server/States/GetSession");
-            var nextState = nextStatePrefab.GetComponent<GetSessionState>();
-            nextState.SetAsClient(serverSession);
+            var state = GetComponent<GetSessionState>();
+            state.SetAsClient(serverSession);
+            state.enabled = true;
 
         }
 
-        private void ConfigureNextStateAsServer()
+        private void StartNextStateAsServer()
         {
-            nextStatePrefab = Resources.Load<GameObject>("Server/States/GetSession");
-            var nextState = nextStatePrefab.GetComponent<GetSessionState>();
-            nextState.SetAsServer();
-        }
-
-        private void StartNextState()
-        {
-            Instantiate(nextStatePrefab);
+            var state = GetComponent<GetSessionState>();
+            state.SetAsServer();
+            state.enabled = true;
         }
 
         private void StartUdp()
         {
-            Instantiate(Resources.Load<GameObject>("Server/Udp/Udp"));
+            var udp = GetComponent<Udp>();
+            udp.enabled = true;
+        }
+
+        private void Disable()
+        {
+            enabled = false;
         }
     }
 }

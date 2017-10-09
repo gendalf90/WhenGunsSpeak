@@ -52,6 +52,6 @@ namespace Soldier.Body
             }
         }
 
-        public Guid Guid { get; private set; }
+        public Guid Guid { get; set; }
     }
 }

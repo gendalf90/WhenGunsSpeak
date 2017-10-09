@@ -14,21 +14,24 @@ namespace Server
         private Observable observable;
         private Udp udp;
         private SimpleTimer timeoutTimer;
-        private GameObject nextStatePrefab;
 
-        private Action onStartedNotificationStrategy;
-        private Action<string> setCurrentSessionStrategy;
+        private Action<string> startNextStateStrategy;
 
         private void Awake()
         {
             observable = FindObjectOfType<Observable>();
-            udp = FindObjectOfType<Udp>();
+            udp = GetComponent<Udp>();
         }
 
-        private void Start()
+        private void OnEnable()
         {
             StartTimeoutTimer();
             SubscribeAll();
+        }
+
+        private void OnDisable()
+        {
+            UnsubscribeAll();
         }
 
         private void StartTimeoutTimer()
@@ -57,9 +60,13 @@ namespace Server
 
         private void Stop()
         {
-            UnsubscribeAll();
             RunStopping();
-            Destroy(gameObject);
+            Disable();
+        }
+
+        private void Disable()
+        {
+            enabled = false;
         }
 
         private void SubscribeAll()
@@ -74,48 +81,42 @@ namespace Server
 
         private void OnGetSession(OnSessionEvent e)
         {
-            UnsubscribeAll();
-            InitializeEvent(e);
-            NotifyThatHasStarted();
-            StartNextState();
-            Destroy(gameObject);
-        }
-
-        private void InitializeEvent(OnSessionEvent e)
-        {
-            setCurrentSessionStrategy(e.Session);
+            StartNextState(e.Session);
+            Disable();
         }
 
         public void SetAsClient(string serverSession)
         {
-            nextStatePrefab = Resources.Load<GameObject>("Server/States/ClientConnecting");
-            var nextState = nextStatePrefab.GetComponent<ClientConnectingState>();
-            nextState.ServerSession = serverSession;
-            setCurrentSessionStrategy = currentSession => nextState.CurrentSession = currentSession;
-            onStartedNotificationStrategy = () => observable.Publish(new OnStartedAsClientEvent(nextState.CurrentSession));
+            var nextState = GetComponent<ClientConnectingState>();
+            startNextStateStrategy = currentSession =>
+            {
+                nextState.ServerSession = serverSession;
+                nextState.CurrentSession = currentSession;
+                observable.Publish(new OnStartedAsClientEvent(nextState.CurrentSession));
+                nextState.enabled = true;
+            };
         }
 
         public void SetAsServer()
         {
-            nextStatePrefab = Resources.Load<GameObject>("Server/States/ServerProcessing");
-            var nextState = nextStatePrefab.GetComponent<ServerProcessingState>();
-            setCurrentSessionStrategy = currentSession => nextState.CurrentSession = currentSession;
-            onStartedNotificationStrategy = () => observable.Publish(new OnStartedAsServerEvent(nextState.CurrentSession));
+            var nextState = GetComponent<ServerProcessingState>();
+            startNextStateStrategy = currentSession =>
+            {
+                nextState.CurrentSession = currentSession;
+                observable.Publish(new OnStartedAsServerEvent(nextState.CurrentSession));
+                nextState.enabled = true;
+            };
         }
 
-        private void StartNextState()
+        private void StartNextState(string currentSession)
         {
-            Instantiate(nextStatePrefab);
-        }
-
-        private void NotifyThatHasStarted()
-        {
-            onStartedNotificationStrategy();
+            startNextStateStrategy(currentSession);
         }
 
         private void RunStopping()
         {
-            Instantiate(Resources.Load<GameObject>("Server/States/Stopping"));
+            var state = GetComponent<StoppingState>();
+            state.enabled = true;
         }
     }
 }

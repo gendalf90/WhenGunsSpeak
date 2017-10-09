@@ -18,13 +18,18 @@ namespace Server
         private void Awake()
         {
             observable = FindObjectOfType<Observable>();
-            udp = FindObjectOfType<Udp>();
+            udp = GetComponent<Udp>();
         }
 
-        private void Start()
+        private void OnEnable()
         {
             StartSendRequestTimer();
             SubscribeAll();
+        }
+
+        private void OnDisable()
+        {
+            UnsubscribeAll();
         }
 
         private void StartSendRequestTimer()
@@ -59,9 +64,13 @@ namespace Server
 
         private void Stop(StopCommand command)
         {
-            UnsubscribeAll();
             RunStopping();
-            Destroy(gameObject);
+            Disable();
+        }
+
+        private void Disable()
+        {
+            enabled = false;
         }
 
         private void SendRoomsRequestIfNeeded()
@@ -74,7 +83,8 @@ namespace Server
 
         private void RunStopping()
         {
-            Instantiate(Resources.Load<GameObject>("Server/States/Stopping"));
+            var state = GetComponent<StoppingState>();
+            state.enabled = true;
         }
     }
 }

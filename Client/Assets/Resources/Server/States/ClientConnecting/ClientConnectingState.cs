@@ -13,19 +13,26 @@ namespace Server
         private Observable observable;
         private Udp udp;
         private SimpleTimer timeoutTimer;
-        private GameObject nextStatePrefab;
+        private ClientProcessingState nextState;
+        private StoppingState stoppingState;
 
         private void Awake()
         {
             observable = FindObjectOfType<Observable>();
-            udp = FindObjectOfType<Udp>();
-            nextStatePrefab = Resources.Load<GameObject>("Server/States/ClientProcessing");
+            udp = GetComponent<Udp>();
+            nextState = GetComponent<ClientProcessingState>();
+            stoppingState = GetComponent<StoppingState>();
         }
 
-        private void Start()
+        private void OnEnable()
         {
             StartTimeoutTimer();
             SubscribeAll();
+        }
+
+        private void OnDisable()
+        {
+            UnsubscribeAll();
         }
 
         private void StartTimeoutTimer()
@@ -64,10 +71,9 @@ namespace Server
                 return;
             }
 
-            UnsubscribeAll();
             NotifyThatConnected();
             RunNextState();
-            Destroy(gameObject);
+            Disable();
         }
 
         public string CurrentSession { get; set; }
@@ -76,9 +82,8 @@ namespace Server
 
         private void Stop()
         {
-            UnsubscribeAll();
             RunStopping();
-            Destroy(gameObject);
+            Disable();
         }
 
         private void SendPingToServer()
@@ -88,20 +93,24 @@ namespace Server
 
         private void RunStopping()
         {
-            Instantiate(Resources.Load<GameObject>("Server/States/Stopping"));
+            stoppingState.enabled = true;
         }
 
         private void RunNextState()
         {
-            var nextState = nextStatePrefab.GetComponent<ClientProcessingState>();
             nextState.CurrentSession = CurrentSession;
             nextState.ServerSession = ServerSession;
-            Instantiate(nextStatePrefab);
+            nextState.enabled = true;
         }
 
         private void NotifyThatConnected()
         {
             observable.Publish(new OnConnectToServerEvent(ServerSession));
+        }
+
+        private void Disable()
+        {
+            enabled = false;
         }
     }
 }

@@ -15,12 +15,12 @@ namespace Server
             observable = FindObjectOfType<Observable>();
         }
 
-        private void Start()
+        private void OnEnable()
         {
             observable.Subscribe<OnPacketsEvent>(Receive);
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
             observable.Unsubscribe<OnPacketsEvent>(Receive);
         }

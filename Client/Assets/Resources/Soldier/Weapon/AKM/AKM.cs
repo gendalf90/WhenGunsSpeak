@@ -118,6 +118,6 @@ namespace Soldier.Weapon
             }
         }
 
-        public Guid Guid { get; private set; }
+        public Guid Guid { get; set; }
     }
 }

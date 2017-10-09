@@ -24,12 +24,17 @@ namespace Server
         private void Awake()
         {
             observable = FindObjectOfType<Observable>();
-            udp = FindObjectOfType<Udp>();
+            udp = GetComponent<Udp>();
         }
 
-        private void Start()
+        private void OnEnable()
         {
             SubscribeAll();
+        }
+
+        private void OnDisable()
+        {
+            UnsubscribeAll();
         }
 
         private void SubscribeAll()
@@ -78,10 +83,13 @@ namespace Server
 
         private void ReceiveFromClient(OnSendEvent e)
         {
-            if(clients.Contains(e.FromSession))
+            if (!clients.Contains(e.FromSession))
             {
-                observable.Publish(new OnReceiveEvent(e.FromSession, e.Data));
+                return;
             }
+
+            observable.Publish(new OnReceiveEvent(e.FromSession, e.Data));
+            observable.Publish(new OnReceiveFromClientEvent(e.FromSession, e.Data));
         }
 
         private void SendToClients(SendToClientsCommand command)
@@ -96,10 +104,9 @@ namespace Server
 
         private void Stop(StopCommand command)
         {
-            UnsubscribeAll();
             NotifyThatAllClientsDisconnected();
             RunStopping();
-            Destroy(gameObject);
+            Disable();
         }
 
         private void NotifyThatAllClientsDisconnected()
@@ -112,7 +119,13 @@ namespace Server
 
         private void RunStopping()
         {
-            Instantiate(Resources.Load<GameObject>("Server/States/Stopping"));
+            var state = GetComponent<StoppingState>();
+            state.enabled = true;
+        }
+
+        private void Disable()
+        {
+            enabled = false;
         }
     }
 }

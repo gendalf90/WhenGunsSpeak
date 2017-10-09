@@ -15,6 +15,7 @@ namespace Shells
             observable = FindObjectOfType<Observable>();
         }
 
+        //только для пуль; гильзы не имеют триггер
         private void OnTriggerEnter2D(Collider2D other) 
         {
             observable.Publish(new OnBulletHitEvent(Guid, other.GetInstanceID()));

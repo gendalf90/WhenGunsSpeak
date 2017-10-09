@@ -9,11 +9,13 @@ namespace Server
     {
         private Observable observable;
         private Udp udp;
+        private InactiveState inactive;
 
         private void Awake()
         {
             observable = FindObjectOfType<Observable>();
-            udp = FindObjectOfType<Udp>();
+            udp = GetComponent<Udp>();
+            inactive = GetComponent<InactiveState>();
         }
 
         private void Update()
@@ -21,12 +23,12 @@ namespace Server
             ReleaseUdp();
             NotifyThatHasStopped();
             StartInactiveState();
-            Destroy(gameObject);
+            Disable();
         }
 
         private void StartInactiveState()
         {
-            Instantiate(Resources.Load<GameObject>("Server/States/Inactive"));
+            inactive.enabled = true;
         }
 
         private void NotifyThatHasStopped()
@@ -36,7 +38,12 @@ namespace Server
 
         private void ReleaseUdp()
         {
-            Destroy(udp.gameObject);
+            udp.enabled = false;
+        }
+
+        private void Disable()
+        {
+            enabled = false;
         }
     }
 }

@@ -17,6 +17,7 @@ namespace Server
         private ConcurrentQueue<IPacket> received;
         private int currentAddressIndex = -1;
         private volatile bool isRunning;
+        private volatile bool isPaused;
         private UdpClient client;
 
         public Udp()
@@ -30,6 +31,16 @@ namespace Server
             Run();
             StartBackground(ReceiveProcessing);
             StartBackground(SendProcessing);
+        }
+
+        private void OnEnable()
+        {
+            isPaused = false;
+        }
+
+        private void OnDisable()
+        {
+            isPaused = true;
         }
 
         private void Run()
@@ -54,6 +65,11 @@ namespace Server
         {
             while(isRunning)
             {
+                if(isPaused)
+                {
+                    continue;
+                }
+
                 try
                 {
                     InternalReceive();
@@ -76,6 +92,11 @@ namespace Server
         {
             while (isRunning)
             {
+                if(isPaused)
+                {
+                    continue;
+                }
+
                 try
                 {
                     InternalSend();
