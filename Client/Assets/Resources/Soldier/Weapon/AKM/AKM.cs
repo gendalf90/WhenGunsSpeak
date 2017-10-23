@@ -56,7 +56,7 @@ namespace Soldier.Weapon
 
         private void LookHandle(LookEvent e)
         {
-            if (e.Guid != Guid)
+            if (e.Session != Session)
             {
                 return;
             }
@@ -118,6 +118,6 @@ namespace Soldier.Weapon
             }
         }
 
-        public Guid Guid { get; set; }
+        public string Session { get; set; }
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Soldier.Ground
 {
-    public class Ground : MonoBehaviour
+    class Checker : MonoBehaviour
     {
         private Observable observable;
 
@@ -17,7 +17,7 @@ namespace Soldier.Ground
             observable = FindObjectOfType<Observable>();
         }
 
-        public Guid Guid { get; set; }
+        public string Session { get; set; }
 
         private void OnTriggerStay2D(Collider2D collision)
         {
@@ -27,13 +27,13 @@ namespace Soldier.Ground
             }
 
             grounded = true;
-            observable.Publish(new GroundEvent(Guid, grounded));
+            observable.Publish(new GroundEvent(Session, grounded));
         }
 
         private void OnTriggerExit2D(Collider2D collision)
         {
             grounded = false;
-            observable.Publish(new GroundEvent(Guid, grounded));
+            observable.Publish(new GroundEvent(Session, grounded));
         }
     }
 }

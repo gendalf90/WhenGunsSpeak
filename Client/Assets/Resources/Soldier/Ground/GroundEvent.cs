@@ -7,13 +7,13 @@ namespace Soldier.Ground
 {
     public class GroundEvent
     {
-        public GroundEvent(Guid guid, bool status)
+        public GroundEvent(string session, bool status)
         {
-            Guid = guid;
+            Session = session;
             IsGrounded = status;
         }
 
-        public Guid Guid { get; private set; }
+        public string Session { get; private set; }
 
         public bool IsGrounded { get; private set; }
     }

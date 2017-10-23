@@ -7,11 +7,11 @@ namespace Soldier
 {
     public class RemoveSoldierCommand
     {
-        public RemoveSoldierCommand(Guid guid)
+        public RemoveSoldierCommand(string session)
         {
-            Guid = guid;
+            Session = session;
         }
 
-        public Guid Guid { get; private set; }
+        public string Session { get; set; }
     }
 }

@@ -7,7 +7,14 @@ using UnityEngine;
 using HeadBehaviour = Soldier.Head.Head;
 using BodyBehaviour = Soldier.Body.Body;
 using LegsBehaviour = Soldier.Legs.Legs;
+using RotationBehaviour = Soldier.Rotation.Rotation;
 using Soldier.Weapon;
+using Soldier.Ground;
+using LegsInput = Soldier.Legs.Input;
+using MotionInput = Soldier.Motion.Input;
+using RotationInput = Soldier.Rotation.Input;
+using Soldier.Motion;
+using Soldier.Network;
 
 namespace Soldier.Factory
 {
@@ -20,10 +27,15 @@ namespace Soldier.Factory
         private GameObject legs;
         private GameObject weapon;
 
-        private Guid guid;
-        private GameObject result;
+        private string session;
+        private GameObject current;
 
-        private Dictionary<Guid, GameObject> instantiated = new Dictionary<Guid, GameObject>();
+        private Dictionary<string, GameObject> instantiated;
+
+        public Creator()
+        {
+            instantiated = new Dictionary<string, GameObject>();
+        }
 
         private void Awake()
         {
@@ -45,6 +57,8 @@ namespace Soldier.Factory
 
         public bool IsClient { get; set; }
 
+        public string Session { get; set; }
+
         private void Create(CreateSoldierCommand command)
         {
             InitializeCommand(command);
@@ -52,69 +66,127 @@ namespace Soldier.Factory
             BindHead();
             BindBody();
             BindLegs();
-            BindWeapon();
+            SetGround();
+            SetMotion();
+            SetNetwork();
+            SetRotation();
+            //BindWeapon();
+            NotifyThatCreated();
         }
 
         private void InitializeCommand(CreateSoldierCommand command)
         {
-            guid = command.Guid;
+            session = command.Session;
         }
 
         private void CreateSoldier()
         {
-            result = Instantiate(soldier);
-            var rigidbody = result.GetComponent<Rigidbody2D>();
+            current = Instantiate(soldier);
+            var rigidbody = current.GetComponent<Rigidbody2D>();
             rigidbody.isKinematic = IsClient;
-            instantiated.Add(guid, result);
+            instantiated.Add(session, current);
         }
 
         private void BindHead()
         {
-            var handle = result.transform.Find("HeadHandle");
+            var handle = current.transform.Find("HeadHandle");
             var instance = Instantiate(head);
             instance.transform.SetParent(handle);
             var behaviour = instance.GetComponent<HeadBehaviour>();
-            behaviour.Guid = guid;
+            behaviour.Session = session;
         }
 
         private void BindBody()
         {
-            var handle = result.transform.Find("BodyHandle");
+            var handle = current.transform.Find("BodyHandle");
             var instance = Instantiate(body);
             instance.transform.SetParent(handle);
             var behaviour = instance.GetComponent<BodyBehaviour>();
-            behaviour.Guid = guid;
+            behaviour.Session = session;
+        }
+
+        private void SetGround()
+        {
+            var behaviour = current.GetComponentInChildren<Checker>();
+            behaviour.Session = session;
+            behaviour.enabled = IsServer;
         }
 
         private void BindLegs()
         {
-            var handle = result.transform.Find("LegsHandle");
+            var handle = current.transform.Find("LegsHandle");
             var instance = Instantiate(legs);
             instance.transform.SetParent(handle);
             var behaviour = instance.GetComponent<LegsBehaviour>();
-            behaviour.Guid = guid;
+            behaviour.Session = session;
+            var input = instance.GetComponent<LegsInput>();
+            input.enabled = IsPlayer;
         }
 
-        private void BindWeapon()
+        private void SetMotion()
         {
-            var handle = result.transform.FindChild("Hands");
-            var instance = Instantiate(weapon);
-            instance.transform.SetParent(handle);
-            var behaviour = instance.GetComponent<AKM>();
-            behaviour.Guid = guid;
+            var movement = current.GetComponent<Movement>();
+            movement.Session = session;
+            var position = current.GetComponent<Position>();
+            position.Session = session;
+            var input = current.GetComponent<MotionInput>();
+            input.enabled = IsPlayer;
+        }
+
+        private void SetNetwork()
+        {
+            var receiver = current.GetComponent<Receiver>();
+            receiver.Session = session;
+            var clientSender = current.GetComponent<ClientSender>();
+            clientSender.Session = session;
+            clientSender.enabled = IsClient;
+            var serverSender = current.GetComponent<ServerSender>();
+            serverSender.Session = session;
+            serverSender.enabled = IsServer;
+        }
+
+        private void SetRotation()
+        {
+            var input = current.GetComponent<RotationInput>();
+            input.enabled = IsPlayer;
+            var behaviour = current.GetComponent<RotationBehaviour>();
+            behaviour.Session = session;
+        }
+
+        //private void BindWeapon()
+        //{
+        //    var handle = result.transform.FindChild("Hands");
+        //    var instance = Instantiate(weapon);
+        //    instance.transform.SetParent(handle);
+        //    var behaviour = instance.GetComponent<AKM>();
+        //    behaviour.Guid = guid;
+        //}
+
+        private void NotifyThatCreated()
+        {
+            observable.Publish(new SoldierCreatedEvent(session));
         }
 
         private void Remove(RemoveSoldierCommand command)
         {
             GameObject instance;
 
-            if(!instantiated.TryGetValue(command.Guid, out instance))
+            if(!instantiated.TryGetValue(command.Session, out instance))
             {
                 return;
             }
 
-            instantiated.Remove(command.Guid);
+            instantiated.Remove(command.Session);
             Destroy(instance);
+            observable.Publish(new SoldierRemovedEvent(command.Session));
+        }
+
+        private bool IsPlayer
+        {
+            get
+            {
+                return Session == session;
+            }
         }
 
         private void OnDisable()

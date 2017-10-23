@@ -32,7 +32,5 @@ namespace Soldier.Rotation
         {
             rotation.LookAt(e.WorldPosition);
         }
-
-        public Guid Guid { get; set; }
     }
 }

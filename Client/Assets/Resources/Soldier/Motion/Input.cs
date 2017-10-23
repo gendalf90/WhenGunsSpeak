@@ -23,7 +23,7 @@ namespace Soldier.Motion
             observable.Subscribe<StopRightEvent>(StopRightHandle);
             observable.Subscribe<StartLeftEvent>(StartLeftHandle);
             observable.Subscribe<StopLeftEvent>(StopLeftHandle);
-            observable.Subscribe<JumpEvent>(JumpHandle);
+            observable.Subscribe<StartJumpEvent>(JumpHandle);
         }
 
         private void OnDisable()
@@ -32,7 +32,7 @@ namespace Soldier.Motion
             observable.Unsubscribe<StopRightEvent>(StopRightHandle);
             observable.Unsubscribe<StartLeftEvent>(StartLeftHandle);
             observable.Unsubscribe<StopLeftEvent>(StopLeftHandle);
-            observable.Unsubscribe<JumpEvent>(JumpHandle);
+            observable.Unsubscribe<StartJumpEvent>(JumpHandle);
         }
 
         private void StartRightHandle(StartRightEvent e)
@@ -55,7 +55,7 @@ namespace Soldier.Motion
             movement.StopLeft();
         }
 
-        private void JumpHandle(JumpEvent e)
+        private void JumpHandle(StartJumpEvent e)
         {
             movement.Jump();
         }

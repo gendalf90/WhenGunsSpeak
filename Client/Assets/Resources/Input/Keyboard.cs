@@ -14,6 +14,8 @@ namespace Input
         private bool lastRightState;
         private bool currentLeftState;
         private bool lastLeftState;
+        private bool currentJumpState;
+        private bool lastJumpState;
 
         private void Awake()
         {
@@ -70,6 +72,36 @@ namespace Input
             lastLeftState = currentLeftState;
         }
         
+        private void UpdateJump()
+        {
+            UpdateCurrentJumpState();
+            UpdateJumpEvents();
+            UpdateLastJumpState();
+        }
+
+        private void UpdateCurrentJumpState()
+        {
+            currentJumpState = UnityInput.GetButtonDown("Jump");
+        }
+
+        private void UpdateJumpEvents()
+        {
+            if(IsStart(lastJumpState, currentJumpState))
+            {
+                observable.Publish(new StartJumpEvent());
+            }
+
+            if(IsStop(lastJumpState, currentJumpState))
+            {
+                observable.Publish(new StopJumpEvent());
+            }
+        }
+
+        private void UpdateLastJumpState()
+        {
+            lastJumpState = currentJumpState;
+        }
+
         private bool IsStart(bool lastState, bool currentState)
         {
             return !lastState && currentState;
@@ -78,16 +110,6 @@ namespace Input
         private bool IsStop(bool lastState, bool currentState)
         {
             return lastState && !currentState;
-        }
-
-        private void UpdateJump()
-        {
-            var isPressed = UnityInput.GetButtonDown("Jump");
-
-            if (isPressed)
-            {
-                observable.Publish(new JumpEvent());
-            }
         }
     }
 }

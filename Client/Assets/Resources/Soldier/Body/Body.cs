@@ -34,7 +34,7 @@ namespace Soldier.Body
 
         private void LookHandle(LookEvent e)
         {
-            if(e.Guid != Guid)
+            if(e.Session != Session)
             {
                 return;
             }
@@ -52,6 +52,6 @@ namespace Soldier.Body
             }
         }
 
-        public Guid Guid { get; set; }
+        public string Session { get; set; }
     }
 }

@@ -7,13 +7,13 @@ namespace Soldier.Rotation
 {
     public class LookCommand
     {
-        public LookCommand(Guid guid, Vector2 position)
+        public LookCommand(string session, Vector2 position)
         {
-            Guid = guid;
+            Session = session;
             Position = position;
         }
 
-        public Guid Guid { get; private set; }
+        public string Session { get; private set; }
 
         public Vector2 Position { get; private set; }
     }

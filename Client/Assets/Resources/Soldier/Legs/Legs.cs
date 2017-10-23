@@ -22,19 +22,19 @@ namespace Soldier.Legs
 
         private void OnEnable()
         {
-            observable.Subscribe<StartAnimationCommand>(StartAnimationHandle);
+            observable.Subscribe<AnimationCommand>(UpdateAnimationHandle);
             observable.Subscribe<LookEvent>(LookHandle);
         }
 
         private void OnDisable()
         {
-            observable.Unsubscribe<StartAnimationCommand>(StartAnimationHandle);
+            observable.Unsubscribe<AnimationCommand>(UpdateAnimationHandle);
             observable.Unsubscribe<LookEvent>(LookHandle);
         }
 
         private void LookHandle(LookEvent e)
         {
-            if (e.Guid != Guid)
+            if (e.Session != Session)
             {
                 return;
             }
@@ -50,9 +50,9 @@ namespace Soldier.Legs
             }
         }
 
-        private void StartAnimationHandle(StartAnimationCommand command)
+        private void UpdateAnimationHandle(AnimationCommand command)
         {
-            if(command.Guid != Guid)
+            if(command.Session != Session)
             {
                 return;
             }
@@ -73,6 +73,6 @@ namespace Soldier.Legs
             }
         }
 
-        public Guid Guid { get; set; }
+        public string Session { get; set; }
     }
 }

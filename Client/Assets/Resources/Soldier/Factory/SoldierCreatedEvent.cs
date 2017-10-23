@@ -7,11 +7,11 @@ namespace Soldier.Factory
 {
     public class SoldierCreatedEvent
     {
-        public SoldierCreatedEvent(Guid guid)
+        public SoldierCreatedEvent(string session)
         {
-            Guid = guid;
+            Session = session;
         }
 
-        public Guid Guid { get; private set; }
+        public string Session { get; private set; }
     }
 }

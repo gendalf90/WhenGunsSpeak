@@ -69,7 +69,7 @@ namespace Shells
 
         private void StartAsClient(OnStartedAsClientEvent e)
         {
-            observable.Subscribe<OnReceiveEvent>(Receive);
+            observable.Subscribe<OnReceiveFromServerEvent>(OnReceiveFromServerData);
             IsServer = false;
             IsClient = true;
         }
@@ -84,7 +84,7 @@ namespace Shells
 
         private void OnStop(OnStoppedEvent e)
         {
-            observable.Unsubscribe<OnReceiveEvent>(Receive);
+            observable.Unsubscribe<OnReceiveFromServerEvent>(OnReceiveFromServerData);
             observable.Unsubscribe<OnBulletHitEvent>(OnHit);
             observable.Unsubscribe<Throw7dot62Command>(CreateAndThrowBullet);
             IsServer = false;
@@ -177,7 +177,7 @@ namespace Shells
             observable.Publish(new SendToClientsCommand(data.CreateBinaryObjectPacket()));
         }
 
-        private void Receive(OnReceiveEvent e)
+        private void OnReceiveFromServerData(OnReceiveFromServerEvent e)
         {
             e.Data.OfBinaryObjects<FactoryData>()
                   .FirstOrDefault()

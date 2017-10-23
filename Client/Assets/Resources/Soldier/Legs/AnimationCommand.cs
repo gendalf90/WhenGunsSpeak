@@ -5,15 +5,15 @@ using UnityEngine;
 
 namespace Soldier.Legs
 {
-    public class StartAnimationCommand
+    public class AnimationCommand
     {
-        public StartAnimationCommand(Guid guid, AnimationType type)
+        public AnimationCommand(string session, AnimationType type)
         {
-            Guid = guid;
+            Session = session;
             Type = type;
         }
 
-        public Guid Guid { get; private set; }
+        public string Session { get; private set; }
 
         public AnimationType Type { get; private set; }
     }

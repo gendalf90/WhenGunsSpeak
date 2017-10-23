@@ -1,13 +1,14 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using UnityEngine;
 
-namespace Soldier
+namespace Soldier.Motion
 {
-    public class SetSoldierPositionCommand
+    class PositionEvent
     {
-        public SetSoldierPositionCommand(string session, Vector2 position)
+        public PositionEvent(string session, Vector2 position)
         {
             Session = session;
             Position = position;

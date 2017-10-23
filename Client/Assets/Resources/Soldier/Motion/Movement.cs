@@ -29,16 +29,30 @@ namespace Soldier.Motion
         private void OnEnable()
         {
             observable.Subscribe<GroundEvent>(OnGroundedChange);
+            observable.Subscribe<MoveCommand>(MoveHandler);
         }
 
         private void OnDisable()
         {
             observable.Unsubscribe<GroundEvent>(OnGroundedChange);
+            observable.Unsubscribe<MoveCommand>(MoveHandler);
+        }
+
+        private void MoveHandler(MoveCommand command)
+        {
+            if(Session != command.Session)
+            {
+                return;
+            }
+
+            isRightMoving = command.IsToRight;
+            isLeftMoving = command.IsToLeft;
+            isJumping = command.IsJump;
         }
 
         private void OnGroundedChange(GroundEvent e)
         {
-            if(e.Guid == Guid)
+            if(e.Session == Session)
             {
                 grounded = e.IsGrounded;
             }
@@ -51,7 +65,7 @@ namespace Soldier.Motion
             StayIfNeeded();
         }
 
-        public Guid Guid { get; set; }
+        public string Session { get; set; }
 
         private void StayIfNeeded()
         {

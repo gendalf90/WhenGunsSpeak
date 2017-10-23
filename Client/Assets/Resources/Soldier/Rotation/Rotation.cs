@@ -27,7 +27,7 @@ namespace Soldier.Rotation
 
         private void LookHandler(LookCommand command)
         {
-            if(command.Guid != Guid)
+            if(command.Session != Session)
             {
                 return;
             }
@@ -48,10 +48,10 @@ namespace Soldier.Rotation
 
         private void PublishLookEvent()
         {
-            observable.Publish(new LookEvent(Guid, toPosition, LookDirection));
+            observable.Publish(new LookEvent(Session, toPosition, LookDirection));
         }
 
-        public Guid Guid { get; set; }
+        public string Session { get; set; }
 
         private LookDirection LookDirection
         {

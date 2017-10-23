@@ -7,14 +7,14 @@ namespace Soldier.Rotation
 {
     public class LookEvent
     {
-        public LookEvent(Guid guid, Vector2 position, LookDirection direction)
+        public LookEvent(string session, Vector2 position, LookDirection direction)
         {
-            Guid = guid;
+            Session = session;
             Position = position;
             Direction = direction;
         }
 
-        public Guid Guid { get; private set; }
+        public string Session { get; private set; }
 
         public Vector2 Position { get; private set; }
 
