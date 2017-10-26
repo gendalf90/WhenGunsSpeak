@@ -27,12 +27,44 @@ namespace Soldier.Network
 
         public void FromBytes(byte[] bytes)
         {
-            
+            Items = new Dictionary<string, ServerDataItem>();
+
+            using (var reader = new BinaryDataReader(bytes))
+            {
+                var count = reader.ReadInt();
+
+                for(int i = 0; i < count; i++)
+                {
+                    var item = new ServerDataItem
+                    {
+                        Session = reader.ReadString(),
+                        LookAt = reader.ReadVector(),
+                        IsMoveRight = reader.ReadBoolean(),
+                        IsMoveLeft = reader.ReadBoolean(),
+                        IsJump = reader.ReadBoolean(),
+                        Position = reader.ReadVector()
+                    };
+
+                    Items[item.Session] = item;
+                }
+            }
         }
 
         public byte[] ToBytes()
         {
-            throw new NotImplementedException();
+            var builder = new BinaryDataBuilder().Write(Items.Count);
+
+            foreach(var item in Items.Values)
+            {
+                builder.Write(item.Session)
+                       .Write(item.LookAt)
+                       .Write(item.IsMoveRight)
+                       .Write(item.IsMoveLeft)
+                       .Write(item.IsJump)
+                       .Write(item.Position);
+            }
+
+            return builder.Build();
         }
     }
 }

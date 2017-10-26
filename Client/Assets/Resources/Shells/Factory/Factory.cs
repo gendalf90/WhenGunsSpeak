@@ -6,36 +6,17 @@ using System.Linq;
 using Server;
 using Messages;
 
-namespace Shells
+namespace Shells.Factory
 {
     class Factory : MonoBehaviour
     {
-        [SerializeField]
-        private int cacheCapacity;
-
-        private GameObject prefab;
         private Observable observable;
-        private Queue<GameObject> created;
-        private Dictionary<Guid, GameObject> instantiated;
-
-        private Guid currentGuid;
-        private GameObject currentObject;
-
-        public Factory()
-        {
-            created = new Queue<GameObject>();
-            instantiated = new Dictionary<Guid, GameObject>();
-        }
+        private Creator creator;
 
         private void Awake()
         {
-            prefab = Resources.Load<GameObject>("Shells/Shell");
             observable = FindObjectOfType<Observable>();
-        }
-
-        private void Start()
-        {
-            FillCreatedPull();
+            creator = GetComponent<Creator>();
         }
 
         private void OnEnable()
@@ -52,158 +33,25 @@ namespace Shells
             observable.Unsubscribe<OnStoppedEvent>(OnStop);
         }
 
-        private void FillCreatedPull()
-        {
-            for (int i = 0; i < cacheCapacity; i++)
-            {
-                CreateNewPrefab();
-            }
-        }
-
-        private void CreateNewPrefab()
-        {
-            var newObject = Instantiate(prefab);
-            newObject.SetActive(false);
-            created.Enqueue(newObject);
-        }
-
         private void StartAsClient(OnStartedAsClientEvent e)
         {
-            observable.Subscribe<OnReceiveFromServerEvent>(OnReceiveFromServerData);
-            IsServer = false;
-            IsClient = true;
+            creator.enabled = true;
+            creator.IsServer = false;
+            creator.IsClient = true;
         }
 
         private void StartAsServer(OnStartedAsServerEvent e)
         {
-            observable.Subscribe<OnBulletHitEvent>(OnHit);
-            observable.Subscribe<Throw7dot62Command>(CreateAndThrowBullet);
-            IsServer = true;
-            IsClient = false;
+            creator.enabled = true;
+            creator.IsServer = true;
+            creator.IsClient = false;
         }
 
         private void OnStop(OnStoppedEvent e)
         {
-            observable.Unsubscribe<OnReceiveFromServerEvent>(OnReceiveFromServerData);
-            observable.Unsubscribe<OnBulletHitEvent>(OnHit);
-            observable.Unsubscribe<Throw7dot62Command>(CreateAndThrowBullet);
-            IsServer = false;
-            IsClient = false;
-        }
-
-        private bool IsServer { get; set; }
-
-        private bool IsClient { get; set; }
-
-        private void CreateAndThrowBullet(Throw7dot62Command command)
-        {
-            SetGuid(command.Guid);
-            Load();
-            SetPosition(command.Position, command.Rotation);
-            SetComponents();
-            Instantiate();
-            Throw();
-        }
-
-        private void SetGuid(Guid guid)
-        {
-            currentGuid = guid;
-        }
-
-        private void Load()
-        {
-            if (created.Count == 0)
-            {
-                CreateNewPrefab();
-            }
-
-            currentObject = created.Dequeue();
-        }
-
-        private void SetPosition(Vector2 position, float rotation)
-        {
-            var transform = currentObject.transform;
-            transform.position = position;
-            transform.rotation = Quaternion.Euler(0, 0, rotation);
-        }
-
-        private void SetComponents()
-        {
-            var collision = currentObject.GetComponent<Collision>();
-            collision.Guid = currentGuid;
-            var client = currentObject.GetComponent<Client>();
-            client.Guid = currentGuid;
-            client.enabled = IsClient;
-            var server = currentObject.GetComponent<Server>();
-            server.Guid = currentGuid;
-            server.enabled = IsServer;
-            var rigidbody = currentObject.GetComponent<Rigidbody2D>();
-            rigidbody.isKinematic = IsClient;
-        }
-
-        private void Instantiate()
-        {
-            currentObject.SetActive(true);
-            instantiated.Add(currentGuid, currentObject);
-        }
-
-        private void OnHit(OnBulletHitEvent e)
-        {
-            SetGuid(e.Guid);
-            Destroy();
-        }
-
-        private void Destroy()
-        {
-            if (!instantiated.TryGetValue(currentGuid, out currentObject))
-            {
-                return;
-            }
-
-            currentObject.SetActive(false);
-            instantiated.Remove(currentGuid);
-            created.Enqueue(currentObject);
-        }
-
-        private void Throw()
-        {
-            var thrower = currentObject.GetComponent<Throw>();
-            thrower.Begin(2.0f);
-        }
-
-        private void Update()
-        {
-            var data = new FactoryData { InstantiatedGuids = instantiated.Keys.ToArray() };
-            observable.Publish(new SendToClientsCommand(data.CreateBinaryObjectPacket()));
-        }
-
-        private void OnReceiveFromServerData(OnReceiveFromServerEvent e)
-        {
-            e.Data.OfBinaryObjects<FactoryData>()
-                  .FirstOrDefault()
-                  .Do(SynchronizeWithServerData);
-        }
-
-        private void SynchronizeWithServerData(FactoryData data)
-        {
-            var newGuids = data.InstantiatedGuids.Except(instantiated.Keys).ToList();
-            newGuids.ForEach(ClientInstantiate);
-            var oldGuids = instantiated.Keys.Except(data.InstantiatedGuids).ToList();
-            oldGuids.ForEach(ClientDestroy);
-        }
-
-        private void ClientInstantiate(Guid guid)
-        {
-            SetGuid(guid);
-            Load();
-            SetComponents();
-            Instantiate();
-        }
-
-        private void ClientDestroy(Guid guid)
-        {
-            SetGuid(guid);
-            Destroy();
+            creator.enabled = false;
+            creator.IsServer = false;
+            creator.IsClient = false;
         }
     }
 }

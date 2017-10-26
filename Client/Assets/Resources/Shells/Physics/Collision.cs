@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Shells
+namespace Shells.Physics
 {
     public class Collision : MonoBehaviour
     {

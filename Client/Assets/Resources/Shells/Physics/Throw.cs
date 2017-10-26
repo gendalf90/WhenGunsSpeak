@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Shells
+namespace Shells.Physics
 {
     public class Throw : MonoBehaviour
     {
+        [SerializeField]
+        private float force;
+
         private Rigidbody2D rigidbody2d;
         private Transform fromTransform;
         private Transform toTransform;
-
-        private float force;
 
         private void Awake()
         {
@@ -19,7 +20,7 @@ namespace Shells
             toTransform = transform.FindChild("To");
         }
 
-        public void Begin(float force)
+        public void WithForce(float force)
         {
             SetForce(force);
             AddForce();

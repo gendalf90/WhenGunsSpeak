@@ -33,6 +33,7 @@ namespace Soldier.Network
 
         private void OnEnable()
         {
+            observable.Subscribe<OnReceiveFromClientEvent>(ReceiveFromClient);
             observable.Subscribe<PositionEvent>(PositionHandler);
             observable.Subscribe<SoldierCreatedEvent>(SoldierCreatedHandler);
             observable.Subscribe<SoldierRemovedEvent>(SoldierRemovedHandler);
@@ -47,6 +48,7 @@ namespace Soldier.Network
 
         private void OnDisable()
         {
+            observable.Unsubscribe<OnReceiveFromClientEvent>(ReceiveFromClient);
             observable.Unsubscribe<PositionEvent>(PositionHandler);
             observable.Unsubscribe<SoldierCreatedEvent>(SoldierCreatedHandler);
             observable.Unsubscribe<SoldierRemovedEvent>(SoldierRemovedHandler);

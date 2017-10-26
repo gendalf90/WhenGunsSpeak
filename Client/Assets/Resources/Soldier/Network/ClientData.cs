@@ -21,12 +21,24 @@ namespace Soldier.Network
 
         public void FromBytes(byte[] bytes)
         {
-            
+            using (var reader = new BinaryDataReader(bytes))
+            {
+                Session = reader.ReadString();
+                LookAt = reader.ReadVector();
+                IsMoveRight = reader.ReadBoolean();
+                IsMoveLeft = reader.ReadBoolean();
+                IsJump = reader.ReadBoolean();
+            }
         }
 
         public byte[] ToBytes()
         {
-            throw new NotImplementedException();
+            return new BinaryDataBuilder().Write(Session)
+                                          .Write(LookAt)
+                                          .Write(IsMoveRight)
+                                          .Write(IsMoveLeft)
+                                          .Write(IsJump)
+                                          .Build();
         }
     }
 }
