@@ -16,8 +16,8 @@ namespace Shells.Physics
         private void Awake()
         {
             rigidbody2d = GetComponent<Rigidbody2D>();
-            fromTransform = transform.FindChild("From");
-            toTransform = transform.FindChild("To");
+            fromTransform = transform.Find("From");
+            toTransform = transform.Find("To");
         }
 
         public void WithForce(float force)

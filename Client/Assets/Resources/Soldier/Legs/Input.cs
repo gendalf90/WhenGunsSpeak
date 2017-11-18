@@ -9,12 +9,12 @@ namespace Soldier.Legs
     class Input : MonoBehaviour
     {
         private Observable observable;
-        private Animation legsAnimation;
+        private LegsAnimation legsAnimation;
 
         private void Awake()
         {
             observable = FindObjectOfType<Observable>();
-            legsAnimation = GetComponentInChildren<Animation>();
+            legsAnimation = GetComponentInChildren<LegsAnimation>();
         }
 
         private void OnEnable()

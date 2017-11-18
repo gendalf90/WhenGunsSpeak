@@ -13,8 +13,10 @@ namespace Server
     class Udp : MonoBehaviour
     {
         private IPEndPoint[] addresses;
-        private ConcurrentQueue<IPacket> sending;
-        private ConcurrentQueue<IPacket> received;
+        private readonly object sendingSync;
+        private readonly object receivedSync;
+        private Queue<IPacket> sending;
+        private List<IPacket> received;
         private int currentAddressIndex = -1;
         private volatile bool isRunning;
         private volatile bool isPaused;
@@ -22,8 +24,10 @@ namespace Server
 
         public Udp()
         {
-            received = new ConcurrentQueue<IPacket>();
-            sending = new ConcurrentQueue<IPacket>();
+            sendingSync = new object();
+            receivedSync = new object();
+            received = new List<IPacket>();
+            sending = new Queue<IPacket>();
         }
 
         private void Start()
@@ -85,7 +89,11 @@ namespace Server
         {
             IPEndPoint endPoint = null;
             var bytes = client.Receive(ref endPoint);
-            received.Enqueue(bytes.ToPacket());
+
+            lock(receivedSync)
+            {
+                received.Add(bytes.ToPacket());
+            }
         }
 
         private void SendProcessing()
@@ -110,11 +118,16 @@ namespace Server
 
         private void InternalSend()
         {
-            IPacket packet = null;
-
-            if (!sending.TryDequeue(out packet))
+            IPacket packet;
+            
+            lock(sendingSync)
             {
-                return;
+                if (sending.Count == 0)
+                {
+                    return;
+                }
+
+                packet = sending.Dequeue();
             }
 
             var endPoint = GetNextAddress();
@@ -124,19 +137,20 @@ namespace Server
 
         public IPacket[] Receive()
         {
-            var result = new IPacket[received.Count];
-
-            for (int i = 0; i < result.Length; i++)
+            lock (receivedSync)
             {
-                received.TryDequeue(out result[i]);
+                var result = received.ToArray();
+                received.Clear();
+                return result;
             }
-
-            return result;
         }
 
         public void Send(IPacket packet)
         {
-            sending.Enqueue(packet);
+            lock(sendingSync)
+            {
+                sending.Enqueue(packet);
+            }
         }
 
         private IPEndPoint GetNextAddress()

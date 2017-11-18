@@ -15,8 +15,8 @@ namespace Soldier.Body
 
         private void Awake()
         {
-            handsTransform = transform.FindChild("Hands");
-            shoulderTransform = transform.FindChild("Shoulder");
+            handsTransform = transform.Find("Hands");
+            shoulderTransform = transform.Find("Shoulder");
         }
 
         public Vector2 Aim

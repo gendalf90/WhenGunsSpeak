@@ -10,13 +10,13 @@ namespace Soldier.Legs
     class Legs : MonoBehaviour
     {
         private Observable observable;
-        private Animation legsAnimation;
+        private LegsAnimation legsAnimation;
         private Flip flip;
 
         private void Awake()
         {
             observable = FindObjectOfType<Observable>();
-            legsAnimation = GetComponent<Animation>();
+            legsAnimation = GetComponent<LegsAnimation>();
             flip = GetComponent<Flip>();
         }
 

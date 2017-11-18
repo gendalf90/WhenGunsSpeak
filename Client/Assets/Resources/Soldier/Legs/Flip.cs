@@ -10,7 +10,7 @@ namespace Soldier.Legs
 
         private void Awake()
         {
-            legsTransform = transform.FindChild("Legs");
+            legsTransform = transform.Find("Legs");
         }
 
         public void ToLeft()

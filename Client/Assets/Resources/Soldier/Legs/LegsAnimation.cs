@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Soldier.Legs
 {
-    class Animation : MonoBehaviour
+    class LegsAnimation : MonoBehaviour
     {
         private Animator animator;
         private Transform legsTransform;
@@ -15,7 +15,7 @@ namespace Soldier.Legs
         private void Awake()
         {
             animator = GetComponentInChildren<Animator>();
-            legsTransform = transform.FindChild("Legs");
+            legsTransform = transform.Find("Legs");
         }
 
         private void Update()

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Camera
 {
-    public class Camera : MonoBehaviour
+    public class View : MonoBehaviour
     {
         
     }
