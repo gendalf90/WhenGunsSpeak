@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "FuckNatService": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 39748"
+    }
+  }
+}
