@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -11,12 +13,14 @@ namespace FuckNatService
     class GetYourIPService : IHostedService
     {
         private readonly IOptions<UdpOptions> options;
+        private readonly ILogger<GetYourIPService> logger;
 
         private UdpClient udpClient;
 
-        public GetYourIPService(IOptions<UdpOptions> options)
+        public GetYourIPService(IOptions<UdpOptions> options, ILogger<GetYourIPService> logger)
         {
             this.options = options;
+            this.logger = logger;
         }
 
         public Task StartAsync(CancellationToken cancellationToken)
@@ -31,7 +35,7 @@ namespace FuckNatService
 
             while (true)
             {
-                await GetYourIpAsync();
+                await GetYourIpSafeAsync();
             };
         }
 
@@ -41,6 +45,18 @@ namespace FuckNatService
             var port = options.Value.Port;
             var listenOn = new IPEndPoint(ipAddress, port);
             udpClient = new UdpClient(listenOn);
+        }
+
+        private async Task GetYourIpSafeAsync()
+        {
+            try
+            {
+                await GetYourIpAsync();
+            }
+            catch(Exception e)
+            {
+                logger.LogError(e, "Error while ip getting");
+            }
         }
 
         private async Task GetYourIpAsync()
