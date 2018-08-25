@@ -12,6 +12,7 @@ namespace Connection.Rooms
     {
         private readonly HubConnection signalRConnection;
         private readonly IHttpClientFactory httpClientFactory;
+        private readonly IObserver<ConnectedUserData> userConnectedObserver;
 
         public RoomsConnection(IHttpClientFactory httpClientFactory)
         {
@@ -22,7 +23,10 @@ namespace Connection.Rooms
         {
             signalRConnection.On<string>("IAmConnected", userId =>
             {
-                OnUserConnected(this, new UserConnectedEventArgs(userId));
+                userConnectedObserver.OnNext(new ConnectedUserData
+                {
+                    UserId = userId
+                });
             });
         }
 
@@ -31,13 +35,13 @@ namespace Connection.Rooms
             await signalRConnection.InvokeAsync("CreateMyRoom");
         }
 
-        public async Task<IEnumerable<RoomShortDto>> GetAllRoomsAsync()
+        public async Task<IEnumerable<RoomData>> GetAllRoomsAsync()
         {
             var httpClient = httpClientFactory.CreateClient();
             var response = await httpClient.GetAsync("api/rooms");
             return await response.EnsureSuccessStatusCode()
                                  .Content
-                                 .ReadAsAsync<IEnumerable<RoomShortDto>>();
+                                 .ReadAsAsync<IEnumerable<RoomData>>();
         }
 
         public Task StartAsync(CancellationToken cancellationToken)
@@ -45,11 +49,9 @@ namespace Connection.Rooms
             throw new NotImplementedException();
         }
 
-        public Task StopAsync(CancellationToken cancellationToken)
+        public async Task StopAsync(CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            await signalRConnection.DisposeAsync();
         }
-
-        public event EventHandler<UserConnectedEventArgs> OnUserConnected;
     }
 }
