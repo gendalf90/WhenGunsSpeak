@@ -1,10 +1,8 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using FuckNatService.MessageClient;
+using FuckNatService.Messages;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using System;
-using System.Net;
-using System.Net.Sockets;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -12,14 +10,18 @@ namespace FuckNatService
 {
     class GetYourIPService : IHostedService
     {
-        private readonly IOptions<UdpOptions> options;
+        private readonly IMessageClientCreator messageClientCreator;
+        private readonly IRequestCreator requestCreator;
         private readonly ILogger<GetYourIPService> logger;
 
-        private UdpClient udpClient;
+        private IMessageClient messageClient;
 
-        public GetYourIPService(IOptions<UdpOptions> options, ILogger<GetYourIPService> logger)
+        public GetYourIPService(IMessageClientCreator messageClientCreator,
+                                IRequestCreator requestCreator, 
+                                ILogger<GetYourIPService> logger)
         {
-            this.options = options;
+            this.messageClientCreator = messageClientCreator;
+            this.requestCreator = requestCreator;
             this.logger = logger;
         }
 
@@ -41,10 +43,7 @@ namespace FuckNatService
 
         private void InitializeClient()
         {
-            var ipAddress = IPAddress.Any;
-            var port = options.Value.Port;
-            var listenOn = new IPEndPoint(ipAddress, port);
-            udpClient = new UdpClient(listenOn);
+            messageClient = messageClientCreator.Create();
         }
 
         private async Task GetYourIpSafeAsync()
@@ -61,15 +60,14 @@ namespace FuckNatService
 
         private async Task GetYourIpAsync()
         {
-            var request = await udpClient.ReceiveAsync();
-            var endPointString = request.RemoteEndPoint.ToString();
-            var endPointBytes = Encoding.UTF8.GetBytes(endPointString);
-            await udpClient.SendAsync(endPointBytes, endPointBytes.Length, request.RemoteEndPoint);
+            var request = requestCreator.Create();
+            await request.LoadAsync(messageClient);
+            await request.SendResponseIfValidAsync(messageClient);
         }
 
         public Task StopAsync(CancellationToken cancellationToken)
         {
-            udpClient.Close();
+            messageClient.Dispose();
             return Task.CompletedTask;
         }
     }
