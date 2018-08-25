@@ -11,10 +11,10 @@ namespace FuckNatService.Messages
     class Request : IRequest
     {
         private const int SessionKeyLength = 16;
-        private static readonly Guid ResponseMessageKey = new Guid("C1FDA972-DF95-4680-8CF2-00581EB2C5E4");
+        private const int AddressLength = 8;
+        private const int PortLenght = 4;
 
         private byte[] securityKeyBytes;
-        private byte[] responseMessageKeyBytes;
         private byte[] sessionKeyBytes;
         private byte[] endPointBytes;
 
@@ -23,28 +23,24 @@ namespace FuckNatService.Messages
         public Request(string securityKey)
         {
             securityKeyBytes = Encoding.UTF8.GetBytes(securityKey);
-            responseMessageKeyBytes = ResponseMessageKey.ToByteArray();
         }
 
         public async Task LoadAsync(IMessageClient client)
         {
             var messageData = await client.ReceiveAsync();
             endPoint = messageData.EndPoint;
-            var endPointString = messageData.EndPoint.ToString();
-            endPointBytes = Encoding.UTF8.GetBytes(endPointString);
-            sessionKeyBytes = GetSessionKeyIfExist(messageData.Bytes);
+            endPointBytes = CreateEndPointBytes(endPoint);
+            sessionKeyBytes = messageData.Bytes;
         }
 
-        private byte[] GetSessionKeyIfExist(byte[] bytes)
+        private byte[] CreateEndPointBytes(IPEndPoint endPoint)
         {
-            if (bytes.Length < SessionKeyLength)
-            {
-                return null;
-            }
-
-            var sessionKeyBytes = new byte[SessionKeyLength];
-            bytes.CopyTo(sessionKeyBytes, 0);
-            return sessionKeyBytes;
+            var result = new byte[AddressLength + PortLenght];
+            var addressBytes = endPoint.Address.GetAddressBytes();
+            addressBytes.CopyTo(result, 0);
+            var portBytes = BitConverter.GetBytes(endPoint.Port);
+            portBytes.CopyTo(result, AddressLength);
+            return result;
         }
 
         public async Task SendResponseIfValidAsync(IMessageClient client)
@@ -63,7 +59,7 @@ namespace FuckNatService.Messages
 
         private bool IsReadyToResponse
         {
-            get => sessionKeyBytes != null && endPointBytes != null;
+            get => sessionKeyBytes != null && securityKeyBytes.Length == SessionKeyLength && endPoint != null;
         }
 
         private byte[] CreateSignKeyOfData(byte[] bytes)
@@ -78,7 +74,6 @@ namespace FuckNatService.Messages
         {
             using (var stream = new MemoryStream())
             {
-                stream.Write(responseMessageKeyBytes, 0, responseMessageKeyBytes.Length);
                 stream.Write(sessionKeyBytes, 0, sessionKeyBytes.Length);
                 stream.Write(endPointBytes, 0, endPointBytes.Length);
                 return stream.ToArray();

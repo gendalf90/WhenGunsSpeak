@@ -31,7 +31,6 @@ namespace FuckNatService.MessageClient
         public void Dispose()
         {
             udpClient.Close();
-            udpClient.Dispose();
         }
     }
 }
