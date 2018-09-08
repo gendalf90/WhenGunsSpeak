@@ -2,7 +2,11 @@
   "profiles": {
     "FuckNatService": {
       "commandName": "Project",
-      "commandLineArgs": "--port 39748"
+      "commandLineArgs": "--port 39748",
+      "environmentVariables": {
+        "SECURITY_KEY": "qwer1234asdf5678",
+        "ENVIRONMENT": "Development"
+      }
     }
   }
 }

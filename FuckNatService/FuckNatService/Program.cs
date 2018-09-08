@@ -3,8 +3,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Threading.Tasks;
 using Serilog;
-using FuckNatService.Messages;
-using FuckNatService.MessageClient;
+using Datagrammer;
+using System.Security;
+using Datagrammer.Aes;
 
 namespace FuckNatService
 {
@@ -19,17 +20,16 @@ namespace FuckNatService
                                    })
                                    .ConfigureServices((context, services) =>
                                    {
-                                       services.AddTransient<IMessageClientCreator, MessageClientCreator>()
-                                               .AddTransient<IRequestCreator, RequestCreator>()
-                                               .AddHostedService<GetYourIPService>()
-                                               .Configure<UdpOptions>(options =>
+                                       var secureKey = LoadSecureKey(context.Configuration);
+
+                                       services.AddSingleton<IMessageHandler, RequestHandler>()
+                                               .AddSingleton<IErrorHandler, ErrorHandler>()
+                                               .AddDatagramAesEncryption(secureKey)
+                                               .Configure<DatagramOptions>(options =>
                                                {
-                                                   options.Port = context.Configuration.GetValue<int>("port");
+                                                   options.ListeningPoint.Port = context.Configuration.GetValue<int>("port");
                                                })
-                                               .Configure<SecurityOptions>(options =>
-                                               {
-                                                   options.SecurityKey = context.Configuration["SECURITY_KEY"];
-                                               });
+                                               .AddHostedDatagrammer();
                                    })
                                    .UseSerilog((context, configuration) =>
                                    {
@@ -47,6 +47,18 @@ namespace FuckNatService
                                                           fileSizeLimitBytes: 10485760);
                                    })
                                    .RunConsoleAsync();
+        }
+
+        private static SecureString LoadSecureKey(IConfiguration configuration)
+        {
+            var result = new SecureString();
+
+            foreach(var secureChar in configuration["SECURITY_KEY"])
+            {
+                result.AppendChar(secureChar);
+            }
+
+            return result;
         }
     }
 }
