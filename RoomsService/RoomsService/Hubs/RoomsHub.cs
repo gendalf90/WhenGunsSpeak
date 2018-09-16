@@ -32,7 +32,6 @@ namespace RoomsService.Hubs
         {
             await Groups.AddToGroupAsync(MyConnectionId, MyRoomId);
             await saveNewRoomStrategy.SaveAsync(MyRoomId, MyId);
-            AmIRoomOwner = true;
             LogThatRoomIsCreated();
         }
 
@@ -51,7 +50,6 @@ namespace RoomsService.Hubs
             await Clients.OthersInGroup(MyRoomId).SendAsync("GetOutFromMyRoom", MyRoomId);
             await Groups.RemoveFromGroupAsync(MyConnectionId, MyRoomId);
             await deleteRoomStrategy.DeleteAsync(MyRoomId);
-            AmIRoomOwner = false;
             LogThatRoomIsDeleted();
         }
 
@@ -60,14 +58,19 @@ namespace RoomsService.Hubs
             logger.Information($"Room '{MyRoomId}' is deleted by owner '{MyId}'");
         }
 
-        public async Task IWantToJoinToYourRoom(string ownerId, string userIp)
+        public async Task IWantToJoinToYourRoom(string ownerId)
         {
-            await Clients.User(ownerId).SendAsync("PleaseAddMeToYourRoom", MyId, userIp);
+            await Clients.User(ownerId).SendAsync("PleaseAddMeToYourRoom", MyId);
         }
 
-        public async Task IJoinYouToMyRoom(string userId, string ownerIp)
+        public async Task ITellYouMyIP(string userId, string address, int port)
         {
-            await Clients.User(userId).SendAsync("YouAreJoinedToMyRoom", MyRoomId, ownerIp);
+            await Clients.User(userId).SendAsync("HeSaysThatHisIpIs", MyId, address, port);
+        }
+
+        public async Task IJoinYouToMyRoom(string userId)
+        {
+            await Clients.User(userId).SendAsync("YouAreJoinedToMyRoom", MyRoomId);
             LogThatUserIsJoinedToRoom(userId);
         }
 
@@ -114,7 +117,7 @@ namespace RoomsService.Hubs
         public override async Task OnDisconnectedAsync(Exception exception)
         {
             await Clients.Others.SendAsync("IAmDisconnected", MyId);
-            await DisposeMeIfIAmRoomOwnerAsync();
+            await deleteRoomStrategy.DeleteAsync(MyRoomId);
             LogThatUserIsDisconnected(exception);
             await base.OnDisconnectedAsync(exception);
         }
@@ -129,19 +132,5 @@ namespace RoomsService.Hubs
         private string MyRoomId => Context.UserIdentifier;
 
         private string MyId => Context.UserIdentifier;
-
-        private bool AmIRoomOwner
-        {
-            get => Context.Items.TryGetValue("AmIRoomOwner", out object value) ? (bool)value : false;
-            set => Context.Items["AmIRoomOwner"] = value;
-        }
-
-        private async Task DisposeMeIfIAmRoomOwnerAsync()
-        {
-            if(AmIRoomOwner)
-            {
-                await deleteRoomStrategy.DeleteAsync(MyRoomId);
-            }
-        }
     }
 }

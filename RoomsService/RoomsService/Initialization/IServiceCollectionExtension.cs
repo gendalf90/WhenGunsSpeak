@@ -39,7 +39,9 @@ namespace RoomsService.Initialization
         public static IServiceCollection AddSignalR(this IServiceCollection services, IConfiguration configuration)
         {
             var redisConnection = configuration["REDIS_CONNECTION_STRING"];
-            services.AddSignalR().AddRedis(redisConnection);
+            services.AddSignalR()
+                    .AddMessagePackProtocol()
+                    .AddRedis(redisConnection);
             return services;
         }
 
