@@ -2,7 +2,7 @@
 
 namespace Connection
 {
-    public class MyIPData
+    public sealed class MyIPData
     {
         public IPEndPoint IP { get; set; }
     }

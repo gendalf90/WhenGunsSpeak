@@ -1,8 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using Microsoft.Extensions.Hosting;
+using System.Threading.Tasks;
 
 namespace Connection.Udp
 {
-    interface IUdpConnection
+    interface IUdpConnection : IHostedService
     {
         Task SendAsync(MessageData data);
     }

@@ -1,69 +1,59 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using Connection.Udp.Messaging;
+using Connection.Udp.NatFucking;
+using Datagrammer;
+using Datagrammer.MessagePack;
 using Microsoft.Extensions.Options;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Connection.Udp
 {
-    class UdpConnection : IHostedService, IUdpConnection
+    class UdpConnection : IUdpConnection
     {
+        private readonly IDatagramSender datagramSender;
         private readonly IOptions<UdpOptions> udpOptions;
-        private readonly IMessageCreator messageCreator;
-        private readonly IMessageClientCreator messageClientCreator;
 
-        private IMessageClient messageClient;
         private Timer natFuckingTimer;
-        private Guid natFuckingSessionId;
 
-        public UdpConnection()
+        public UdpConnection(IDatagramSender datagramSender, IOptions<UdpOptions> udpOptions)
         {
-
+            this.datagramSender = datagramSender;
+            this.udpOptions = udpOptions;
         }
-
 
         public async Task SendAsync(MessageData data)
         {
-            var message = messageCreator.Create();
-            await message.SendAsync(messageClient, data);
+            await datagramSender.SendByMessagePackAsync(new MessageDto
+            {
+                Body = data.Bytes,
+                MessageType = UdpMessageType.Messaging,
+                UserId = udpOptions.Value.UserId
+            }, data.IP);
         }
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
-            InitializeClient();
-            InitializeNatFuckingSession();
-            StartNatFucking();
+            StartNatFuckingRequestSending();
             return Task.CompletedTask;
         }
 
-        private void InitializeNatFuckingSession()
-        {
-            natFuckingSessionId = Guid.NewGuid();
-        }
-
-        private void InitializeClient()
-        {
-            messageClient = messageClientCreator.Create();
-        }
-
-        private void StartNatFucking()
+        private void StartNatFuckingRequestSending()
         {
             natFuckingTimer = new Timer(FuckNatAsync, null, udpOptions.Value.NatFuckingPeriod, udpOptions.Value.NatFuckingPeriod);
         }
 
-        private async void FuckNatAsync(object sessionId)
+        private async void FuckNatAsync(object state)
         {
-            var message = messageCreator.Create();
-            await message.SendFuckNatRequestAsync(messageClient);
+            await datagramSender.SendByMessagePackAsync(new NatFuckingRequestDto
+            {
+                UserId = udpOptions.Value.UserId
+            }, udpOptions.Value.NatFuckerAddress);
         }
 
         public Task StopAsync(CancellationToken cancellationToken)
         {
             natFuckingTimer.Dispose();
-            messageClient.Dispose();
             return Task.CompletedTask;
         }
-
-        
     }
 }

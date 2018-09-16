@@ -2,10 +2,8 @@
 
 namespace Connection
 {
-    public sealed class RoomData
+    public sealed class RoomExpellingData
     {
         public Guid RoomId { get; set; }
-
-        public Guid OwnerId { get; set; }
     }
 }

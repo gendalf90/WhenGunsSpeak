@@ -2,7 +2,7 @@
 
 namespace Connection
 {
-    public sealed class ConnectedUserData
+    public sealed class DisconnectedUserData
     {
         public Guid UserId { get; set; }
     }

@@ -2,10 +2,10 @@
 
 namespace Connection
 {
-    public sealed class RoomData
+    public sealed class RoomRejectingData
     {
         public Guid RoomId { get; set; }
 
-        public Guid OwnerId { get; set; }
+        public string Message { get; set; }
     }
 }

@@ -2,13 +2,26 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Datagrammer" Version="0.0.5-alpha" />
+    <PackageReference Include="Datagrammer.Hmac" Version="0.0.3-alpha" />
+    <PackageReference Include="Datagrammer.MessagePack" Version="0.0.4-alpha" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.6" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="1.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Protocols.MessagePack" Version="1.0.3" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="2.1.1" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="2.1.1" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="5.2.4" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.2.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\AssemblyInfo.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
   </ItemGroup>
 
 </Project>
