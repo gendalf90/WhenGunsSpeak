@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 using Serilog;
 using Datagrammer;
 using System.Security;
-using Datagrammer.Aes;
+using Datagrammer.Hmac;
+using System;
 
 namespace FuckNatService
 {
@@ -20,11 +21,11 @@ namespace FuckNatService
                                    })
                                    .ConfigureServices((context, services) =>
                                    {
-                                       var secureKey = LoadSecureKey(context.Configuration);
+                                       var securityKey = LoadSecurityKey(context.Configuration);
 
                                        services.AddSingleton<IMessageHandler, RequestHandler>()
                                                .AddSingleton<IErrorHandler, ErrorHandler>()
-                                               .AddDatagramAesEncryption(secureKey)
+                                               .AddSingleton<IMiddleware>(new HmacSha1Middleware(securityKey))
                                                .Configure<DatagramOptions>(options =>
                                                {
                                                    options.ListeningPoint.Port = context.Configuration.GetValue<int>("port");
@@ -49,16 +50,10 @@ namespace FuckNatService
                                    .RunConsoleAsync();
         }
 
-        private static SecureString LoadSecureKey(IConfiguration configuration)
+        private static byte[] LoadSecurityKey(IConfiguration configuration)
         {
-            var result = new SecureString();
-
-            foreach(var secureChar in configuration["SECURITY_KEY"])
-            {
-                result.AppendChar(secureChar);
-            }
-
-            return result;
+            var key = configuration["SECURITY_KEY"];
+            return Convert.FromBase64String(key);
         }
     }
 }

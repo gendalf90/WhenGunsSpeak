@@ -3,9 +3,10 @@ using System;
 
 namespace FuckNatService
 {
-    [MessagePackObject(keyAsPropertyName: true)]
+    [MessagePackObject]
     public class RequestDto
     {
-        public Guid SessionID { get; set; }
+        [Key(0)]
+        public Guid UserId { get; set; }
     }
 }

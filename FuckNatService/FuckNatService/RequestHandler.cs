@@ -7,18 +7,14 @@ namespace FuckNatService
 {
     class RequestHandler : MessagePackHandler<RequestDto>
     {
-        private readonly IDatagramSender sender;
+        private const byte ResponseMessageType = 2;
 
-        public RequestHandler(IDatagramSender sender)
+        public override async Task HandleAsync(IContext context, RequestDto data, IPEndPoint endPoint)
         {
-            this.sender = sender;
-        }
-
-        public override async Task HandleAsync(RequestDto data, IPEndPoint endPoint)
-        {
-            await sender.SendByMessagePackAsync(new ResponseDto
+            await context.SendByMessagePackAsync(new ResponseDto
             {
-                SessionID = data.SessionID,
+                MessageType = ResponseMessageType,
+                UserId = data.UserId,
                 Address = endPoint.Address.GetAddressBytes(),
                 Port = endPoint.Port
             }, endPoint);

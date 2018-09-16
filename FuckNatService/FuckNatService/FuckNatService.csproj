@@ -10,9 +10,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Datagrammer" Version="0.0.3-alpha" />
-    <PackageReference Include="Datagrammer.Aes" Version="0.0.2-alpha" />
-    <PackageReference Include="Datagrammer.MessagePack" Version="0.0.1-alpha" />
+    <PackageReference Include="Datagrammer" Version="0.0.5-alpha" />
+    <PackageReference Include="Datagrammer.Hmac" Version="0.0.3-alpha" />
+    <PackageReference Include="Datagrammer.MessagePack" Version="0.0.4-alpha" />
     <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="2.1.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="2.1.1" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="2.1.1" />

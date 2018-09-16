@@ -14,7 +14,7 @@ namespace FuckNatService
             this.logger = logger;
         }
 
-        public Task HandleAsync(Exception e)
+        public Task HandleAsync(IContext context, Exception e)
         {
             logger.LogError(e, "Request error");
             return Task.CompletedTask;

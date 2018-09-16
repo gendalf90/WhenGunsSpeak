@@ -3,13 +3,19 @@ using System;
 
 namespace FuckNatService
 {
-    [MessagePackObject(keyAsPropertyName: true)]
+    [MessagePackObject]
     public class ResponseDto
     {
-        public Guid SessionID { get; set; }
+        [Key(0)]
+        public byte MessageType { get; set; }
 
+        [Key(1)]
+        public Guid UserId { get; set; }
+
+        [Key(2)]
         public byte[] Address { get; set; }
 
+        [Key(3)]
         public int Port { get; set; }
     }
 }
