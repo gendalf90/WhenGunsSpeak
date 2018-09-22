@@ -4,9 +4,6 @@ using Microsoft.Extensions.Hosting;
 using System.Threading.Tasks;
 using Serilog;
 using Datagrammer;
-using System.Security;
-using Datagrammer.Hmac;
-using System;
 
 namespace FuckNatService
 {
@@ -21,11 +18,8 @@ namespace FuckNatService
                                    })
                                    .ConfigureServices((context, services) =>
                                    {
-                                       var securityKey = LoadSecurityKey(context.Configuration);
-
                                        services.AddSingleton<IMessageHandler, RequestHandler>()
                                                .AddSingleton<IErrorHandler, ErrorHandler>()
-                                               .AddSingleton<IMiddleware>(new HmacSha1Middleware(securityKey))
                                                .Configure<DatagramOptions>(options =>
                                                {
                                                    options.ListeningPoint.Port = context.Configuration.GetValue<int>("port");
@@ -48,12 +42,6 @@ namespace FuckNatService
                                                           fileSizeLimitBytes: 10485760);
                                    })
                                    .RunConsoleAsync();
-        }
-
-        private static byte[] LoadSecurityKey(IConfiguration configuration)
-        {
-            var key = configuration["SECURITY_KEY"];
-            return Convert.FromBase64String(key);
         }
     }
 }
