@@ -7,6 +7,7 @@ using RoomsService.Common.DeleteRoom;
 using RoomsService.Common.DescribeRoom;
 using RoomsService.Common.GetAllRooms;
 using RoomsService.Common.GetRoom;
+using RoomsService.Common.GetToken;
 using RoomsService.Common.SaveNewRoom;
 using RoomsService.Logs;
 using System;
@@ -17,9 +18,13 @@ namespace RoomsService.Initialization
     {
         public static IServiceCollection AddAuthentication(this IServiceCollection services, IConfiguration configuration)
         {
-            var sign = configuration["TOKEN_SIGNING_KEY"];
+            var securityKey = CreateTokenSecurityKey(configuration);
 
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            services.Configure<SecurityOptions>(options =>
+                    {
+                        options.SecurityKey = securityKey;
+                    })
+                    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                     .AddJwtBearer(options =>
                     {
                         options.TokenValidationParameters = new TokenValidationParameters
@@ -29,7 +34,7 @@ namespace RoomsService.Initialization
                             ValidateLifetime = false,
                             RequireExpirationTime = false,
                             ValidateIssuerSigningKey = true,
-                            IssuerSigningKey = CreateTokenSigningKey(sign)
+                            IssuerSigningKey = securityKey
                         };
                     });
 
@@ -81,7 +86,8 @@ namespace RoomsService.Initialization
                            .AddTransient<IDescribeRoomStrategy, DescribeRoomStrategy>()
                            .AddTransient<IGetAllRoomsStrategy, GetAllRoomsStrategy>()
                            .AddTransient<IGetRoomStrategy, GetRoomStrategy>()
-                           .AddTransient<ISaveNewRoomStrategy, SaveNewRoomStrategy>();
+                           .AddTransient<ISaveNewRoomStrategy, SaveNewRoomStrategy>()
+                           .AddTransient<IGetTokenStrategy, GetTokenStrategy>();
         }
 
         public static IServiceCollection AddLogs(this IServiceCollection services)
@@ -89,9 +95,10 @@ namespace RoomsService.Initialization
             return services.AddTransient<IRoomLogger, RoomLogger>();
         }
 
-        private static SecurityKey CreateTokenSigningKey(string key)
+        private static SecurityKey CreateTokenSecurityKey(IConfiguration configuration)
         {
-            var bytes = Convert.FromBase64String(key);
+            var sign = configuration["TOKEN_SIGNING_KEY"];
+            var bytes = Convert.FromBase64String(sign);
             return new SymmetricSecurityKey(bytes);
         }
     }

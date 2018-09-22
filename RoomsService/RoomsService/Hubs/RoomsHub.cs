@@ -68,9 +68,9 @@ namespace RoomsService.Hubs
             await Clients.User(userId).SendAsync("HeSaysThatHisIpIs", MyId, address, port);
         }
 
-        public async Task IJoinYouToMyRoom(string userId)
+        public async Task IJoinYouToMyRoom(string userId, string securityKey)
         {
-            await Clients.User(userId).SendAsync("YouAreJoinedToMyRoom", MyRoomId);
+            await Clients.User(userId).SendAsync("YouAreJoinedToMyRoom", MyRoomId, securityKey);
             LogThatUserIsJoinedToRoom(userId);
         }
 
@@ -105,7 +105,7 @@ namespace RoomsService.Hubs
         public override async Task OnConnectedAsync()
         {
             await base.OnConnectedAsync();
-            await Clients.Others.SendAsync("IAmConnected", MyId);
+            await Clients.Others.SendAsync("HeIsConnected", MyId);
             LogThatUserIsConnected();
         }
 
@@ -116,7 +116,7 @@ namespace RoomsService.Hubs
 
         public override async Task OnDisconnectedAsync(Exception exception)
         {
-            await Clients.Others.SendAsync("IAmDisconnected", MyId);
+            await Clients.Others.SendAsync("HeIsDisconnected", MyId);
             await deleteRoomStrategy.DeleteAsync(MyRoomId);
             LogThatUserIsDisconnected(exception);
             await base.OnDisconnectedAsync(exception);
@@ -125,6 +125,17 @@ namespace RoomsService.Hubs
         private void LogThatUserIsDisconnected(Exception e)
         {
             logger.Information(e, $"User '{MyId}' is disconnected");
+        }
+
+        private async Task IWantToKnowMyId()
+        {
+            await Clients.Caller.SendAsync("ThatIsYourId", MyId);
+            LogThatUserRequestedId();
+        }
+
+        private void LogThatUserRequestedId()
+        {
+            logger.Information($"User '{MyId}' requested id");
         }
 
         private string MyConnectionId => Context.ConnectionId;
