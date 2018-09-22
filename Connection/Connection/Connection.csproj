@@ -7,7 +7,7 @@
 
   <ItemGroup>
     <PackageReference Include="Datagrammer" Version="0.0.5-alpha" />
-    <PackageReference Include="Datagrammer.Hmac" Version="0.0.3-alpha" />
+    <PackageReference Include="Datagrammer.Hmac" Version="0.0.4-alpha" />
     <PackageReference Include="Datagrammer.MessagePack" Version="0.0.4-alpha" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.6" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="1.0.3" />

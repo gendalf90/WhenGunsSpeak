@@ -25,11 +25,6 @@ namespace Connection.Udp.Messaging
                 return Task.CompletedTask;
             }
 
-            if (data.UserId != connectionOptions.Value.UserId)
-            {
-                return Task.CompletedTask;
-            }
-
             messageObserver.OnNext(new MessageData
             {
                 Bytes = data.Body,

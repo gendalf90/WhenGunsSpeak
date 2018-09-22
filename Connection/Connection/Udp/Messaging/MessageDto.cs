@@ -10,9 +10,6 @@ namespace Connection.Udp.Messaging
         public UdpMessageType MessageType { get; set; }
 
         [Key(1)]
-        public Guid UserId { get; set; }
-
-        [Key(2)]
         public byte[] Body { get; set; }
     }
 }

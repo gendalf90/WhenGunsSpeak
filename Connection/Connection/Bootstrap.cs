@@ -8,6 +8,7 @@ using Connection.Initialization;
 using System.Threading.Tasks;
 using System.Net.Http.Headers;
 using System.Net.Http;
+using Datagrammer.Hmac;
 
 namespace Connection
 {
@@ -69,7 +70,13 @@ namespace Connection
                                                   })
                                                   .AddObserver<MessageData>()
                                                   .AddObserver<MyIPData>()
-                                                  .AddSingleton<IMessageHandler, MessageHandler>()
+                                                  .AddSingleton<MessageHandler>()
+                                                  .AddSingleton<IMessageHandler>(provider =>
+                                                  {
+                                                      var messageHander = provider.GetService<MessageHandler>();
+                                                      var securityKey = connectionOptions.SecurityKey;
+                                                      return new HmacSha1HandlerDecorator(messageHander, securityKey);
+                                                  })
                                                   .AddSingleton<IMessageHandler, NatFuckingMessageHandler>()
                                                   .AddSingleton<UdpConnection>()
                                                   .AddDatagrammer()
