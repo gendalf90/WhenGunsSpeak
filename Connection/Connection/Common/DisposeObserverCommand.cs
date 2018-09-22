@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Connection.Mediator
+namespace Connection.Common
 {
     class DisposeObserverCommand<T> : IDisposable
     {

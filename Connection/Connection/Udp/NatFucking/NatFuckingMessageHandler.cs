@@ -10,12 +10,12 @@ namespace Connection.Udp.NatFucking
     class NatFuckingMessageHandler : MessagePackHandler<NatFuckingResponseDto>
     {
         private readonly IObserver<MyIPData> myIPObserver;
-        private readonly IOptions<UdpOptions> udpOptions;
+        private readonly IOptions<UdpOptions> connectionOptions;
 
-        public NatFuckingMessageHandler(IObserver<MyIPData> myIPObserver, IOptions<UdpOptions> udpOptions)
+        public NatFuckingMessageHandler(IObserver<MyIPData> myIPObserver, IOptions<UdpOptions> connectionOptions)
         {
             this.myIPObserver = myIPObserver;
-            this.udpOptions = udpOptions;
+            this.connectionOptions = connectionOptions;
         }
 
         public override Task HandleAsync(IContext context, NatFuckingResponseDto data, IPEndPoint endPoint)
@@ -25,13 +25,14 @@ namespace Connection.Udp.NatFucking
                 return Task.CompletedTask;
             }
 
-            if(data.UserId != udpOptions.Value.UserId)
+            if(data.UserId != connectionOptions.Value.UserId)
             {
                 return Task.CompletedTask;
             }
 
             myIPObserver.OnNext(new MyIPData
             {
+                UserId = connectionOptions.Value.UserId,
                 IP = new IPEndPoint(new IPAddress(data.Address), data.Port)
             });
 

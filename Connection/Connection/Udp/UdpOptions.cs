@@ -3,14 +3,14 @@ using System.Net;
 
 namespace Connection.Udp
 {
-    class UdpOptions
+    internal class UdpOptions
     {
+        public byte[] SecurityKey { get; set; }
+
+        public Guid UserId { get; set; }
+
         public TimeSpan NatFuckingPeriod { get; set; }
 
         public IPEndPoint NatFuckerAddress { get; set; }
-
-        public IPEndPoint MessagingEndPoint { get; set; }
-
-        public Guid UserId { get; set; }
     }
 }

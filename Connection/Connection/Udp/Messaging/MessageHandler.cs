@@ -10,12 +10,12 @@ namespace Connection.Udp.Messaging
     class MessageHandler : MessagePackHandler<MessageDto>
     {
         private readonly IObserver<MessageData> messageObserver;
-        private readonly IOptions<UdpOptions> udpOptions;
+        private readonly IOptions<UdpOptions> connectionOptions;
 
-        public MessageHandler(IObserver<MessageData> messageObserver, IOptions<UdpOptions> udpOptions)
+        public MessageHandler(IObserver<MessageData> messageObserver, IOptions<UdpOptions> connectionOptions)
         {
             this.messageObserver = messageObserver;
-            this.udpOptions = udpOptions;
+            this.connectionOptions = connectionOptions;
         }
 
         public override Task HandleAsync(IContext context, MessageDto data, IPEndPoint endPoint)
@@ -25,7 +25,7 @@ namespace Connection.Udp.Messaging
                 return Task.CompletedTask;
             }
 
-            if (data.UserId != udpOptions.Value.UserId)
+            if (data.UserId != connectionOptions.Value.UserId)
             {
                 return Task.CompletedTask;
             }

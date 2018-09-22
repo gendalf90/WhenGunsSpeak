@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Connection.Mediator
+namespace Connection.Common
 {
     class ObserverComposite<T> : IObserverComposite<T>
     {

@@ -1,59 +1,79 @@
-﻿using Connection.Udp.Messaging;
+﻿using Connection.Common;
+using Connection.Udp.Messaging;
 using Connection.Udp.NatFucking;
 using Datagrammer;
 using Datagrammer.MessagePack;
 using Microsoft.Extensions.Options;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Connection.Udp
 {
-    class UdpConnection : IUdpConnection
+    class UdpConnection : IMessageConnection
     {
-        private readonly IDatagramSender datagramSender;
-        private readonly IOptions<UdpOptions> udpOptions;
+        private readonly IDatagramClient datagramClient;
+        private readonly IOptions<MessageConnectionOptions> connectionOptions;
+        private readonly IObserverComposite<MessageData> messageObserver;
+        private readonly IObserverComposite<MyIPData> myIpObserver;
 
         private Timer natFuckingTimer;
 
-        public UdpConnection(IDatagramSender datagramSender, IOptions<UdpOptions> udpOptions)
+        public UdpConnection(IDatagramClient datagramClient, 
+                             IOptions<MessageConnectionOptions> connectionOptions,
+                             IObserverComposite<MessageData> messageObserver,
+                             IObserverComposite<MyIPData> myIpObserver)
         {
-            this.datagramSender = datagramSender;
-            this.udpOptions = udpOptions;
+            this.datagramClient = datagramClient;
+            this.connectionOptions = connectionOptions;
+            this.messageObserver = messageObserver;
+            this.myIpObserver = myIpObserver;
         }
 
         public async Task SendAsync(MessageData data)
         {
-            await datagramSender.SendByMessagePackAsync(new MessageDto
+            await datagramClient.SendByMessagePackAsync(new MessageDto
             {
                 Body = data.Bytes,
                 MessageType = UdpMessageType.Messaging,
-                UserId = udpOptions.Value.UserId
+                UserId = connectionOptions.Value.UserId
             }, data.IP);
         }
 
-        public Task StartAsync(CancellationToken cancellationToken)
+        public void Start()
         {
             StartNatFuckingRequestSending();
-            return Task.CompletedTask;
         }
 
         private void StartNatFuckingRequestSending()
         {
-            natFuckingTimer = new Timer(FuckNatAsync, null, udpOptions.Value.NatFuckingPeriod, udpOptions.Value.NatFuckingPeriod);
+            natFuckingTimer = new Timer(FuckNatAsync, null, connectionOptions.Value.NatFuckingPeriod, connectionOptions.Value.NatFuckingPeriod);
         }
 
         private async void FuckNatAsync(object state)
         {
-            await datagramSender.SendByMessagePackAsync(new NatFuckingRequestDto
+            await datagramClient.SendByMessagePackAsync(new NatFuckingRequestDto
             {
-                UserId = udpOptions.Value.UserId
-            }, udpOptions.Value.NatFuckerAddress);
+                UserId = connectionOptions.Value.UserId
+            }, connectionOptions.Value.NatFuckerAddress);
         }
 
-        public Task StopAsync(CancellationToken cancellationToken)
+        public IDisposable Subscribe(IObserver<MessageData> observer)
+        {
+            messageObserver.Add(observer);
+            return new DisposeObserverCommand<MessageData>(messageObserver, observer);
+        }
+
+        public void Dispose()
         {
             natFuckingTimer.Dispose();
-            return Task.CompletedTask;
+            datagramClient.Dispose();
+        }
+
+        public IDisposable Subscribe(IObserver<MyIPData> observer)
+        {
+            myIpObserver.Add(observer);
+            return new DisposeObserverCommand<MyIPData>(myIpObserver, observer);
         }
     }
 }

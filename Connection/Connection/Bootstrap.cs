@@ -1,31 +1,83 @@
-﻿using Connection.Mediator;
-using Connection.Rooms;
+﻿using Connection.Rooms;
 using Connection.Udp;
 using Connection.Udp.Messaging;
 using Connection.Udp.NatFucking;
 using Datagrammer;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Datagrammer.Hmac;
-using System.Net.Http.Headers;
-using System;
 using Connection.Initialization;
+using System.Threading.Tasks;
+using System.Net.Http.Headers;
+using System.Net.Http;
 
 namespace Connection
 {
     public sealed class Bootstrap
     {
-        public IConnection Build(ConnectionOptions connectionOptions)
+        public async Task<IRoomConnection> StartRoomConnectionAsync(RoomConnectionOptions connectionOptions)
         {
-            var host = new HostBuilder().ConfigureServices(services =>
-                                        {
-                                            services.AddMessaging(connectionOptions)
-                                                    .AddRooms(connectionOptions)
-                                                    .AddObservers();
-                                        })
-                                        .Start();
+            var token = await InitializeRoomTokenAsync(connectionOptions);
 
-            return new ConnectionMediator(host);
+            var services = new ServiceCollection().Configure<RoomOptions>(options =>
+                                                  {
+                                                      options.Token = token;
+                                                      options.Address = connectionOptions.RoomsAddress;
+                                                  })
+                                                  .AddObserver<ConnectedUserData>()
+                                                  .AddObserver<DisconnectedUserData>()
+                                                  .AddObserver<RoomExpellingData>()
+                                                  .AddObserver<RoomJoinedData>()
+                                                  .AddObserver<RoomJoiningData>()
+                                                  .AddObserver<RoomLeavingData>()
+                                                  .AddObserver<RoomRejectedData>()
+                                                  .AddObserver<UserIPData>()
+                                                  .AddObserver<MyIdData>()
+                                                  .AddSingleton<RoomConnection>();
+
+            services.AddHttpClient("RoomsClient", (client) =>
+                    {
+                        client.BaseAddress = connectionOptions.RoomsAddress;
+                        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                    });
+
+            var connection = services.BuildServiceProvider().GetService<RoomConnection>();
+            await connection.StartAsync();
+            return connection;
+        }
+
+        private async Task<string> InitializeRoomTokenAsync(RoomConnectionOptions connectionOptions)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = connectionOptions.RoomsAddress;
+                return await client.GetStringAsync("api/token");
+            }
+        }
+
+        public Task<IMessageConnection> StartMessageConnectionAsync(MessageConnectionOptions connectionOptions)
+        {
+            var services = new ServiceCollection().Configure<UdpOptions>(options =>
+                                                  {
+                                                      options.NatFuckerAddress = connectionOptions.NatFuckerAddress;
+                                                      options.NatFuckingPeriod = connectionOptions.NatFuckingPeriod;
+                                                      options.SecurityKey = connectionOptions.SecurityKey;
+                                                      options.UserId = connectionOptions.UserId;
+                                                  })
+                                                  .Configure<DatagramOptions>(options =>
+                                                  {
+                                                      options.ListeningPoint = connectionOptions.ListeningPoint;
+                                                      options.ReceivingParallelismDegree = connectionOptions.ReceivingParallelismDegree;
+                                                  })
+                                                  .AddObserver<MessageData>()
+                                                  .AddObserver<MyIPData>()
+                                                  .AddSingleton<IMessageHandler, MessageHandler>()
+                                                  .AddSingleton<IMessageHandler, NatFuckingMessageHandler>()
+                                                  .AddSingleton<UdpConnection>()
+                                                  .AddDatagrammer()
+                                                  .BuildServiceProvider();
+
+            var connection = services.GetService<UdpConnection>();
+            connection.Start();
+            return Task.FromResult<IMessageConnection>(connection);
         }
     }
 }

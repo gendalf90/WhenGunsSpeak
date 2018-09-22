@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Connection.Rooms
+namespace Connection
 {
-    class RoomsOptions
+    public sealed class RoomConnectionOptions
     {
         public Uri RoomsAddress { get; set; }
     }
