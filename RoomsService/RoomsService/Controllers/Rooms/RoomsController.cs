@@ -8,7 +8,7 @@ namespace RoomsService.Controllers.Rooms
 {
     [Authorize]
     [Route("api/rooms")]
-    class RoomsController : ControllerBase
+    public class RoomsController : ControllerBase
     {
         private IGetRoomStrategy getRoomStrategy;
         private IGetAllRoomsStrategy getAllRoomsStrategy;

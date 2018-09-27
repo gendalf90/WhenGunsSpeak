@@ -2,7 +2,7 @@
 
 namespace RoomsService.Common.DescribeRoom
 {
-    interface IDescribeRoomStrategy
+    public interface IDescribeRoomStrategy
     {
         Task DescribeAsync(string roomId, string description);
     }

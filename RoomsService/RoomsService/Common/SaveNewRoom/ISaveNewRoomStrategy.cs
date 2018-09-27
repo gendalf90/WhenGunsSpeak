@@ -2,7 +2,7 @@
 
 namespace RoomsService.Common.SaveNewRoom
 {
-    interface ISaveNewRoomStrategy
+    public interface ISaveNewRoomStrategy
     {
         Task SaveAsync(string roomId, string ownerId);
     }

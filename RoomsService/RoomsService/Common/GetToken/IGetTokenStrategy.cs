@@ -2,7 +2,7 @@
 
 namespace RoomsService.Common.GetToken
 {
-    interface IGetTokenStrategy
+    public interface IGetTokenStrategy
     {
         Task<string> GetAsync();
     }

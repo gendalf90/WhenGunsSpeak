@@ -2,7 +2,7 @@
 
 namespace RoomsService.Common.DeleteRoom
 {
-    interface IDeleteRoomStrategy
+    public interface IDeleteRoomStrategy
     {
         Task DeleteAsync(string roomId);
     }

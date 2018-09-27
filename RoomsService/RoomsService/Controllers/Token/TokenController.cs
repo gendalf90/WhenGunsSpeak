@@ -5,7 +5,7 @@ using RoomsService.Common.GetToken;
 namespace RoomsService.Controllers.Token
 {
     [Route("api/token")]
-    class TokenController : ControllerBase
+    public class TokenController : ControllerBase
     {
         private IGetTokenStrategy getTokenStrategy;
 

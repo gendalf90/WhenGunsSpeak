@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace RoomsService.Common.GetRoom
 {
-    interface IGetRoomStrategy
+    public interface IGetRoomStrategy
     {
         Task<RoomDto> GetByIdAsync(string id);
     }

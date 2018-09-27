@@ -2,7 +2,7 @@
 
 namespace RoomsService.Logs
 {
-    interface IRoomLogger
+    public interface IRoomLogger
     {
         void Information(Exception e, string message);
 

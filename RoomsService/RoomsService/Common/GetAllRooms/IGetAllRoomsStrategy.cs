@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace RoomsService.Common.GetAllRooms
 {
-    interface IGetAllRoomsStrategy
+    public interface IGetAllRoomsStrategy
     {
         Task<IEnumerable<RoomShortDto>> GetAsync();
     }

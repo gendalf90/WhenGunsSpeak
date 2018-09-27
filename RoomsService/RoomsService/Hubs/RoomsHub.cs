@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace RoomsService.Hubs
 {
     [Authorize]
-    class RoomsHub : Hub
+    public class RoomsHub : Hub
     {
         private readonly ISaveNewRoomStrategy saveNewRoomStrategy;
         private readonly IDescribeRoomStrategy describeRoomStrategy;
