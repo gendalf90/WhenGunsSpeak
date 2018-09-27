@@ -65,7 +65,7 @@ namespace Connection.Rooms
         {
             InitializeSignalRHub();
             InitializeSignalRCallbacks();
-            await StartAsync();
+            await StartHubAsync();
         }
 
         private async Task StartHubAsync()
