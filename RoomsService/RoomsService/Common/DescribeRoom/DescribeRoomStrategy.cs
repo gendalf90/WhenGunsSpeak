@@ -13,9 +13,9 @@ namespace RoomsService.Common.DescribeRoom
             this.database = database;
         }
 
-        public async Task DescribeAsync(string roomId, string description)
+        public async Task DescribeAsync(string ownerId, string description)
         {
-            var filter = Builders<BsonDocument>.Filter.Eq("_id", roomId);
+            var filter = Builders<BsonDocument>.Filter.Eq("_id", ownerId);
             var update = Builders<BsonDocument>.Update.Set("description", description);
             await database.GetCollection<BsonDocument>("rooms").UpdateOneAsync(filter, update);
         }

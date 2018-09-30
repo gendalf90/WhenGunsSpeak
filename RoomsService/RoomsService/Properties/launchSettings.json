@@ -17,10 +17,12 @@
     },
     "RoomsService": {
       "commandName": "Project",
-      "launchBrowser": true,
       "applicationUrl": "http://localhost:50557",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "REDIS_CONNECTION_STRING": "192.168.1.40:6379",
+        "MONGODB_CONNECTION_STRING": "mongodb://192.168.1.40:27017",
+        "TOKEN_SIGNING_KEY": "dGVzdHRlc3R0ZXN0dGVzdA=="
       }
     }
   }

@@ -2,8 +2,8 @@
 {
     public class RoomShortDto
     {
-        public string RoomId { get; set; }
-
         public string OwnerId { get; set; }
+
+        public string Header { get; set; }
     }
 }

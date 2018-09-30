@@ -29,7 +29,7 @@ namespace RoomsService.Controllers.Rooms
         [HttpGet("{roomId}")]
         public async Task<IActionResult> GetRoomByIdAsync(string roomId)
         {
-            var room = await getRoomStrategy.GetByIdAsync(roomId);
+            var room = await getRoomStrategy.GetByOwnerAsync(roomId);
             return Ok(room);
         }
     }

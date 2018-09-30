@@ -15,8 +15,8 @@ namespace RoomsService.Common.GetRoom
         {
             BsonClassMap.RegisterClassMap<RoomDto>(cm =>
             {
-                cm.MapIdProperty(e => e.RoomId);
-                cm.MapProperty(e => e.OwnerId).SetElementName("owner");
+                cm.MapIdProperty(e => e.OwnerId);
+                cm.MapProperty(e => e.Header).SetElementName("header");
                 cm.MapProperty(e => e.Description).SetElementName("description");
             });
         }
@@ -34,23 +34,23 @@ namespace RoomsService.Common.GetRoom
             this.cacheOptions = cacheOptions;
         }
 
-        public async Task<RoomDto> GetByIdAsync(string id)
+        public async Task<RoomDto> GetByOwnerAsync(string ownerId)
         {
-            var cached = await GetFromCacheByIdAsync(id);
+            var cached = await GetFromCacheByOwnerIdAsync(ownerId);
 
             if (cached != null)
             {
                 return cached;
             }
 
-            var stored = await GetFromDatabaseByIdAsync(id);
+            var stored = await GetFromDatabaseByOwnerIdAsync(ownerId);
             await AddToCacheAsync(stored);
             return stored;
         }
 
-        private async Task<RoomDto> GetFromCacheByIdAsync(string id)
+        private async Task<RoomDto> GetFromCacheByOwnerIdAsync(string id)
         {
-            var key = GetCacheKeyById(id);
+            var key = GetCacheKeyByOwnerId(id);
             var bson = await cache.GetAsync(key);
 
             if (bson != null)
@@ -61,16 +61,16 @@ namespace RoomsService.Common.GetRoom
             return null;
         }
 
-        private async Task<RoomDto> GetFromDatabaseByIdAsync(string id)
+        private async Task<RoomDto> GetFromDatabaseByOwnerIdAsync(string id)
         {
             return await database.GetCollection<RoomDto>(CollectionName)
-                                 .Find(room => room.RoomId == id)
+                                 .Find(room => room.OwnerId == id)
                                  .FirstOrDefaultAsync();
         }
 
         private async Task AddToCacheAsync(RoomDto room)
         {
-            var key = GetCacheKeyById(room.RoomId);
+            var key = GetCacheKeyByOwnerId(room.OwnerId);
             var bson = room.ToBson();
             var options = new DistributedCacheEntryOptions
             {
@@ -79,7 +79,7 @@ namespace RoomsService.Common.GetRoom
             await cache.SetAsync(key, bson, options);
         }
 
-        private string GetCacheKeyById(string id) => $"room:id:{id}";
+        private string GetCacheKeyByOwnerId(string id) => $"room:owner:{id}";
 
         private string CollectionName => "rooms";
     }

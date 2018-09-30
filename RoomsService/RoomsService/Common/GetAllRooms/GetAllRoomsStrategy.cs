@@ -16,8 +16,8 @@ namespace RoomsService.Common.GetAllRooms
         {
             BsonClassMap.RegisterClassMap<RoomShortDto>(cm =>
             {
-                cm.MapIdProperty(e => e.RoomId);
-                cm.MapProperty(e => e.OwnerId).SetElementName("owner");
+                cm.MapIdProperty(e => e.OwnerId);
+                cm.MapProperty(e => e.Header).SetElementName("header");
             });
         }
 

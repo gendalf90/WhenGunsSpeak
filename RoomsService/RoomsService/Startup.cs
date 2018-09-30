@@ -21,6 +21,7 @@ namespace RoomsService
             services.AddAuthentication(configuration)
                     .AddSignalR(configuration)
                     .AddMongo(configuration)
+                    .AddCache(configuration)
                     .AddCommon()
                     .AddLogs()
                     .AddMvc();

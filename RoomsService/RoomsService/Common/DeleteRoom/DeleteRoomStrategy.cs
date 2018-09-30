@@ -13,9 +13,9 @@ namespace RoomsService.Common.DeleteRoom
             this.database = database;
         }
 
-        public async Task DeleteAsync(string roomId)
+        public async Task DeleteAsync(string ownerId)
         {
-            var filter = Builders<BsonDocument>.Filter.Eq("_id", roomId);
+            var filter = Builders<BsonDocument>.Filter.Eq("_id", ownerId);
             await database.GetCollection<BsonDocument>("rooms").DeleteOneAsync(filter);
         }
     }

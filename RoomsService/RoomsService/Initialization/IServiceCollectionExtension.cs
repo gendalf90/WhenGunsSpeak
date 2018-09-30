@@ -8,7 +8,7 @@ using RoomsService.Common.DescribeRoom;
 using RoomsService.Common.GetAllRooms;
 using RoomsService.Common.GetRoom;
 using RoomsService.Common.GetToken;
-using RoomsService.Common.SaveNewRoom;
+using RoomsService.Common.CreateRoom;
 using RoomsService.Logs;
 using System;
 
@@ -86,7 +86,7 @@ namespace RoomsService.Initialization
                            .AddTransient<IDescribeRoomStrategy, DescribeRoomStrategy>()
                            .AddTransient<IGetAllRoomsStrategy, GetAllRoomsStrategy>()
                            .AddTransient<IGetRoomStrategy, GetRoomStrategy>()
-                           .AddTransient<ISaveNewRoomStrategy, SaveNewRoomStrategy>()
+                           .AddTransient<ICreateRoomStrategy, CreateRoomStrategy>()
                            .AddTransient<IGetTokenStrategy, GetTokenStrategy>();
         }
 

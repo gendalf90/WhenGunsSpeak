@@ -5,6 +5,6 @@ namespace RoomsService.Common.GetRoom
 {
     public interface IGetRoomStrategy
     {
-        Task<RoomDto> GetByIdAsync(string id);
+        Task<RoomDto> GetByOwnerAsync(string ownerId);
     }
 }
