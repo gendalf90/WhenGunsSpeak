@@ -4,7 +4,7 @@ namespace Connection
 {
     public sealed class RoomRejectedData
     {
-        public Guid RoomId { get; set; }
+        public Guid OwnerId { get; set; }
 
         public string Message { get; set; }
     }

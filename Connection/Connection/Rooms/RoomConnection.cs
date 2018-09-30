@@ -13,7 +13,7 @@ namespace Connection.Rooms
     class RoomConnection : IRoomConnection
     {
         private readonly IHttpClientFactory httpClientFactory;
-        private readonly IObserverComposite<MyIdData> myIdObserver;
+        private readonly IObserverComposite<MyData> aboutMeObserver;
         private readonly IObserverComposite<ConnectedUserData> userConnectedObserver;
         private readonly IObserverComposite<DisconnectedUserData> userDisconnectedObserver;
         private readonly IObserverComposite<RoomExpellingData> roomExpellingObserver;
@@ -22,6 +22,8 @@ namespace Connection.Rooms
         private readonly IObserverComposite<RoomJoinedData> roomJoinedObserver;
         private readonly IObserverComposite<RoomRejectedData> roomRejectedObserver;
         private readonly IObserverComposite<RoomLeavingData> roomLeavingObserver;
+        private readonly IObserverComposite<MessagingStartingData> messagingStartingObserver;
+        private readonly IObserverComposite<MessagingStartedData> messagingStartedObserver;
         private readonly IOptions<RoomOptions> roomOptions;
 
         private HubConnection signalRConnection;
@@ -35,7 +37,9 @@ namespace Connection.Rooms
                               IObserverComposite<RoomJoinedData> roomJoinedObserver,
                               IObserverComposite<RoomRejectedData> roomRejectedObserver,
                               IObserverComposite<RoomLeavingData> roomLeavingObserver,
-                              IObserverComposite<MyIdData> myIdObserver,
+                              IObserverComposite<MyData> aboutMeObserver,
+                              IObserverComposite<MessagingStartingData> messagingStartingObserver,
+                              IObserverComposite<MessagingStartedData> messagingStartedObserver,
                               IOptions<RoomOptions> roomOptions)
         {
             this.httpClientFactory = httpClientFactory;
@@ -47,7 +51,9 @@ namespace Connection.Rooms
             this.roomJoinedObserver = roomJoinedObserver;
             this.roomRejectedObserver = roomRejectedObserver;
             this.roomLeavingObserver = roomLeavingObserver;
-            this.myIdObserver = myIdObserver;
+            this.aboutMeObserver = aboutMeObserver;
+            this.messagingStartingObserver = messagingStartingObserver;
+            this.messagingStartedObserver = messagingStartedObserver;
             this.roomOptions = roomOptions;
         }
 
@@ -75,14 +81,6 @@ namespace Connection.Rooms
 
         private void InitializeSignalRCallbacks()
         {
-            signalRConnection.On<Guid>("ThatIsYourId", userId =>
-            {
-                myIdObserver.OnNext(new MyIdData
-                {
-                    Id = userId
-                });
-            });
-
             signalRConnection.On<Guid>("HeIsConnected", userId =>
             {
                 userConnectedObserver.OnNext(new ConnectedUserData
@@ -99,11 +97,11 @@ namespace Connection.Rooms
                 });
             });
 
-            signalRConnection.On<Guid>("GetOutFromMyRoom", roomId =>
+            signalRConnection.On<Guid>("GetOutFromMyRoom", ownerId =>
             {
                 roomExpellingObserver.OnNext(new RoomExpellingData
                 {
-                    RoomId = roomId
+                    OwnerId = ownerId
                 });
             });
 
@@ -124,36 +122,55 @@ namespace Connection.Rooms
                 });
             });
 
-            signalRConnection.On<Guid, string>("YouAreJoinedToMyRoom", (roomId, securityKey) =>
+            signalRConnection.On<Guid>("YouAreJoinedToMyRoom", ownerId =>
             {
                 roomJoinedObserver.OnNext(new RoomJoinedData
                 {
-                    RoomId = roomId,
-                    SecurityKey = Convert.FromBase64String(securityKey)
+                    OwnerId = ownerId
                 });
             });
 
-            signalRConnection.On<Guid, string>("YouAreNotJoinedToMyRoom", (roomId, message) =>
+            signalRConnection.On<Guid, string>("YouAreNotJoinedToMyRoom", (ownerId, message) =>
             {
                 roomRejectedObserver.OnNext(new RoomRejectedData
                 {
-                    RoomId = roomId,
+                    OwnerId = ownerId,
                     Message = message
                 });
             });
 
-            signalRConnection.On<Guid>("ILeaveYourRoom", userId =>
+            signalRConnection.On<Guid>("HeLeavesMyRoom", userId =>
             {
                 roomLeavingObserver.OnNext(new RoomLeavingData
                 {
                     UserId = userId
                 });
             });
-        }
 
-        public async Task CreateMyRoomAsync()
-        {
-            await signalRConnection.InvokeAsync("CreateMyRoom");
+            signalRConnection.On<Guid>("HeSuggestsToStartMessaging", userId =>
+            {
+                messagingStartingObserver.OnNext(new MessagingStartingData
+                {
+                    UserId = userId
+                });
+            });
+
+            signalRConnection.On<Guid, string>("HeIsReadyToStartMessaging", (userId, securityKey) =>
+            {
+                messagingStartedObserver.OnNext(new MessagingStartedData
+                {
+                    UserId = userId,
+                    SecurityKey = Convert.FromBase64String(securityKey)
+                });
+            });
+
+            signalRConnection.On<Guid>("ThisIsYou", userId =>
+            {
+                aboutMeObserver.OnNext(new MyData
+                {
+                    Id = userId
+                });
+            });
         }
 
         public async Task<IEnumerable<RoomData>> GetAllRoomsAsync()
@@ -179,6 +196,11 @@ namespace Connection.Rooms
             signalRConnection.DisposeAsync();
         }
 
+        public async Task CreateMyRoomAsync(string header)
+        {
+            await signalRConnection.InvokeAsync("CreateMyRoom", header);
+        }
+
         public async Task DescribeMyRoomAsync(string description)
         {
             await signalRConnection.InvokeAsync("DescribeMyRoom", description);
@@ -199,19 +221,34 @@ namespace Connection.Rooms
             await signalRConnection.InvokeAsync("ITellYouMyIP", userId, address.ToString(), port);
         }
 
+        public async Task AskToStartMessagingAsync(Guid userId)
+        {
+            await signalRConnection.InvokeAsync("IWantToStartMessagingWithYou", userId);
+        }
+
+        public async Task StartMessagingAsync(Guid userId, byte[] securityKey)
+        {
+            await signalRConnection.InvokeAsync("IAmReadyToStartMessagingWithYou", userId, Convert.ToBase64String(securityKey));
+        }
+
         public async Task DenyToUserToMyRoomJoiningAsync(Guid userId, string message)
         {
             await signalRConnection.InvokeAsync("IDoNotJoinYouToMyRoomBecause", userId, message);
         }
 
-        public async Task LeaveThisRoomAsync(Guid roomId, Guid ownerId)
+        public async Task LeaveThisOwnerRoomAsync(Guid ownerId)
         {
-            await signalRConnection.InvokeAsync("ILeaveThisRoom", roomId, ownerId);
+            await signalRConnection.InvokeAsync("ILeaveYourRoom", ownerId);
         }
 
-        public async Task JoinTheUserToMyRoomAsync(Guid userId, byte[] securityKey)
+        public async Task JoinTheUserToMyRoomAsync(Guid userId)
         {
-            await signalRConnection.InvokeAsync("IJoinYouToMyRoom", userId, Convert.ToBase64String(securityKey));
+            await signalRConnection.InvokeAsync("IJoinYouToMyRoom", userId);
+        }
+
+        public async Task KnowAboutMeAsync()
+        {
+            await signalRConnection.SendAsync("IWantToKnowAboutMe");
         }
 
         public IDisposable Subscribe(IObserver<ConnectedUserData> observer)
@@ -262,15 +299,22 @@ namespace Connection.Rooms
             return new DisposeObserverCommand<UserIPData>(userIPObserver, observer);
         }
 
-        public async Task KnowMyIdAsync()
+        public IDisposable Subscribe(IObserver<MyData> observer)
         {
-            await signalRConnection.SendAsync("IWantToKnowMyId");
+            aboutMeObserver.Add(observer);
+            return new DisposeObserverCommand<MyData>(aboutMeObserver, observer);
         }
 
-        public IDisposable Subscribe(IObserver<MyIdData> observer)
+        public IDisposable Subscribe(IObserver<MessagingStartingData> observer)
         {
-            myIdObserver.Add(observer);
-            return new DisposeObserverCommand<MyIdData>(myIdObserver, observer);
+            messagingStartingObserver.Add(observer);
+            return new DisposeObserverCommand<MessagingStartingData>(messagingStartingObserver, observer);
+        }
+
+        public IDisposable Subscribe(IObserver<MessagingStartedData> observer)
+        {
+            messagingStartedObserver.Add(observer);
+            return new DisposeObserverCommand<MessagingStartedData>(messagingStartedObserver, observer);
         }
     }
 }

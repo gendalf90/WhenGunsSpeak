@@ -31,7 +31,9 @@ namespace Connection
                                                   .AddObserver<RoomLeavingData>()
                                                   .AddObserver<RoomRejectedData>()
                                                   .AddObserver<UserIPData>()
-                                                  .AddObserver<MyIdData>()
+                                                  .AddObserver<MyData>()
+                                                  .AddObserver<MessagingStartingData>()
+                                                  .AddObserver<MessagingStartedData>()
                                                   .AddSingleton<RoomConnection>();
 
             services.AddHttpClient("RoomsClient", (client) =>

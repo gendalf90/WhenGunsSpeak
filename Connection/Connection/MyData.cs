@@ -2,7 +2,7 @@
 
 namespace Connection
 {
-    public sealed class MyIdData
+    public sealed class MyData
     {
         public Guid Id { get; set; }
     }

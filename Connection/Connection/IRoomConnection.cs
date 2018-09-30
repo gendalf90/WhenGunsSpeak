@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Connection
 {
-    public interface IRoomConnection : IObservable<MyIdData>,
+    public interface IRoomConnection : IObservable<MyData>,
                                        IObservable<ConnectedUserData>,
                                        IObservable<DisconnectedUserData>,
                                        IObservable<RoomExpellingData>,
@@ -14,10 +14,12 @@ namespace Connection
                                        IObservable<RoomJoiningData>,
                                        IObservable<RoomLeavingData>,
                                        IObservable<RoomRejectedData>,
+                                       IObservable<MessagingStartingData>,
+                                       IObservable<MessagingStartedData>,
                                        IObservable<UserIPData>,
                                        IDisposable
     {
-        Task CreateMyRoomAsync();
+        Task CreateMyRoomAsync(string header);
 
         Task DescribeMyRoomAsync(string description);
 
@@ -27,13 +29,17 @@ namespace Connection
 
         Task TellMyIpAsync(Guid userId, IPAddress address, int port);
 
-        Task JoinTheUserToMyRoomAsync(Guid userId, byte[] securityKey);
+        Task AskToStartMessagingAsync(Guid userId);
+
+        Task StartMessagingAsync(Guid userId, byte[] securityKey);
+
+        Task JoinTheUserToMyRoomAsync(Guid userId);
 
         Task DenyToUserToMyRoomJoiningAsync(Guid userId, string message);
 
-        Task LeaveThisRoomAsync(Guid roomId, Guid ownerId);
+        Task LeaveThisOwnerRoomAsync(Guid ownerId);
 
-        Task KnowMyIdAsync();
+        Task KnowAboutMeAsync();
 
         Task<IEnumerable<RoomData>> GetAllRoomsAsync();
 
