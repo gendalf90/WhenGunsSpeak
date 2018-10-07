@@ -14,7 +14,5 @@ namespace Connection
         public IPEndPoint NatFuckerAddress { get; set; }
 
         public IPEndPoint ListeningPoint { get; set; }
-
-        public int ReceivingParallelismDegree { get; set; }
     }
 }

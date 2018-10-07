@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Net.Http.Headers;
 using System.Net.Http;
 using Datagrammer.Hmac;
+using System;
+using Microsoft.Extensions.Options;
 
 namespace Connection
 {
@@ -68,16 +70,15 @@ namespace Connection
                                                   .Configure<DatagramOptions>(options =>
                                                   {
                                                       options.ListeningPoint = connectionOptions.ListeningPoint;
-                                                      options.ReceivingParallelismDegree = connectionOptions.ReceivingParallelismDegree;
                                                   })
                                                   .AddObserver<MessageData>()
                                                   .AddObserver<MyIPData>()
-                                                  .AddSingleton<MessageHandler>()
-                                                  .AddSingleton<IMessageHandler>(provider =>
+                                                  .AddSingleton(provider =>
                                                   {
-                                                      var messageHander = provider.GetService<MessageHandler>();
+                                                      var observer = provider.GetService<IObserver<MessageData>>();
+                                                      var options = provider.GetService<IOptions<UdpOptions>>();
                                                       var securityKey = connectionOptions.SecurityKey;
-                                                      return new HmacSha1HandlerDecorator(messageHander, securityKey);
+                                                      return new MessageHandler(observer, options).WithHmacMD5(securityKey);
                                                   })
                                                   .AddSingleton<IMessageHandler, NatFuckingMessageHandler>()
                                                   .AddSingleton<UdpConnection>()

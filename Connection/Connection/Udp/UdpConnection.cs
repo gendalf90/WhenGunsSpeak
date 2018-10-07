@@ -33,13 +33,12 @@ namespace Connection.Udp
 
         public async Task SendAsync(MessageData data)
         {
-            var secureSender = new HmacSha1SenderDecorator(datagramClient, options.Value.SecurityKey);
-
-            await secureSender.SendByMessagePackAsync(new MessageDto
-            {
-                Body = data.Bytes,
-                MessageType = UdpMessageType.Messaging,
-            }, data.IP);
+            await datagramClient.WithHmacMD5(options.Value.SecurityKey)
+                                .SendByMessagePackAsync(new MessageDto
+                                {
+                                    Body = data.Bytes,
+                                    MessageType = UdpMessageType.Messaging,
+                                }, data.IP);
         }
 
         public void Start()
