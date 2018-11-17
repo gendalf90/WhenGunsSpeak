@@ -6,12 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
+    path: Assets/Resources/Scenes/ArenaOne/ArenaOne.unity
+    guid: 717459c3527c440448cd7c59dda1fb55
+  - enabled: 1
+    path: Assets/Resources/Scenes/MainMenu/MainMenu.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/MultiplayerMenu.unity
+    path: Assets/Resources/Scenes/MultiplayerMenu/MultiplayerMenu.unity
     guid: 528480a773ab6814da8735ee6d3714b0
-  - enabled: 1
-    path: Assets/Scenes/ArenaOne.unity
-    guid: 717459c3527c440448cd7c59dda1fb55
   m_configObjects: {}

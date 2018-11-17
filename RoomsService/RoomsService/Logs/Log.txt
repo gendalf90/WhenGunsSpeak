@@ -1,0 +1,755 @@
+2018-11-10 22:42:26Z [INF] DESKTOP-EFHV749 31132 RoomsService User profile is available. Using '"C:\Users\genda\AppData\Local\ASP.NET\DataProtection-Keys"' as key repository and Windows DPAPI to encrypt keys at rest.
+2018-11-10 22:42:30Z [INF] DESKTOP-EFHV749 31132 RoomsService Connecting to Redis endpoints: "192.168.1.40:6379". Using Server Name: "DESKTOP-EFHV749_883245bbc9ce48c4b700cb72292277b1"
+2018-11-10 22:42:31Z [INF] DESKTOP-EFHV749 31132 RoomsService Connected to Redis.
+2018-11-10 22:44:05Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/api/token  
+2018-11-10 22:44:08Z [INF] DESKTOP-EFHV749 31132 RoomsService Route matched with "{action = \"GetTokenAsync\", controller = \"Token\"}". Executing action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)"
+2018-11-10 22:44:08Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" - Validation state: Valid
+2018-11-10 22:44:08Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 221.7746ms.
+2018-11-10 22:44:08Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing ObjectResult, writing value of type '"System.String"'.
+2018-11-10 22:44:08Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" in 458.5756ms
+2018-11-10 22:44:08Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 3728.0282ms 200 text/plain; charset=utf-8
+2018-11-10 22:44:10Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 POST http://localhost:50557/signalr/rooms/negotiate  0
+2018-11-10 22:44:10Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-10 22:44:10Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-10 22:44:11Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 217.2297ms 200 application/json
+2018-11-10 22:44:11Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/signalr/rooms?id=M3ZYt1bSWqHA880b_EgWXQ  
+2018-11-10 22:44:11Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-10 22:44:11Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-10 22:44:12Z [INF] DESKTOP-EFHV749 31132 RoomsService Completed connection handshake. Using HubProtocol '"messagepack"'.
+2018-11-10 22:44:12Z [INF] DESKTOP-EFHV749 31132 RoomsService User 'b4d5ee83-c605-46fd-95a6-8db4174d1a47' is connected
+2018-11-10 22:44:13Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/api/token  
+2018-11-10 22:44:13Z [INF] DESKTOP-EFHV749 31132 RoomsService Route matched with "{action = \"GetTokenAsync\", controller = \"Token\"}". Executing action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)"
+2018-11-10 22:44:13Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" - Validation state: Valid
+2018-11-10 22:44:13Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 3.8183ms.
+2018-11-10 22:44:13Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing ObjectResult, writing value of type '"System.String"'.
+2018-11-10 22:44:13Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" in 5.3301ms
+2018-11-10 22:44:13Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 24.1493ms 200 text/plain; charset=utf-8
+2018-11-10 22:44:13Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 POST http://localhost:50557/signalr/rooms/negotiate  0
+2018-11-10 22:44:13Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-10 22:44:13Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-10 22:44:13Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 1.2188ms 200 application/json
+2018-11-10 22:44:13Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/signalr/rooms?id=JEkaA9PPLG7z3BJeLSxrLA  
+2018-11-10 22:44:13Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-10 22:44:13Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-10 22:44:13Z [INF] DESKTOP-EFHV749 31132 RoomsService Completed connection handshake. Using HubProtocol '"messagepack"'.
+2018-11-10 22:44:13Z [INF] DESKTOP-EFHV749 31132 RoomsService User 'b325c72e-a6d5-43b8-8504-258dfc4c666f' is connected
+2018-11-10 22:44:18Z [INF] DESKTOP-EFHV749 31132 RoomsService User 'b325c72e-a6d5-43b8-8504-258dfc4c666f' is disconnected
+2018-11-10 22:44:18Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 4947.5453ms 101 
+2018-11-10 22:44:20Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/api/token  
+2018-11-10 22:44:20Z [INF] DESKTOP-EFHV749 31132 RoomsService Route matched with "{action = \"GetTokenAsync\", controller = \"Token\"}". Executing action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)"
+2018-11-10 22:44:20Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" - Validation state: Valid
+2018-11-10 22:44:20Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 5.7026ms.
+2018-11-10 22:44:20Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing ObjectResult, writing value of type '"System.String"'.
+2018-11-10 22:44:20Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" in 7.1832ms
+2018-11-10 22:44:20Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 11.5327ms 200 text/plain; charset=utf-8
+2018-11-10 22:44:20Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 POST http://localhost:50557/signalr/rooms/negotiate  0
+2018-11-10 22:44:20Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-10 22:44:20Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-10 22:44:20Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 7.4896ms 200 application/json
+2018-11-10 22:44:20Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/signalr/rooms?id=fG9e4m2aGiw5ZropIEuXAg  
+2018-11-10 22:44:20Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-10 22:44:20Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-10 22:44:20Z [INF] DESKTOP-EFHV749 31132 RoomsService Completed connection handshake. Using HubProtocol '"messagepack"'.
+2018-11-10 22:44:20Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/api/token  
+2018-11-10 22:44:20Z [INF] DESKTOP-EFHV749 31132 RoomsService User '53eac906-2f74-4492-9cd8-72c5a1c4b0ed' is connected
+2018-11-10 22:44:20Z [INF] DESKTOP-EFHV749 31132 RoomsService Route matched with "{action = \"GetTokenAsync\", controller = \"Token\"}". Executing action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)"
+2018-11-10 22:44:20Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" - Validation state: Valid
+2018-11-10 22:44:20Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 3.3159ms.
+2018-11-10 22:44:20Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing ObjectResult, writing value of type '"System.String"'.
+2018-11-10 22:44:20Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" in 4.2921ms
+2018-11-10 22:44:20Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 8.2423ms 200 text/plain; charset=utf-8
+2018-11-10 22:44:20Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 POST http://localhost:50557/signalr/rooms/negotiate  0
+2018-11-10 22:44:20Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-10 22:44:20Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-10 22:44:20Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 0.8998ms 200 application/json
+2018-11-10 22:44:20Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/signalr/rooms?id=589NsIsKzWF-WR36j6T3rA  
+2018-11-10 22:44:20Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-10 22:44:20Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-10 22:44:20Z [INF] DESKTOP-EFHV749 31132 RoomsService Completed connection handshake. Using HubProtocol '"messagepack"'.
+2018-11-10 22:44:21Z [INF] DESKTOP-EFHV749 31132 RoomsService User '8de5345c-77fb-4ec7-806e-23eb6e1639bf' is connected
+2018-11-10 22:44:21Z [INF] DESKTOP-EFHV749 31132 RoomsService Room with header 'My test room' is created by owner '53eac906-2f74-4492-9cd8-72c5a1c4b0ed'
+2018-11-10 22:44:24Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/api/rooms  
+2018-11-10 22:44:24Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-10 22:44:24Z [INF] DESKTOP-EFHV749 31132 RoomsService Route matched with "{action = \"GetAllRoomsAsync\", controller = \"Rooms\"}". Executing action "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)"
+2018-11-10 22:44:24Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-10 22:44:24Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing action method "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)" - Validation state: Valid
+2018-11-10 22:44:25Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action method "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 1178.2985ms.
+2018-11-10 22:44:25Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[RoomsService.Controllers.Rooms.RoomShortDto, RoomsService, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'.
+2018-11-10 22:44:25Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)" in 1336.2508ms
+2018-11-10 22:44:25Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 1386.4039ms 200 application/json; charset=utf-8
+2018-11-10 22:44:26Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/api/rooms/53eac906-2f74-4492-9cd8-72c5a1c4b0ed  
+2018-11-10 22:44:26Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-10 22:44:26Z [INF] DESKTOP-EFHV749 31132 RoomsService Route matched with "{action = \"GetRoomByIdAsync\", controller = \"Rooms\"}". Executing action "RoomsService.Controllers.Rooms.RoomsController.GetRoomByIdAsync (RoomsService)"
+2018-11-10 22:44:26Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-10 22:44:26Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing action method "RoomsService.Controllers.Rooms.RoomsController.GetRoomByIdAsync (RoomsService)" with arguments (["53eac906-2f74-4492-9cd8-72c5a1c4b0ed"]) - Validation state: Valid
+2018-11-10 22:44:26Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action method "RoomsService.Controllers.Rooms.RoomsController.GetRoomByIdAsync (RoomsService)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 352.1642ms.
+2018-11-10 22:44:26Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing ObjectResult, writing value of type '"RoomsService.Controllers.Rooms.RoomDto"'.
+2018-11-10 22:44:26Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action "RoomsService.Controllers.Rooms.RoomsController.GetRoomByIdAsync (RoomsService)" in 421.8606ms
+2018-11-10 22:44:26Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 459.3137ms 200 application/json; charset=utf-8
+2018-11-10 22:44:26Z [INF] DESKTOP-EFHV749 31132 RoomsService Room with owner '53eac906-2f74-4492-9cd8-72c5a1c4b0ed' is deleted
+2018-11-10 22:44:29Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/api/rooms  
+2018-11-10 22:44:29Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-10 22:44:29Z [INF] DESKTOP-EFHV749 31132 RoomsService Route matched with "{action = \"GetAllRoomsAsync\", controller = \"Rooms\"}". Executing action "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)"
+2018-11-10 22:44:29Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-10 22:44:29Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing action method "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)" - Validation state: Valid
+2018-11-10 22:44:29Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action method "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 11.8492ms.
+2018-11-10 22:44:29Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[RoomsService.Controllers.Rooms.RoomShortDto, RoomsService, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'.
+2018-11-10 22:44:29Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)" in 12.7828ms
+2018-11-10 22:44:29Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 14.0284ms 200 application/json; charset=utf-8
+2018-11-10 22:44:29Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/api/token  
+2018-11-10 22:44:29Z [INF] DESKTOP-EFHV749 31132 RoomsService Route matched with "{action = \"GetTokenAsync\", controller = \"Token\"}". Executing action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)"
+2018-11-10 22:44:29Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" - Validation state: Valid
+2018-11-10 22:44:29Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 0.2197ms.
+2018-11-10 22:44:29Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing ObjectResult, writing value of type '"System.String"'.
+2018-11-10 22:44:29Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" in 0.5425ms
+2018-11-10 22:44:29Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 1.1309ms 200 text/plain; charset=utf-8
+2018-11-10 22:44:30Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 POST http://localhost:50557/signalr/rooms/negotiate  0
+2018-11-10 22:44:30Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-10 22:44:30Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-10 22:44:30Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 0.9322ms 200 application/json
+2018-11-10 22:44:30Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/signalr/rooms?id=eWLQ3wdXCmM2MIhxE3WaXA  
+2018-11-10 22:44:30Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-10 22:44:30Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-10 22:44:30Z [INF] DESKTOP-EFHV749 31132 RoomsService Completed connection handshake. Using HubProtocol '"messagepack"'.
+2018-11-10 22:44:30Z [INF] DESKTOP-EFHV749 31132 RoomsService User 'a09ea3cf-32d4-4a0c-9233-c4f6292a845f' is connected
+2018-11-10 22:44:30Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/api/token  
+2018-11-10 22:44:30Z [INF] DESKTOP-EFHV749 31132 RoomsService Route matched with "{action = \"GetTokenAsync\", controller = \"Token\"}". Executing action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)"
+2018-11-10 22:44:30Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" - Validation state: Valid
+2018-11-10 22:44:30Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 3.2624ms.
+2018-11-10 22:44:30Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing ObjectResult, writing value of type '"System.String"'.
+2018-11-10 22:44:30Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" in 3.7731ms
+2018-11-10 22:44:30Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 4.8512ms 200 text/plain; charset=utf-8
+2018-11-10 22:44:30Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 POST http://localhost:50557/signalr/rooms/negotiate  0
+2018-11-10 22:44:30Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-10 22:44:30Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-10 22:44:30Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 0.7476ms 200 application/json
+2018-11-10 22:44:30Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/signalr/rooms?id=g8KqxJuUG6DO-CIAEJZTRQ  
+2018-11-10 22:44:30Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-10 22:44:30Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-10 22:44:30Z [INF] DESKTOP-EFHV749 31132 RoomsService Completed connection handshake. Using HubProtocol '"messagepack"'.
+2018-11-10 22:44:30Z [INF] DESKTOP-EFHV749 31132 RoomsService User 'af3b80d8-df63-4529-adc8-d70f83459e34' is connected
+2018-11-10 22:44:34Z [INF] DESKTOP-EFHV749 31132 RoomsService User 'a09ea3cf-32d4-4a0c-9233-c4f6292a845f' have accepted messaging request from user 'af3b80d8-df63-4529-adc8-d70f83459e34'
+2018-11-10 22:44:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/api/token  
+2018-11-10 22:44:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Route matched with "{action = \"GetTokenAsync\", controller = \"Token\"}". Executing action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)"
+2018-11-10 22:44:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" - Validation state: Valid
+2018-11-10 22:44:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 0.1904ms.
+2018-11-10 22:44:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing ObjectResult, writing value of type '"System.String"'.
+2018-11-10 22:44:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" in 0.5521ms
+2018-11-10 22:44:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 1.0781ms 200 text/plain; charset=utf-8
+2018-11-10 22:44:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 POST http://localhost:50557/signalr/rooms/negotiate  0
+2018-11-10 22:44:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-10 22:44:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-10 22:44:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 0.7813ms 200 application/json
+2018-11-10 22:44:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/signalr/rooms?id=BgiY_rR56o7tZWOz43SArg  
+2018-11-10 22:44:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-10 22:44:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-10 22:44:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Completed connection handshake. Using HubProtocol '"messagepack"'.
+2018-11-10 22:44:37Z [INF] DESKTOP-EFHV749 31132 RoomsService User '373efad9-e608-4911-a6f7-da1ffe07aef7' is connected
+2018-11-10 22:44:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/api/token  
+2018-11-10 22:44:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Route matched with "{action = \"GetTokenAsync\", controller = \"Token\"}". Executing action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)"
+2018-11-10 22:44:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" - Validation state: Valid
+2018-11-10 22:44:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 0.1687ms.
+2018-11-10 22:44:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing ObjectResult, writing value of type '"System.String"'.
+2018-11-10 22:44:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" in 0.4438ms
+2018-11-10 22:44:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 0.8412ms 200 text/plain; charset=utf-8
+2018-11-10 22:44:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 POST http://localhost:50557/signalr/rooms/negotiate  0
+2018-11-10 22:44:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-10 22:44:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-10 22:44:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 14.6149ms 200 application/json
+2018-11-10 22:44:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/signalr/rooms?id=SFyCQiIvrTiv10Cl7ygmLQ  
+2018-11-10 22:44:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-10 22:44:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-10 22:44:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Completed connection handshake. Using HubProtocol '"messagepack"'.
+2018-11-10 22:44:37Z [INF] DESKTOP-EFHV749 31132 RoomsService User '746446f6-b871-4d08-9e24-cce8cd1965ca' is connected
+2018-11-10 22:44:40Z [INF] DESKTOP-EFHV749 31132 RoomsService User '746446f6-b871-4d08-9e24-cce8cd1965ca' is joined to room with owner '373efad9-e608-4911-a6f7-da1ffe07aef7'
+2018-11-10 22:44:40Z [INF] DESKTOP-EFHV749 31132 RoomsService User '746446f6-b871-4d08-9e24-cce8cd1965ca' is not joined to room with owner '373efad9-e608-4911-a6f7-da1ffe07aef7' because 'Test reason'
+2018-11-10 22:44:40Z [INF] DESKTOP-EFHV749 31132 RoomsService User '746446f6-b871-4d08-9e24-cce8cd1965ca' left room with owner '373efad9-e608-4911-a6f7-da1ffe07aef7'
+2018-11-10 22:44:45Z [INF] DESKTOP-EFHV749 31132 RoomsService User '373efad9-e608-4911-a6f7-da1ffe07aef7' is disconnected
+2018-11-10 22:44:45Z [INF] DESKTOP-EFHV749 31132 RoomsService User '53eac906-2f74-4492-9cd8-72c5a1c4b0ed' is disconnected
+2018-11-10 22:44:45Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 7825.8993ms 101 
+2018-11-10 22:44:45Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 24568.9513ms 101 
+2018-11-10 22:44:45Z [INF] DESKTOP-EFHV749 31132 RoomsService User '746446f6-b871-4d08-9e24-cce8cd1965ca' is disconnected
+2018-11-10 22:44:45Z [INF] DESKTOP-EFHV749 31132 RoomsService User 'af3b80d8-df63-4529-adc8-d70f83459e34' is disconnected
+2018-11-10 22:44:45Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 7771.4202ms 101 
+2018-11-10 22:44:45Z [INF] DESKTOP-EFHV749 31132 RoomsService User 'b4d5ee83-c605-46fd-95a6-8db4174d1a47' is disconnected
+2018-11-10 22:44:45Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 14611.9925ms 101 
+2018-11-10 22:44:45Z [INF] DESKTOP-EFHV749 31132 RoomsService User 'a09ea3cf-32d4-4a0c-9233-c4f6292a845f' is disconnected
+2018-11-10 22:44:45Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 34225.7095ms 101 
+2018-11-10 22:44:45Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 14715.7039ms 101 
+2018-11-10 22:44:45Z [INF] DESKTOP-EFHV749 31132 RoomsService User '8de5345c-77fb-4ec7-806e-23eb6e1639bf' is disconnected
+2018-11-10 22:44:45Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 24495.7021ms 101 
+2018-11-11 05:46:51Z [WRN] DESKTOP-EFHV749 31132 RoomsService Connection to Redis failed.
+StackExchange.Redis.RedisConnectionException: SocketFailure on 192.168.1.40:6379/Subscription, origin: WriteQueue, input-buffer: 0, outstanding: 2, last-read: 10829s ago, last-write: 5s ago, unanswered-write: 5s ago, keep-alive: 60s, pending: 0, state: ConnectedEstablished, in: 0, ar: 0, last-heartbeat: 0s ago, last-mbeat: 0s ago, global: 0s ago ---> System.IO.IOException: Unable to write data to the transport connection: Удаленный хост принудительно разорвал существующее подключение. ---> System.Net.Sockets.SocketException: Удаленный хост принудительно разорвал существующее подключение
+   at System.Net.Sockets.NetworkStream.Write(Byte[] buffer, Int32 offset, Int32 size)
+   --- End of inner exception stack trace ---
+   at System.Net.Sockets.NetworkStream.Write(Byte[] buffer, Int32 offset, Int32 size)
+   at System.IO.BufferedStream.Flush()
+   at StackExchange.Redis.PhysicalConnection.Flush() in c:\code\StackExchange.Redis\StackExchange.Redis\StackExchange\Redis\PhysicalConnection.cs:line 180
+   at StackExchange.Redis.PhysicalBridge.WriteQueue(Int32 maxWork) in c:\code\StackExchange.Redis\StackExchange.Redis\StackExchange\Redis\PhysicalBridge.cs:line 593
+   --- End of inner exception stack trace ---
+2018-11-11 12:28:31Z [INF] DESKTOP-EFHV749 31132 RoomsService Connection to Redis restored.
+2018-11-11 12:35:29Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/api/token  
+2018-11-11 12:35:29Z [INF] DESKTOP-EFHV749 31132 RoomsService Route matched with "{action = \"GetTokenAsync\", controller = \"Token\"}". Executing action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)"
+2018-11-11 12:35:29Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" - Validation state: Valid
+2018-11-11 12:35:29Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 55.4858ms.
+2018-11-11 12:35:29Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing ObjectResult, writing value of type '"System.String"'.
+2018-11-11 12:35:29Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" in 277.5897ms
+2018-11-11 12:35:29Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 352.3329ms 200 text/plain; charset=utf-8
+2018-11-11 12:35:30Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 POST http://localhost:50557/signalr/rooms/negotiate  0
+2018-11-11 12:35:30Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 12:35:30Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 12:35:30Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 26.8762ms 200 application/json
+2018-11-11 12:35:30Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/signalr/rooms?id=sEFwj4c-AgDQViS72x7-Pg  
+2018-11-11 12:35:30Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 12:35:30Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 12:35:30Z [INF] DESKTOP-EFHV749 31132 RoomsService Completed connection handshake. Using HubProtocol '"messagepack"'.
+2018-11-11 12:35:30Z [INF] DESKTOP-EFHV749 31132 RoomsService User 'c588742c-1ad1-4adb-9bd6-265787258034' is connected
+2018-11-11 12:35:30Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/api/token  
+2018-11-11 12:35:30Z [INF] DESKTOP-EFHV749 31132 RoomsService Route matched with "{action = \"GetTokenAsync\", controller = \"Token\"}". Executing action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)"
+2018-11-11 12:35:30Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" - Validation state: Valid
+2018-11-11 12:35:30Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 0.1407ms.
+2018-11-11 12:35:30Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing ObjectResult, writing value of type '"System.String"'.
+2018-11-11 12:35:30Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" in 0.4368ms
+2018-11-11 12:35:30Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 2.467ms 200 text/plain; charset=utf-8
+2018-11-11 12:35:30Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 POST http://localhost:50557/signalr/rooms/negotiate  0
+2018-11-11 12:35:30Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 12:35:30Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 12:35:30Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 3.0089ms 200 application/json
+2018-11-11 12:35:30Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/signalr/rooms?id=46WN8LbG0kcqCjE-0cNxCA  
+2018-11-11 12:35:30Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 12:35:30Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 12:35:30Z [INF] DESKTOP-EFHV749 31132 RoomsService Completed connection handshake. Using HubProtocol '"messagepack"'.
+2018-11-11 12:35:30Z [INF] DESKTOP-EFHV749 31132 RoomsService User '3bc40bce-1fc8-4a11-97a6-d889a7df0c41' is connected
+2018-11-11 12:35:34Z [INF] DESKTOP-EFHV749 31132 RoomsService User '3bc40bce-1fc8-4a11-97a6-d889a7df0c41' is disconnected
+2018-11-11 12:35:34Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 3258.7259ms 101 
+2018-11-11 12:35:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/api/token  
+2018-11-11 12:35:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Route matched with "{action = \"GetTokenAsync\", controller = \"Token\"}". Executing action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)"
+2018-11-11 12:35:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" - Validation state: Valid
+2018-11-11 12:35:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 0.1216ms.
+2018-11-11 12:35:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing ObjectResult, writing value of type '"System.String"'.
+2018-11-11 12:35:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" in 0.3477ms
+2018-11-11 12:35:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 0.6915ms 200 text/plain; charset=utf-8
+2018-11-11 12:35:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 POST http://localhost:50557/signalr/rooms/negotiate  0
+2018-11-11 12:35:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 12:35:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 12:35:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 0.7476ms 200 application/json
+2018-11-11 12:35:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/signalr/rooms?id=CH6nNSwXGsueTAccm9ya_g  
+2018-11-11 12:35:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 12:35:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 12:35:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Completed connection handshake. Using HubProtocol '"messagepack"'.
+2018-11-11 12:35:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/api/token  
+2018-11-11 12:35:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Route matched with "{action = \"GetTokenAsync\", controller = \"Token\"}". Executing action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)"
+2018-11-11 12:35:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" - Validation state: Valid
+2018-11-11 12:35:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 1.0965ms.
+2018-11-11 12:35:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing ObjectResult, writing value of type '"System.String"'.
+2018-11-11 12:35:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" in 1.336ms
+2018-11-11 12:35:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 1.7385ms 200 text/plain; charset=utf-8
+2018-11-11 12:35:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 POST http://localhost:50557/signalr/rooms/negotiate  0
+2018-11-11 12:35:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 12:35:37Z [INF] DESKTOP-EFHV749 31132 RoomsService User 'a9da9858-6f38-457e-a360-964d7382179e' is connected
+2018-11-11 12:35:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 12:35:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 0.8686ms 200 application/json
+2018-11-11 12:35:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/signalr/rooms?id=X2nSlAXM101GSe0Xch3c1w  
+2018-11-11 12:35:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 12:35:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 12:35:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Completed connection handshake. Using HubProtocol '"messagepack"'.
+2018-11-11 12:35:37Z [INF] DESKTOP-EFHV749 31132 RoomsService User '29617635-ab31-4fd7-8899-44e40c25af0c' is connected
+2018-11-11 12:35:37Z [INF] DESKTOP-EFHV749 31132 RoomsService Room with header 'My test room' is created by owner 'a9da9858-6f38-457e-a360-964d7382179e'
+2018-11-11 12:35:40Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/api/rooms  
+2018-11-11 12:35:40Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 12:35:40Z [INF] DESKTOP-EFHV749 31132 RoomsService Route matched with "{action = \"GetAllRoomsAsync\", controller = \"Rooms\"}". Executing action "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)"
+2018-11-11 12:35:40Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 12:35:40Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing action method "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)" - Validation state: Valid
+2018-11-11 12:35:40Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action method "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 55.5711ms.
+2018-11-11 12:35:40Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[RoomsService.Controllers.Rooms.RoomShortDto, RoomsService, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'.
+2018-11-11 12:35:40Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)" in 95.6779ms
+2018-11-11 12:35:40Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 96.6325ms 200 application/json; charset=utf-8
+2018-11-11 12:35:40Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/api/rooms/a9da9858-6f38-457e-a360-964d7382179e  
+2018-11-11 12:35:40Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 12:35:40Z [INF] DESKTOP-EFHV749 31132 RoomsService Route matched with "{action = \"GetRoomByIdAsync\", controller = \"Rooms\"}". Executing action "RoomsService.Controllers.Rooms.RoomsController.GetRoomByIdAsync (RoomsService)"
+2018-11-11 12:35:40Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 12:35:40Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing action method "RoomsService.Controllers.Rooms.RoomsController.GetRoomByIdAsync (RoomsService)" with arguments (["a9da9858-6f38-457e-a360-964d7382179e"]) - Validation state: Valid
+2018-11-11 12:35:40Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action method "RoomsService.Controllers.Rooms.RoomsController.GetRoomByIdAsync (RoomsService)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 28.1638ms.
+2018-11-11 12:35:40Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing ObjectResult, writing value of type '"RoomsService.Controllers.Rooms.RoomDto"'.
+2018-11-11 12:35:40Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action "RoomsService.Controllers.Rooms.RoomsController.GetRoomByIdAsync (RoomsService)" in 58.0165ms
+2018-11-11 12:35:40Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 58.6909ms 200 application/json; charset=utf-8
+2018-11-11 12:35:40Z [INF] DESKTOP-EFHV749 31132 RoomsService Room with owner 'a9da9858-6f38-457e-a360-964d7382179e' is deleted
+2018-11-11 12:35:43Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/api/rooms  
+2018-11-11 12:35:43Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 12:35:43Z [INF] DESKTOP-EFHV749 31132 RoomsService Route matched with "{action = \"GetAllRoomsAsync\", controller = \"Rooms\"}". Executing action "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)"
+2018-11-11 12:35:43Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 12:35:43Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing action method "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)" - Validation state: Valid
+2018-11-11 12:35:43Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action method "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 14.4723ms.
+2018-11-11 12:35:43Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[RoomsService.Controllers.Rooms.RoomShortDto, RoomsService, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'.
+2018-11-11 12:35:43Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)" in 15.5166ms
+2018-11-11 12:35:43Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 16.54ms 200 application/json; charset=utf-8
+2018-11-11 12:35:43Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/api/token  
+2018-11-11 12:35:43Z [INF] DESKTOP-EFHV749 31132 RoomsService Route matched with "{action = \"GetTokenAsync\", controller = \"Token\"}". Executing action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)"
+2018-11-11 12:35:43Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" - Validation state: Valid
+2018-11-11 12:35:43Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 0.6941ms.
+2018-11-11 12:35:43Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing ObjectResult, writing value of type '"System.String"'.
+2018-11-11 12:35:43Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" in 0.9189ms
+2018-11-11 12:35:43Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 1.3003ms 200 text/plain; charset=utf-8
+2018-11-11 12:35:43Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 POST http://localhost:50557/signalr/rooms/negotiate  0
+2018-11-11 12:35:43Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 12:35:43Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 12:35:43Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 0.6291ms 200 application/json
+2018-11-11 12:35:43Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/signalr/rooms?id=HNSutCjjTtw-258ONKly4g  
+2018-11-11 12:35:43Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 12:35:43Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 12:35:43Z [INF] DESKTOP-EFHV749 31132 RoomsService Completed connection handshake. Using HubProtocol '"messagepack"'.
+2018-11-11 12:35:43Z [INF] DESKTOP-EFHV749 31132 RoomsService User '91bade29-2c59-4d06-8dc1-0147da557a37' is connected
+2018-11-11 12:35:43Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/api/token  
+2018-11-11 12:35:43Z [INF] DESKTOP-EFHV749 31132 RoomsService Route matched with "{action = \"GetTokenAsync\", controller = \"Token\"}". Executing action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)"
+2018-11-11 12:35:43Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" - Validation state: Valid
+2018-11-11 12:35:43Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 0.1292ms.
+2018-11-11 12:35:43Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing ObjectResult, writing value of type '"System.String"'.
+2018-11-11 12:35:43Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" in 0.3477ms
+2018-11-11 12:35:43Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 1.2653ms 200 text/plain; charset=utf-8
+2018-11-11 12:35:43Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 POST http://localhost:50557/signalr/rooms/negotiate  0
+2018-11-11 12:35:43Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 12:35:43Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 12:35:43Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 0.5642ms 200 application/json
+2018-11-11 12:35:43Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/signalr/rooms?id=FW-dd9w7ZYNhH7RF8S5vgg  
+2018-11-11 12:35:43Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 12:35:43Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 12:35:43Z [INF] DESKTOP-EFHV749 31132 RoomsService Completed connection handshake. Using HubProtocol '"messagepack"'.
+2018-11-11 12:35:43Z [INF] DESKTOP-EFHV749 31132 RoomsService User '9daa7412-9e75-447c-a553-d558a40079d2' is connected
+2018-11-11 12:35:46Z [INF] DESKTOP-EFHV749 31132 RoomsService User '91bade29-2c59-4d06-8dc1-0147da557a37' have accepted messaging request from user '9daa7412-9e75-447c-a553-d558a40079d2'
+2018-11-11 12:35:49Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/api/token  
+2018-11-11 12:35:49Z [INF] DESKTOP-EFHV749 31132 RoomsService Route matched with "{action = \"GetTokenAsync\", controller = \"Token\"}". Executing action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)"
+2018-11-11 12:35:49Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" - Validation state: Valid
+2018-11-11 12:35:49Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 0.3164ms.
+2018-11-11 12:35:49Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing ObjectResult, writing value of type '"System.String"'.
+2018-11-11 12:35:49Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" in 0.8463ms
+2018-11-11 12:35:49Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 2.3937ms 200 text/plain; charset=utf-8
+2018-11-11 12:35:49Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 POST http://localhost:50557/signalr/rooms/negotiate  0
+2018-11-11 12:35:49Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 12:35:49Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 12:35:49Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 0.9826ms 200 application/json
+2018-11-11 12:35:49Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/signalr/rooms?id=dKnkUoFII2sunEJ13-bAbQ  
+2018-11-11 12:35:49Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 12:35:49Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 12:35:49Z [INF] DESKTOP-EFHV749 31132 RoomsService Completed connection handshake. Using HubProtocol '"messagepack"'.
+2018-11-11 12:35:49Z [INF] DESKTOP-EFHV749 31132 RoomsService User 'da180106-50ca-45b1-851a-da0985ec9745' is connected
+2018-11-11 12:35:49Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/api/token  
+2018-11-11 12:35:49Z [INF] DESKTOP-EFHV749 31132 RoomsService Route matched with "{action = \"GetTokenAsync\", controller = \"Token\"}". Executing action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)"
+2018-11-11 12:35:49Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" - Validation state: Valid
+2018-11-11 12:35:49Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 0.1579ms.
+2018-11-11 12:35:49Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing ObjectResult, writing value of type '"System.String"'.
+2018-11-11 12:35:49Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" in 0.4374ms
+2018-11-11 12:35:49Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 0.803ms 200 text/plain; charset=utf-8
+2018-11-11 12:35:49Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 POST http://localhost:50557/signalr/rooms/negotiate  0
+2018-11-11 12:35:49Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 12:35:49Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 12:35:49Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 0.8749ms 200 application/json
+2018-11-11 12:35:49Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/signalr/rooms?id=DprQEnnhObfK8XC5FagJeQ  
+2018-11-11 12:35:49Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 12:35:49Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 12:35:49Z [INF] DESKTOP-EFHV749 31132 RoomsService Completed connection handshake. Using HubProtocol '"messagepack"'.
+2018-11-11 12:35:49Z [INF] DESKTOP-EFHV749 31132 RoomsService User 'a33df468-2add-4758-9b00-c072950c27ea' is connected
+2018-11-11 12:35:52Z [INF] DESKTOP-EFHV749 31132 RoomsService User 'a33df468-2add-4758-9b00-c072950c27ea' is joined to room with owner 'da180106-50ca-45b1-851a-da0985ec9745'
+2018-11-11 12:35:52Z [INF] DESKTOP-EFHV749 31132 RoomsService User 'a33df468-2add-4758-9b00-c072950c27ea' is not joined to room with owner 'da180106-50ca-45b1-851a-da0985ec9745' because 'Test reason'
+2018-11-11 12:35:52Z [INF] DESKTOP-EFHV749 31132 RoomsService User 'a33df468-2add-4758-9b00-c072950c27ea' left room with owner 'da180106-50ca-45b1-851a-da0985ec9745'
+2018-11-11 12:35:56Z [INF] DESKTOP-EFHV749 31132 RoomsService User '29617635-ab31-4fd7-8899-44e40c25af0c' is disconnected
+2018-11-11 12:35:56Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 19051.7961ms 101 
+2018-11-11 12:35:56Z [INF] DESKTOP-EFHV749 31132 RoomsService User '91bade29-2c59-4d06-8dc1-0147da557a37' is disconnected
+2018-11-11 12:35:56Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 12607.0954ms 101 
+2018-11-11 12:35:56Z [INF] DESKTOP-EFHV749 31132 RoomsService User '9daa7412-9e75-447c-a553-d558a40079d2' is disconnected
+2018-11-11 12:35:56Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 12580.6783ms 101 
+2018-11-11 12:35:56Z [INF] DESKTOP-EFHV749 31132 RoomsService User 'c588742c-1ad1-4adb-9bd6-265787258034' is disconnected
+2018-11-11 12:35:56Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 26133.7563ms 101 
+2018-11-11 12:35:56Z [INF] DESKTOP-EFHV749 31132 RoomsService User 'a33df468-2add-4758-9b00-c072950c27ea' is disconnected
+2018-11-11 12:35:56Z [INF] DESKTOP-EFHV749 31132 RoomsService User 'da180106-50ca-45b1-851a-da0985ec9745' is disconnected
+2018-11-11 12:35:56Z [INF] DESKTOP-EFHV749 31132 RoomsService User 'a9da9858-6f38-457e-a360-964d7382179e' is disconnected
+2018-11-11 12:35:56Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 6810.3852ms 101 
+2018-11-11 12:35:56Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 6861.9247ms 101 
+2018-11-11 12:35:56Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 19615.0861ms 101 
+2018-11-11 12:37:34Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/api/token  
+2018-11-11 12:37:34Z [INF] DESKTOP-EFHV749 31132 RoomsService Route matched with "{action = \"GetTokenAsync\", controller = \"Token\"}". Executing action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)"
+2018-11-11 12:37:34Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" - Validation state: Valid
+2018-11-11 12:37:34Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 0.2986ms.
+2018-11-11 12:37:34Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing ObjectResult, writing value of type '"System.String"'.
+2018-11-11 12:37:34Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" in 1.0341ms
+2018-11-11 12:37:34Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 4.2539ms 200 text/plain; charset=utf-8
+2018-11-11 12:43:59Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/api/token  
+2018-11-11 12:43:59Z [INF] DESKTOP-EFHV749 31132 RoomsService Route matched with "{action = \"GetTokenAsync\", controller = \"Token\"}". Executing action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)"
+2018-11-11 12:43:59Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" - Validation state: Valid
+2018-11-11 12:43:59Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 23.1954ms.
+2018-11-11 12:43:59Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing ObjectResult, writing value of type '"System.String"'.
+2018-11-11 12:43:59Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" in 35.0185ms
+2018-11-11 12:43:59Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 159.222ms 200 text/plain; charset=utf-8
+2018-11-11 12:44:01Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 POST http://localhost:50557/signalr/rooms/negotiate  0
+2018-11-11 12:44:01Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 12:44:01Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 12:44:01Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 54.7541ms 200 application/json
+2018-11-11 12:44:01Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/signalr/rooms?id=J49D80fom3AmN2TyFOFwEw  
+2018-11-11 12:44:01Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 12:44:01Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 12:44:02Z [INF] DESKTOP-EFHV749 31132 RoomsService Completed connection handshake. Using HubProtocol '"messagepack"'.
+2018-11-11 12:44:02Z [INF] DESKTOP-EFHV749 31132 RoomsService User '1f57e321-3a2b-4114-94e9-d0ffed3d1322' is connected
+2018-11-11 12:45:38Z [INF] DESKTOP-EFHV749 31132 RoomsService User '1f57e321-3a2b-4114-94e9-d0ffed3d1322' is disconnected
+2018-11-11 12:45:38Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 96978.3087ms 101 
+2018-11-11 12:46:14Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/api/token  
+2018-11-11 12:46:14Z [INF] DESKTOP-EFHV749 31132 RoomsService Route matched with "{action = \"GetTokenAsync\", controller = \"Token\"}". Executing action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)"
+2018-11-11 12:46:14Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" - Validation state: Valid
+2018-11-11 12:46:14Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 6.7636ms.
+2018-11-11 12:46:14Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing ObjectResult, writing value of type '"System.String"'.
+2018-11-11 12:46:14Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" in 9.3395ms
+2018-11-11 12:46:14Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 22.0536ms 200 text/plain; charset=utf-8
+2018-11-11 12:55:48Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/api/token  
+2018-11-11 12:55:48Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/api/token  
+2018-11-11 12:55:48Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/api/token  
+2018-11-11 12:55:48Z [INF] DESKTOP-EFHV749 31132 RoomsService Route matched with "{action = \"GetTokenAsync\", controller = \"Token\"}". Executing action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)"
+2018-11-11 12:55:48Z [INF] DESKTOP-EFHV749 31132 RoomsService Route matched with "{action = \"GetTokenAsync\", controller = \"Token\"}". Executing action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)"
+2018-11-11 12:55:48Z [INF] DESKTOP-EFHV749 31132 RoomsService Route matched with "{action = \"GetTokenAsync\", controller = \"Token\"}". Executing action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)"
+2018-11-11 12:55:48Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" - Validation state: Valid
+2018-11-11 12:55:48Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" - Validation state: Valid
+2018-11-11 12:55:48Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" - Validation state: Valid
+2018-11-11 12:55:48Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 12.8687ms.
+2018-11-11 12:55:48Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 12.4013ms.
+2018-11-11 12:55:48Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 12.9101ms.
+2018-11-11 12:55:48Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing ObjectResult, writing value of type '"System.String"'.
+2018-11-11 12:55:48Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing ObjectResult, writing value of type '"System.String"'.
+2018-11-11 12:55:48Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing ObjectResult, writing value of type '"System.String"'.
+2018-11-11 12:55:48Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" in 18.9669ms
+2018-11-11 12:55:48Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" in 18.8994ms
+2018-11-11 12:55:48Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" in 18.8809ms
+2018-11-11 12:55:48Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 63.4938ms 200 text/plain; charset=utf-8
+2018-11-11 12:55:48Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 86.2186ms 200 text/plain; charset=utf-8
+2018-11-11 12:55:48Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 56.0156ms 200 text/plain; charset=utf-8
+2018-11-11 12:55:49Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 POST http://localhost:50557/signalr/rooms/negotiate  0
+2018-11-11 12:55:49Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 12:55:49Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 POST http://localhost:50557/signalr/rooms/negotiate  0
+2018-11-11 12:55:49Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 12:55:49Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 POST http://localhost:50557/signalr/rooms/negotiate  0
+2018-11-11 12:55:49Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 12:55:49Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 12:55:49Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 12:55:49Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 12:55:49Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 6.5865ms 200 application/json
+2018-11-11 12:55:49Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 9.1332ms 200 application/json
+2018-11-11 12:55:49Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 21.8249ms 200 application/json
+2018-11-11 12:55:49Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/signalr/rooms?id=mR_B7UFjslHIaNooxZ2bOA  
+2018-11-11 12:55:49Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/signalr/rooms?id=d5LNUVczf5H-hiVdl8vMsg  
+2018-11-11 12:55:49Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/signalr/rooms?id=Ijv1xUe0L6I_kxMLzh_7nA  
+2018-11-11 12:55:49Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 12:55:49Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 12:55:49Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 12:55:49Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 12:55:49Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 12:55:49Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 12:55:51Z [INF] DESKTOP-EFHV749 31132 RoomsService Completed connection handshake. Using HubProtocol '"messagepack"'.
+2018-11-11 12:55:51Z [INF] DESKTOP-EFHV749 31132 RoomsService Completed connection handshake. Using HubProtocol '"messagepack"'.
+2018-11-11 12:55:51Z [INF] DESKTOP-EFHV749 31132 RoomsService User '4bfd1ce7-948c-49c2-8514-f97f966c66c9' is connected
+2018-11-11 12:55:51Z [INF] DESKTOP-EFHV749 31132 RoomsService User 'ea5ea160-67a7-4889-b6c6-9fc5e189d3b8' is connected
+2018-11-11 12:55:51Z [INF] DESKTOP-EFHV749 31132 RoomsService Completed connection handshake. Using HubProtocol '"messagepack"'.
+2018-11-11 12:55:51Z [INF] DESKTOP-EFHV749 31132 RoomsService User '91c16ff9-a7c7-4b22-9e64-513bce65b2a3' is connected
+2018-11-11 12:55:53Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/api/rooms  
+2018-11-11 12:55:53Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 12:55:53Z [INF] DESKTOP-EFHV749 31132 RoomsService Route matched with "{action = \"GetAllRoomsAsync\", controller = \"Rooms\"}". Executing action "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)"
+2018-11-11 12:55:53Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 12:55:53Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing action method "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)" - Validation state: Valid
+2018-11-11 12:55:53Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action method "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 96.6497ms.
+2018-11-11 12:55:53Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[RoomsService.Controllers.Rooms.RoomShortDto, RoomsService, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'.
+2018-11-11 12:55:53Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)" in 105.39ms
+2018-11-11 12:55:53Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 109.3452ms 200 application/json; charset=utf-8
+2018-11-11 12:55:56Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/api/rooms  
+2018-11-11 12:55:56Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 12:55:56Z [INF] DESKTOP-EFHV749 31132 RoomsService Route matched with "{action = \"GetAllRoomsAsync\", controller = \"Rooms\"}". Executing action "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)"
+2018-11-11 12:55:56Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 12:55:56Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing action method "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)" - Validation state: Valid
+2018-11-11 12:55:57Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action method "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 433.8296ms.
+2018-11-11 12:55:57Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[RoomsService.Controllers.Rooms.RoomShortDto, RoomsService, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'.
+2018-11-11 12:55:57Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)" in 441.2975ms
+2018-11-11 12:55:57Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 444.6548ms 200 application/json; charset=utf-8
+2018-11-11 12:55:59Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/api/rooms  
+2018-11-11 12:55:59Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 12:55:59Z [INF] DESKTOP-EFHV749 31132 RoomsService Route matched with "{action = \"GetAllRoomsAsync\", controller = \"Rooms\"}". Executing action "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)"
+2018-11-11 12:55:59Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 12:55:59Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing action method "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)" - Validation state: Valid
+2018-11-11 12:56:00Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action method "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 411.2277ms.
+2018-11-11 12:56:00Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[RoomsService.Controllers.Rooms.RoomShortDto, RoomsService, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'.
+2018-11-11 12:56:00Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)" in 412.1765ms
+2018-11-11 12:56:00Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 416.5266ms 200 application/json; charset=utf-8
+2018-11-11 12:56:02Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/api/rooms  
+2018-11-11 12:56:02Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 12:56:02Z [INF] DESKTOP-EFHV749 31132 RoomsService Route matched with "{action = \"GetAllRoomsAsync\", controller = \"Rooms\"}". Executing action "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)"
+2018-11-11 12:56:02Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 12:56:02Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing action method "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)" - Validation state: Valid
+2018-11-11 12:56:03Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action method "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 460.1454ms.
+2018-11-11 12:56:03Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[RoomsService.Controllers.Rooms.RoomShortDto, RoomsService, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'.
+2018-11-11 12:56:03Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)" in 514.4614ms
+2018-11-11 12:56:03Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 519.335ms 200 application/json; charset=utf-8
+2018-11-11 12:56:05Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/api/rooms  
+2018-11-11 12:56:05Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 12:56:05Z [INF] DESKTOP-EFHV749 31132 RoomsService Route matched with "{action = \"GetAllRoomsAsync\", controller = \"Rooms\"}". Executing action "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)"
+2018-11-11 12:56:05Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 12:56:05Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing action method "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)" - Validation state: Valid
+2018-11-11 12:56:06Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action method "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 722.7961ms.
+2018-11-11 12:56:06Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[RoomsService.Controllers.Rooms.RoomShortDto, RoomsService, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'.
+2018-11-11 12:56:06Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)" in 729.9507ms
+2018-11-11 12:56:06Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 732.1528ms 200 application/json; charset=utf-8
+2018-11-11 12:56:08Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/api/rooms  
+2018-11-11 12:56:08Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 12:56:08Z [INF] DESKTOP-EFHV749 31132 RoomsService Route matched with "{action = \"GetAllRoomsAsync\", controller = \"Rooms\"}". Executing action "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)"
+2018-11-11 12:56:08Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 12:56:08Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing action method "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)" - Validation state: Valid
+2018-11-11 12:56:08Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action method "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 35.7642ms.
+2018-11-11 12:56:08Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[RoomsService.Controllers.Rooms.RoomShortDto, RoomsService, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'.
+2018-11-11 12:56:08Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)" in 41.0574ms
+2018-11-11 12:56:08Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 43.9773ms 200 application/json; charset=utf-8
+2018-11-11 12:56:14Z [INF] DESKTOP-EFHV749 31132 RoomsService User '91c16ff9-a7c7-4b22-9e64-513bce65b2a3' is disconnected
+2018-11-11 12:56:14Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 24536.7398ms 101 
+2018-11-11 12:56:14Z [INF] DESKTOP-EFHV749 31132 RoomsService User '4bfd1ce7-948c-49c2-8514-f97f966c66c9' is disconnected
+2018-11-11 12:56:15Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 25851.7891ms 101 
+2018-11-11 12:56:15Z [INF] DESKTOP-EFHV749 31132 RoomsService User 'ea5ea160-67a7-4889-b6c6-9fc5e189d3b8' is disconnected
+2018-11-11 12:56:15Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 25978.2189ms 101 
+2018-11-11 13:03:19Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/api/token  
+2018-11-11 13:03:19Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/api/token  
+2018-11-11 13:03:19Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/api/token  
+2018-11-11 13:03:19Z [INF] DESKTOP-EFHV749 31132 RoomsService Route matched with "{action = \"GetTokenAsync\", controller = \"Token\"}". Executing action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)"
+2018-11-11 13:03:19Z [INF] DESKTOP-EFHV749 31132 RoomsService Route matched with "{action = \"GetTokenAsync\", controller = \"Token\"}". Executing action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)"
+2018-11-11 13:03:19Z [INF] DESKTOP-EFHV749 31132 RoomsService Route matched with "{action = \"GetTokenAsync\", controller = \"Token\"}". Executing action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)"
+2018-11-11 13:03:19Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" - Validation state: Valid
+2018-11-11 13:03:19Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" - Validation state: Valid
+2018-11-11 13:03:19Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" - Validation state: Valid
+2018-11-11 13:03:19Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 27.8269ms.
+2018-11-11 13:03:19Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 6.0039ms.
+2018-11-11 13:03:19Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing ObjectResult, writing value of type '"System.String"'.
+2018-11-11 13:03:19Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" in 41.1689ms
+2018-11-11 13:03:19Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 147.1849ms 200 text/plain; charset=utf-8
+2018-11-11 13:03:19Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 15.6217ms.
+2018-11-11 13:03:19Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing ObjectResult, writing value of type '"System.String"'.
+2018-11-11 13:03:19Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" in 44.246ms
+2018-11-11 13:03:19Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 156.8327ms 200 text/plain; charset=utf-8
+2018-11-11 13:03:19Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing ObjectResult, writing value of type '"System.String"'.
+2018-11-11 13:03:19Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" in 45.2846ms
+2018-11-11 13:03:19Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 134.9466ms 200 text/plain; charset=utf-8
+2018-11-11 13:03:21Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 POST http://localhost:50557/signalr/rooms/negotiate  0
+2018-11-11 13:03:21Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 POST http://localhost:50557/signalr/rooms/negotiate  0
+2018-11-11 13:03:21Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 POST http://localhost:50557/signalr/rooms/negotiate  0
+2018-11-11 13:03:21Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 13:03:21Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 13:03:21Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 13:03:22Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 13:03:22Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 13:03:22Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 13:03:22Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 71.9144ms 200 application/json
+2018-11-11 13:03:22Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 662.2991ms 200 application/json
+2018-11-11 13:03:22Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 87.6909ms 200 application/json
+2018-11-11 13:03:22Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/signalr/rooms?id=h9FTSduhY5FPqRmcw8RSEg  
+2018-11-11 13:03:22Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 13:03:22Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 13:03:22Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/signalr/rooms?id=Jdyxv_aZnqaRdxMWe3NOYg  
+2018-11-11 13:03:22Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 13:03:22Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/signalr/rooms?id=0oDsn7NOZLkRzM_yqt3-7g  
+2018-11-11 13:03:22Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 13:03:22Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 13:03:22Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 13:03:22Z [INF] DESKTOP-EFHV749 31132 RoomsService Completed connection handshake. Using HubProtocol '"messagepack"'.
+2018-11-11 13:03:22Z [INF] DESKTOP-EFHV749 31132 RoomsService Completed connection handshake. Using HubProtocol '"messagepack"'.
+2018-11-11 13:03:22Z [INF] DESKTOP-EFHV749 31132 RoomsService Completed connection handshake. Using HubProtocol '"messagepack"'.
+2018-11-11 13:03:22Z [INF] DESKTOP-EFHV749 31132 RoomsService User '6b03ab62-7214-46d0-860a-756cc81375ba' is connected
+2018-11-11 13:03:22Z [INF] DESKTOP-EFHV749 31132 RoomsService User '9290a389-9a00-403e-b289-8fa9bcf0f844' is connected
+2018-11-11 13:03:22Z [INF] DESKTOP-EFHV749 31132 RoomsService User '56503010-dd35-46cc-9e97-f47e7fc420f8' is connected
+2018-11-11 13:03:25Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/api/rooms  
+2018-11-11 13:03:25Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 13:03:25Z [INF] DESKTOP-EFHV749 31132 RoomsService Route matched with "{action = \"GetAllRoomsAsync\", controller = \"Rooms\"}". Executing action "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)"
+2018-11-11 13:03:25Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 13:03:25Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing action method "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)" - Validation state: Valid
+2018-11-11 13:03:30Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/api/rooms  
+2018-11-11 13:03:30Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 13:03:30Z [INF] DESKTOP-EFHV749 31132 RoomsService Route matched with "{action = \"GetAllRoomsAsync\", controller = \"Rooms\"}". Executing action "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)"
+2018-11-11 13:03:30Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 13:03:30Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing action method "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)" - Validation state: Valid
+2018-11-11 13:03:31Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action method "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 5287.9507ms.
+2018-11-11 13:03:31Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[RoomsService.Controllers.Rooms.RoomShortDto, RoomsService, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'.
+2018-11-11 13:03:31Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)" in 5487.575ms
+2018-11-11 13:03:31Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 5503.6075ms 200 application/json; charset=utf-8
+2018-11-11 13:03:31Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action method "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 625.102ms.
+2018-11-11 13:03:31Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[RoomsService.Controllers.Rooms.RoomShortDto, RoomsService, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'.
+2018-11-11 13:03:31Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)" in 627.5703ms
+2018-11-11 13:03:31Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 629.9011ms 200 application/json; charset=utf-8
+2018-11-11 13:03:31Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/api/rooms  
+2018-11-11 13:03:31Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 13:03:31Z [INF] DESKTOP-EFHV749 31132 RoomsService Route matched with "{action = \"GetAllRoomsAsync\", controller = \"Rooms\"}". Executing action "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)"
+2018-11-11 13:03:31Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 13:03:31Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing action method "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)" - Validation state: Valid
+2018-11-11 13:03:31Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action method "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 143.0602ms.
+2018-11-11 13:03:31Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[RoomsService.Controllers.Rooms.RoomShortDto, RoomsService, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'.
+2018-11-11 13:03:31Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)" in 143.9594ms
+2018-11-11 13:03:31Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 158.9762ms 200 application/json; charset=utf-8
+2018-11-11 13:03:50Z [INF] DESKTOP-EFHV749 31132 RoomsService User '9290a389-9a00-403e-b289-8fa9bcf0f844' is disconnected
+2018-11-11 13:03:50Z [INF] DESKTOP-EFHV749 31132 RoomsService User '56503010-dd35-46cc-9e97-f47e7fc420f8' is disconnected
+2018-11-11 13:03:50Z [INF] DESKTOP-EFHV749 31132 RoomsService User '6b03ab62-7214-46d0-860a-756cc81375ba' is disconnected
+2018-11-11 13:03:50Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 27959.9868ms 101 
+2018-11-11 13:03:50Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 27996.4516ms 101 
+2018-11-11 13:03:50Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 27968.6265ms 101 
+2018-11-11 13:03:56Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/api/token  
+2018-11-11 13:03:56Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/api/token  
+2018-11-11 13:03:56Z [INF] DESKTOP-EFHV749 31132 RoomsService Route matched with "{action = \"GetTokenAsync\", controller = \"Token\"}". Executing action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)"
+2018-11-11 13:03:56Z [INF] DESKTOP-EFHV749 31132 RoomsService Route matched with "{action = \"GetTokenAsync\", controller = \"Token\"}". Executing action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)"
+2018-11-11 13:03:56Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" - Validation state: Valid
+2018-11-11 13:03:56Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" - Validation state: Valid
+2018-11-11 13:03:56Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/api/token  
+2018-11-11 13:03:56Z [INF] DESKTOP-EFHV749 31132 RoomsService Route matched with "{action = \"GetTokenAsync\", controller = \"Token\"}". Executing action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)"
+2018-11-11 13:03:56Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" - Validation state: Valid
+2018-11-11 13:03:56Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 0.3247ms.
+2018-11-11 13:03:56Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing ObjectResult, writing value of type '"System.String"'.
+2018-11-11 13:03:56Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 1.5137ms.
+2018-11-11 13:03:56Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing ObjectResult, writing value of type '"System.String"'.
+2018-11-11 13:03:56Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" in 1.776ms
+2018-11-11 13:03:56Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 2.2072ms 200 text/plain; charset=utf-8
+2018-11-11 13:03:56Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" in 1.0768ms
+2018-11-11 13:03:56Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 1.5735ms 200 text/plain; charset=utf-8
+2018-11-11 13:03:56Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 2.758ms.
+2018-11-11 13:03:56Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing ObjectResult, writing value of type '"System.String"'.
+2018-11-11 13:03:56Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" in 2.9968ms
+2018-11-11 13:03:56Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 3.4967ms 200 text/plain; charset=utf-8
+2018-11-11 13:03:57Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 POST http://localhost:50557/signalr/rooms/negotiate  0
+2018-11-11 13:03:57Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 13:03:57Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 13:03:57Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 0.7215ms 200 application/json
+2018-11-11 13:03:57Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 POST http://localhost:50557/signalr/rooms/negotiate  0
+2018-11-11 13:03:57Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 POST http://localhost:50557/signalr/rooms/negotiate  0
+2018-11-11 13:03:57Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 13:03:57Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 13:03:57Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 13:03:57Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 13:03:57Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 0.3438ms 200 application/json
+2018-11-11 13:03:57Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 0.4024ms 200 application/json
+2018-11-11 13:03:57Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/signalr/rooms?id=KV7YKqcN2efCzLX-zQKBTg  
+2018-11-11 13:03:57Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/signalr/rooms?id=DrVlBJ_VdnZAQq0rtp4qGw  
+2018-11-11 13:03:57Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/signalr/rooms?id=RT-mhc2XcjK7Pk4r_4P1Fw  
+2018-11-11 13:03:57Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 13:03:57Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 13:03:57Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 13:03:57Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 13:03:57Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 13:03:57Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 13:03:58Z [INF] DESKTOP-EFHV749 31132 RoomsService Completed connection handshake. Using HubProtocol '"messagepack"'.
+2018-11-11 13:03:58Z [INF] DESKTOP-EFHV749 31132 RoomsService Completed connection handshake. Using HubProtocol '"messagepack"'.
+2018-11-11 13:03:58Z [INF] DESKTOP-EFHV749 31132 RoomsService Completed connection handshake. Using HubProtocol '"messagepack"'.
+2018-11-11 13:03:58Z [INF] DESKTOP-EFHV749 31132 RoomsService User 'e0c93765-e51e-4366-a571-c0e7913d76ca' is connected
+2018-11-11 13:03:58Z [INF] DESKTOP-EFHV749 31132 RoomsService User 'ddc0f99d-fa61-4911-8e42-bc8462e2c54a' is connected
+2018-11-11 13:03:58Z [INF] DESKTOP-EFHV749 31132 RoomsService User '15feaeab-ff46-4af2-939c-e3ab4dfa8ddf' is connected
+2018-11-11 13:03:59Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/api/rooms  
+2018-11-11 13:03:59Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 13:03:59Z [INF] DESKTOP-EFHV749 31132 RoomsService Route matched with "{action = \"GetAllRoomsAsync\", controller = \"Rooms\"}". Executing action "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)"
+2018-11-11 13:03:59Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 13:03:59Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing action method "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)" - Validation state: Valid
+2018-11-11 13:03:59Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action method "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 80.5547ms.
+2018-11-11 13:03:59Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[RoomsService.Controllers.Rooms.RoomShortDto, RoomsService, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'.
+2018-11-11 13:03:59Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)" in 81.2769ms
+2018-11-11 13:03:59Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 83.7223ms 200 application/json; charset=utf-8
+2018-11-11 13:04:02Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/api/rooms  
+2018-11-11 13:04:02Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 13:04:02Z [INF] DESKTOP-EFHV749 31132 RoomsService Route matched with "{action = \"GetAllRoomsAsync\", controller = \"Rooms\"}". Executing action "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)"
+2018-11-11 13:04:02Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 13:04:02Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing action method "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)" - Validation state: Valid
+2018-11-11 13:04:02Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action method "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 14.818ms.
+2018-11-11 13:04:02Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[RoomsService.Controllers.Rooms.RoomShortDto, RoomsService, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'.
+2018-11-11 13:04:02Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)" in 18.4173ms
+2018-11-11 13:04:02Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 21.6339ms 200 application/json; charset=utf-8
+2018-11-11 13:04:05Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/api/rooms  
+2018-11-11 13:04:05Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 13:04:05Z [INF] DESKTOP-EFHV749 31132 RoomsService Route matched with "{action = \"GetAllRoomsAsync\", controller = \"Rooms\"}". Executing action "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)"
+2018-11-11 13:04:05Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 13:04:05Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing action method "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)" - Validation state: Valid
+2018-11-11 13:04:06Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action method "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 322.8095ms.
+2018-11-11 13:04:06Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[RoomsService.Controllers.Rooms.RoomShortDto, RoomsService, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'.
+2018-11-11 13:04:06Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)" in 324.8078ms
+2018-11-11 13:04:06Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 327.2322ms 200 application/json; charset=utf-8
+2018-11-11 13:04:08Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/api/rooms  
+2018-11-11 13:04:08Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 13:04:08Z [INF] DESKTOP-EFHV749 31132 RoomsService Route matched with "{action = \"GetAllRoomsAsync\", controller = \"Rooms\"}". Executing action "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)"
+2018-11-11 13:04:08Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 13:04:08Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing action method "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)" - Validation state: Valid
+2018-11-11 13:04:08Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action method "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 51.5847ms.
+2018-11-11 13:04:08Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[RoomsService.Controllers.Rooms.RoomShortDto, RoomsService, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'.
+2018-11-11 13:04:08Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)" in 53.227ms
+2018-11-11 13:04:08Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 60.0881ms 200 application/json; charset=utf-8
+2018-11-11 13:04:25Z [INF] DESKTOP-EFHV749 31132 RoomsService User '15feaeab-ff46-4af2-939c-e3ab4dfa8ddf' is disconnected
+2018-11-11 13:04:25Z [INF] DESKTOP-EFHV749 31132 RoomsService User 'ddc0f99d-fa61-4911-8e42-bc8462e2c54a' is disconnected
+2018-11-11 13:04:25Z [INF] DESKTOP-EFHV749 31132 RoomsService User 'e0c93765-e51e-4366-a571-c0e7913d76ca' is disconnected
+2018-11-11 13:04:25Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 27609.2147ms 101 
+2018-11-11 13:04:25Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 27618.7956ms 101 
+2018-11-11 13:04:25Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 27629.27ms 101 
+2018-11-11 13:04:32Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/api/token  
+2018-11-11 13:04:32Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/api/token  
+2018-11-11 13:04:32Z [INF] DESKTOP-EFHV749 31132 RoomsService Route matched with "{action = \"GetTokenAsync\", controller = \"Token\"}". Executing action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)"
+2018-11-11 13:04:32Z [INF] DESKTOP-EFHV749 31132 RoomsService Route matched with "{action = \"GetTokenAsync\", controller = \"Token\"}". Executing action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)"
+2018-11-11 13:04:32Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" - Validation state: Valid
+2018-11-11 13:04:32Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/api/token  
+2018-11-11 13:04:32Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" - Validation state: Valid
+2018-11-11 13:04:32Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 0.1674ms.
+2018-11-11 13:04:32Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing ObjectResult, writing value of type '"System.String"'.
+2018-11-11 13:04:32Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 0.1961ms.
+2018-11-11 13:04:32Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" in 1.1118ms
+2018-11-11 13:04:32Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing ObjectResult, writing value of type '"System.String"'.
+2018-11-11 13:04:32Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 1.7353ms 200 text/plain; charset=utf-8
+2018-11-11 13:04:32Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" in 1.222ms
+2018-11-11 13:04:32Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 1.8983ms 200 text/plain; charset=utf-8
+2018-11-11 13:04:32Z [INF] DESKTOP-EFHV749 31132 RoomsService Route matched with "{action = \"GetTokenAsync\", controller = \"Token\"}". Executing action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)"
+2018-11-11 13:04:32Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" - Validation state: Valid
+2018-11-11 13:04:32Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action method "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 0.1426ms.
+2018-11-11 13:04:32Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing ObjectResult, writing value of type '"System.String"'.
+2018-11-11 13:04:32Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action "RoomsService.Controllers.Token.TokenController.GetTokenAsync (RoomsService)" in 0.3782ms
+2018-11-11 13:04:32Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 2.6733ms 200 text/plain; charset=utf-8
+2018-11-11 13:04:33Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 POST http://localhost:50557/signalr/rooms/negotiate  0
+2018-11-11 13:04:33Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 POST http://localhost:50557/signalr/rooms/negotiate  0
+2018-11-11 13:04:33Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 13:04:33Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 13:04:33Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 13:04:33Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 13:04:33Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 0.7711ms 200 application/json
+2018-11-11 13:04:33Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 0.6903ms 200 application/json
+2018-11-11 13:04:33Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 POST http://localhost:50557/signalr/rooms/negotiate  0
+2018-11-11 13:04:33Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 13:04:33Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 13:04:33Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 2.1842ms 200 application/json
+2018-11-11 13:04:34Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/signalr/rooms?id=vvDB462Tr6OZZBE7nNZTmg  
+2018-11-11 13:04:34Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 13:04:34Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/signalr/rooms?id=kQvI4isJCT9sPWeQes4p-g  
+2018-11-11 13:04:34Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 13:04:34Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 13:04:34Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 13:04:34Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/signalr/rooms?id=9a8jDIyZfYqEXClps_MdPQ  
+2018-11-11 13:04:34Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 13:04:34Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 13:04:34Z [INF] DESKTOP-EFHV749 31132 RoomsService Completed connection handshake. Using HubProtocol '"messagepack"'.
+2018-11-11 13:04:34Z [INF] DESKTOP-EFHV749 31132 RoomsService Completed connection handshake. Using HubProtocol '"messagepack"'.
+2018-11-11 13:04:34Z [INF] DESKTOP-EFHV749 31132 RoomsService Completed connection handshake. Using HubProtocol '"messagepack"'.
+2018-11-11 13:04:34Z [INF] DESKTOP-EFHV749 31132 RoomsService User 'c62aa355-99d8-4d3a-80c0-ed0c3b697ca1' is connected
+2018-11-11 13:04:34Z [INF] DESKTOP-EFHV749 31132 RoomsService User '52f8588a-fe86-4dd8-952d-d236939789e5' is connected
+2018-11-11 13:04:34Z [INF] DESKTOP-EFHV749 31132 RoomsService User 'ec064699-2379-431d-ae32-1b7cd76db0ce' is connected
+2018-11-11 13:04:35Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/api/rooms  
+2018-11-11 13:04:35Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 13:04:35Z [INF] DESKTOP-EFHV749 31132 RoomsService Route matched with "{action = \"GetAllRoomsAsync\", controller = \"Rooms\"}". Executing action "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)"
+2018-11-11 13:04:35Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 13:04:35Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing action method "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)" - Validation state: Valid
+2018-11-11 13:04:35Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action method "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 39.0795ms.
+2018-11-11 13:04:35Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[RoomsService.Controllers.Rooms.RoomShortDto, RoomsService, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'.
+2018-11-11 13:04:35Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)" in 39.4992ms
+2018-11-11 13:04:35Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 41.2071ms 200 application/json; charset=utf-8
+2018-11-11 13:04:38Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/api/rooms  
+2018-11-11 13:04:38Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 13:04:38Z [INF] DESKTOP-EFHV749 31132 RoomsService Route matched with "{action = \"GetAllRoomsAsync\", controller = \"Rooms\"}". Executing action "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)"
+2018-11-11 13:04:38Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 13:04:38Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing action method "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)" - Validation state: Valid
+2018-11-11 13:04:38Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action method "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 30.5315ms.
+2018-11-11 13:04:38Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[RoomsService.Controllers.Rooms.RoomShortDto, RoomsService, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'.
+2018-11-11 13:04:38Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)" in 31.665ms
+2018-11-11 13:04:38Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 33.0011ms 200 application/json; charset=utf-8
+2018-11-11 13:04:41Z [INF] DESKTOP-EFHV749 31132 RoomsService Request starting HTTP/1.1 GET http://localhost:50557/api/rooms  
+2018-11-11 13:04:41Z [INF] DESKTOP-EFHV749 31132 RoomsService Successfully validated the token.
+2018-11-11 13:04:41Z [INF] DESKTOP-EFHV749 31132 RoomsService Route matched with "{action = \"GetAllRoomsAsync\", controller = \"Rooms\"}". Executing action "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)"
+2018-11-11 13:04:41Z [INF] DESKTOP-EFHV749 31132 RoomsService Authorization was successful.
+2018-11-11 13:04:41Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing action method "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)" - Validation state: Valid
+2018-11-11 13:04:41Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action method "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 32.0822ms.
+2018-11-11 13:04:41Z [INF] DESKTOP-EFHV749 31132 RoomsService Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[RoomsService.Controllers.Rooms.RoomShortDto, RoomsService, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'.
+2018-11-11 13:04:41Z [INF] DESKTOP-EFHV749 31132 RoomsService Executed action "RoomsService.Controllers.Rooms.RoomsController.GetAllRoomsAsync (RoomsService)" in 33.8856ms
+2018-11-11 13:04:41Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 35.8992ms 200 application/json; charset=utf-8
+2018-11-11 13:15:12Z [INF] DESKTOP-EFHV749 31132 RoomsService User '52f8588a-fe86-4dd8-952d-d236939789e5' is disconnected
+2018-11-11 13:15:12Z [INF] DESKTOP-EFHV749 31132 RoomsService Request finished in 638879.0449ms 101 
