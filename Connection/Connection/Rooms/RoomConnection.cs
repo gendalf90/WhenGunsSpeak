@@ -63,7 +63,6 @@ namespace Connection.Rooms
                                                           {
                                                               options.AccessTokenProvider = () => Task.FromResult(roomOptions.Value.Token);
                                                           })
-                                                          .AddMessagePackProtocol()
                                                           .Build();
         }
 
