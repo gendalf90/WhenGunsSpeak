@@ -39,7 +39,7 @@ namespace Messages
             });
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             RunAllHandlers();
         }

@@ -126,7 +126,7 @@ namespace Menu.Multiplayer
                 return;
             }
 
-            if(ItemIsAlreadySelected)
+            if(IsItemAlreadySelected)
             {
                 return;
             }
@@ -137,7 +137,7 @@ namespace Menu.Multiplayer
 
         private bool IsThereSelectedItem => currentSelectedItem != null;
 
-        private bool ItemIsAlreadySelected => selectedItem != null && currentSelectedItem.OwnerId == selectedItem.OwnerId;
+        private bool IsItemAlreadySelected => selectedItem != null && currentSelectedItem.OwnerId == selectedItem.OwnerId;
 
         private void SetSelectedItem()
         {
@@ -146,7 +146,7 @@ namespace Menu.Multiplayer
 
         private void SendSelectedItemEvent()
         {
-            observable.Publish(new RoomIsSelectedEvent(selectedItem.OwnerId));
+            observable.Publish(new RoomIsSelectedEvent(currentSelectedItem.OwnerId));
         }
 
         private void UpdateSelectedItem()

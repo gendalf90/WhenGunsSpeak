@@ -2,10 +2,8 @@
 using Connection;
 using Messages;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using Utils;
 
 namespace Server
 {
@@ -13,17 +11,8 @@ namespace Server
     {
         private Observable observable;
         private Parameters parameters;
-        private volatile IRoomConnection roomConnection;
-        private volatile bool hasConnected;
-        private ThreadLocker threadLocker;
-        private List<RoomShortData> allRoomsBuffer;
-        private volatile bool isNewRoomHasStarted;
 
-        public RoomConnection()
-        {
-            threadLocker = new ThreadLocker();
-            allRoomsBuffer = new List<RoomShortData>();
-        }
+        private IRoomConnection roomConnection;
 
         private void Awake()
         {
@@ -55,82 +44,37 @@ namespace Server
             observable.Unsubscribe<StartRoomCommand>(StartRoomHandler);
         }
 
-        public void Connect(StartRoomConnectionCommand command)
+        private async void Connect(StartRoomConnectionCommand command)
         {
-            new Bootstrap().StartRoomConnectionAsync(new RoomConnectionOptions
+            roomConnection = await new Bootstrap().StartRoomConnectionAsync(new RoomConnectionOptions
             {
                 RoomsAddress = new Uri(parameters.GetLocalOrDefault<string>("RoomsServiceAddress"))
-            }).ContinueWith(result =>
-            {
-                roomConnection = result.Result;
-                hasConnected = true;
             });
+
+            observable.Publish(new OnConnectEvent());
         }
 
-        private void Update()
+        private async void StartRoomsUpdating(StartRoomsUpdatingCommand command)
         {
-            SendConnectEventIfHasConnected();
-            SendFinishRoomsUpdatingEventIfAny();
-            SendIfNewRoomHasStarted();
-        }
-
-        private void SendConnectEventIfHasConnected()
-        {
-            if(!hasConnected)
+            if(roomConnection == null)
             {
                 return;
             }
 
-            observable.Publish(new OnConnectEvent());
-            hasConnected = false;
+            var rooms = await roomConnection.GetAllRoomsAsync();
+            var roomsShortData = rooms.Select(room => new RoomShortData(room.OwnerId, room.Header));
+            observable.Publish(new OnAllRoomsUpdatedEvent(roomsShortData));
         }
 
-        private void SendFinishRoomsUpdatingEventIfAny()
+        private async void StartRoomHandler(StartRoomCommand command)
         {
-            threadLocker.Do(() =>
+            if(roomConnection == null)
             {
-                if(!allRoomsBuffer.Any())
-                {
-                    return;
-                }
-
-                observable.Publish(new OnAllRoomsUpdatedEvent(allRoomsBuffer));
-                allRoomsBuffer.Clear();
-            });
-        }
-
-        private void SendIfNewRoomHasStarted()
-        {
-            if(isNewRoomHasStarted)
-            {
-                observable.Publish(new OnNewRoomHasStartedEvent());
-                isNewRoomHasStarted = false;
+                return;
             }
-        }
 
-        private void StartRoomsUpdating(StartRoomsUpdatingCommand command)
-        {
-            roomConnection?.GetAllRoomsAsync().ContinueWith(data =>
-            {
-                FillRoomsBuffer(data.Result);
-            });
-        }
-
-        private void FillRoomsBuffer(IEnumerable<RoomData> allRooms)
-        {
-            threadLocker.Do(() =>
-            {
-                allRoomsBuffer.Clear();
-                allRoomsBuffer.AddRange(allRooms.Select(room => new RoomShortData(room.OwnerId, room.Header)));
-            });
-        }
-
-        private void StartRoomHandler(StartRoomCommand command)
-        {
-            roomConnection?.CreateMyRoomAsync(command.Header).ContinueWith(data =>
-            {
-                isNewRoomHasStarted = true;
-            });
+            await roomConnection.CreateMyRoomAsync(command.Header);
+            observable.Publish(new OnNewRoomHasStartedEvent());
         }
 
         private void OnDestroy()
