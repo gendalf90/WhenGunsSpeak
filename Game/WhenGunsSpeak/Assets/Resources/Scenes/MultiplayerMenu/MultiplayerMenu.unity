@@ -310,6 +310,7 @@ GameObject:
   - component: {fileID: 181262557}
   - component: {fileID: 181262556}
   - component: {fileID: 181262555}
+  - component: {fileID: 181262558}
   m_Layer: 0
   m_Name: Server
   m_TagString: Untagged
@@ -351,6 +352,57 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &181262558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 181262554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8ece1809914a2e4f9b101b8ae884deb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &328704348
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 328704350}
+  - component: {fileID: 328704349}
+  m_Layer: 0
+  m_Name: Parameters
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &328704349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 328704348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9594e0a48aaf2e4e8dfd17b987329ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &328704350
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 328704348}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 529.4868, y: 291.4583, z: -2.5559275}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &376385542
 GameObject:
@@ -1586,7 +1638,7 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1431724045}
   m_OnClick:
     m_PersistentCalls:
@@ -1646,7 +1698,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1431724042}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b436e28fb68916b4981696f5959d41ca, type: 3}
+  m_Script: {fileID: 11500000, guid: 4b4b50a27ba551245b10fa78dc27fbf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1569590633

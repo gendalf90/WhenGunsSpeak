@@ -17,6 +17,9 @@ namespace Menu.Multiplayer
         private Observable observable;
         private EventTimer refreshAllRoomsTimer;
 
+        private RoomItem selectedItem;
+        private RoomItem currentSelectedItem;
+
         public RoomsList()
         {
             refreshAllRoomsTimer = new EventTimer();
@@ -48,10 +51,10 @@ namespace Menu.Multiplayer
 
         private void SubscribeAll()
         {
-            observable.Subscribe<OnAllRoomsUpdatedEvent>(RefreshAll);
+            observable.Subscribe<OnAllRoomsUpdatedEvent>(RefreshAllHandler);
         }
 
-        private void RefreshAll(OnAllRoomsUpdatedEvent e)
+        private void RefreshAllHandler(OnAllRoomsUpdatedEvent e)
         {
             CreateNewItems(e.AllRooms);
             RemoveOldItems(e.AllRooms);
@@ -104,12 +107,76 @@ namespace Menu.Multiplayer
 
         private void Update()
         {
+            UpdateTimer();
+            SendSelectedItemEventIfAny();
+            SendAllItemsAreUnselectedIfSo();
+        }
+
+        private void UpdateTimer()
+        {
             refreshAllRoomsTimer.Update();
         }
 
-        public RoomItem GetSelectedItem()
+        private void SendSelectedItemEventIfAny()
         {
-            return GetComponentsInChildren<RoomItem>().FirstOrDefault(item => item.IsSelected);
+            SetSelectedItem();
+
+            if(!IsThereSelectedItem)
+            {
+                return;
+            }
+
+            if(ItemIsAlreadySelected)
+            {
+                return;
+            }
+
+            SendSelectedItemEvent();
+            UpdateSelectedItem();
+        }
+
+        private bool IsThereSelectedItem => currentSelectedItem != null;
+
+        private bool ItemIsAlreadySelected => selectedItem != null && currentSelectedItem.OwnerId == selectedItem.OwnerId;
+
+        private void SetSelectedItem()
+        {
+            currentSelectedItem = GetComponentsInChildren<RoomItem>().FirstOrDefault(item => item.IsSelected);
+        }
+
+        private void SendSelectedItemEvent()
+        {
+            observable.Publish(new RoomIsSelectedEvent(selectedItem.OwnerId));
+        }
+
+        private void UpdateSelectedItem()
+        {
+            selectedItem = currentSelectedItem;
+        }
+
+        private void SendAllItemsAreUnselectedIfSo()
+        {
+            SetSelectedItem();
+
+            if(IsThereSelectedItem)
+            {
+                return;
+            }
+
+            if(ThereWasNoSelectedItems)
+            {
+                return;
+            }
+
+            SendAllItemsAreUnselectedEvent();
+            UpdateSelectedItem();
+        }
+
+        private bool ThereWasNoSelectedItems => selectedItem == null;
+
+        private void SendAllItemsAreUnselectedEvent()
+        {
+            observable.Publish(new AllRoomsAreUnselectedEvent());
         }
     }
 }

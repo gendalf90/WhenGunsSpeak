@@ -44,7 +44,7 @@ namespace Server
         {
             observable.Subscribe<OnConnectionEvent>(OnClientConnect);
             observable.Subscribe<OnDisconnectionEvent>(OnClientDisconnect);
-            observable.Subscribe<RegisterRoomCommand>(RegisterRoom);
+            //observable.Subscribe<RegisterRoomCommand>(RegisterRoom);
             observable.Subscribe<OnSendEvent>(ReceiveFromClient);
             observable.Subscribe<SendToClientsCommand>(SendToClients);
             observable.Subscribe<StopCommand>(Stop);
@@ -54,7 +54,7 @@ namespace Server
         {
             observable.Unsubscribe<OnConnectionEvent>(OnClientConnect);
             observable.Unsubscribe<OnDisconnectionEvent>(OnClientDisconnect);
-            observable.Unsubscribe<RegisterRoomCommand>(RegisterRoom);
+            //observable.Unsubscribe<RegisterRoomCommand>(RegisterRoom);
             observable.Unsubscribe<OnSendEvent>(ReceiveFromClient);
             observable.Unsubscribe<SendToClientsCommand>(SendToClients);
             observable.Unsubscribe<StopCommand>(Stop);
@@ -80,10 +80,10 @@ namespace Server
             
         }
 
-        private void RegisterRoom(RegisterRoomCommand command)
-        {
+        //private void RegisterRoom(RegisterRoomCommand command)
+        //{
             
-        }
+        //}
 
         private void Stop(StopCommand command)
         {

@@ -1,5 +1,4 @@
-﻿using Connection;
-using System;
+﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,7 +12,6 @@ namespace Menu.Multiplayer
         private Toggle toggle;
         private Text text;
         private Color baseColor;
-        private RoomData data;
 
         private void Awake()
         {

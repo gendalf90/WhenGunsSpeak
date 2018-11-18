@@ -1,20 +1,20 @@
-﻿using Messages;
+﻿using Configuration;
+using Messages;
 using Server;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Utils;
 
 namespace Menu.Multiplayer
 {
     public class MultiplayerMenuScript : MonoBehaviour
     {
-        private RoomsList rooms;
         private Observable observable;
+        private Parameters parameters;
 
         private void Awake()
         {
             observable = FindObjectOfType<Observable>();
-            rooms = GetComponentInChildren<RoomsList>();
+            parameters = FindObjectOfType<Parameters>();
         }
 
         private void Start()
@@ -29,19 +29,7 @@ namespace Menu.Multiplayer
 
         public void Create()
         {
-            SceneManager.LoadScene("ArenaOne", LoadSceneMode.Single);
-        }
-
-        public void Connect()
-        {
-            var selectedItem = rooms.GetSelectedItem();
-
-            if(selectedItem == null)
-            {
-                return;
-            }
-
-            GlobalStorage.Parameters["RoomOwnerID"] = selectedItem.OwnerId.ToString();
+            parameters.ClearLocal("RoomOwnerId");
             SceneManager.LoadScene("ArenaOne", LoadSceneMode.Single);
         }
     }

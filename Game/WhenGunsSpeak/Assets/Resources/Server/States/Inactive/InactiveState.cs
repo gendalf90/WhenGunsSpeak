@@ -27,14 +27,14 @@ namespace Server
 
         private void SubscribeAll()
         {
-            observable.Subscribe<StartAsServerCommand>(OnServerStartEventHandler);
+            //observable.Subscribe<StartAsServerCommand>(OnServerStartEventHandler);
             observable.Subscribe<StartAsClientCommand>(OnClientStartEventHandler);
             observable.Subscribe<StartRoomsListenCommand>(OnRoomsListenStartEventHandler);
         }
 
         private void UnsubscribeAll()
         {
-            observable.Unsubscribe<StartAsServerCommand>(OnServerStartEventHandler);
+            //observable.Unsubscribe<StartAsServerCommand>(OnServerStartEventHandler);
             observable.Unsubscribe<StartAsClientCommand>(OnClientStartEventHandler);
             observable.Unsubscribe<StartRoomsListenCommand>(OnRoomsListenStartEventHandler);
         }
@@ -53,12 +53,12 @@ namespace Server
             Disable();
         }
 
-        private void OnServerStartEventHandler(StartAsServerCommand command)
-        {
-            StartUdp();
-            StartNextStateAsServer();
-            Disable();
-        }
+        //private void OnServerStartEventHandler(StartAsServerCommand command)
+        //{
+        //    StartUdp();
+        //    StartNextStateAsServer();
+        //    Disable();
+        //}
 
         private void StartNextStateAsRoomsListener()
         {

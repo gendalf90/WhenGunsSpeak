@@ -1,25 +1,11 @@
-﻿using Connection;
-using Messages;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Messages;
 using UnityEngine;
-using Utils;
 
 namespace Server
 {
     class ConnectedState : MonoBehaviour
     {
         private Observable observable;
-        private IRoomConnection roomConnection;
-
-        private ThreadLocker threadLocker;
-        private OnAllRoomsUpdatedEvent allRoomsUpdatedEvent;
-        private OnRoomUpdatedEvent roomUpdatedEvent;
-
-        public ConnectedState()
-        {
-            threadLocker = new ThreadLocker();
-        }
 
         private void Awake()
         {
@@ -36,88 +22,40 @@ namespace Server
             UnsubscribeAll();
         }
 
-        private void Update()
-        {
-            SendAllRoomsUpdatedEvent();
-            SendRoomUpdatedEvent();
-        }
-
-        private void SendAllRoomsUpdatedEvent()
-        {
-            threadLocker.Do(() =>
-            {
-                if(allRoomsUpdatedEvent == null)
-                {
-                    return;
-                }
-
-                observable.Publish(allRoomsUpdatedEvent);
-                allRoomsUpdatedEvent = null;
-            });
-        }
-
-        private void SendRoomUpdatedEvent()
-        {
-            threadLocker.Do(() =>
-            {
-                if (roomUpdatedEvent == null)
-                {
-                    return;
-                }
-
-                observable.Publish(roomUpdatedEvent);
-                roomUpdatedEvent = null;
-            });
-        }
-
         private void SubscribeAll()
         {
-            observable.Subscribe<RefreshAllRoomsCommand>(RefreshAllRooms);
-            observable.Subscribe<RefreshRoomCommand>(RefreshRoom);
+            observable.Subscribe<RefreshAllRoomsCommand>(RefreshAllRoomsHandler);
+            observable.Subscribe<StartNewRoomCommand>(StartNewRoomHandler);
+            observable.Subscribe<OnNewRoomHasStartedEvent>(OnNewRoomHasStartedHandler);
         }
 
         private void UnsubscribeAll()
         {
-            observable.Unsubscribe<RefreshAllRoomsCommand>(RefreshAllRooms);
-            observable.Unsubscribe<RefreshRoomCommand>(RefreshRoom);
+            observable.Unsubscribe<RefreshAllRoomsCommand>(RefreshAllRoomsHandler);
+            observable.Unsubscribe<StartNewRoomCommand>(StartNewRoomHandler);
+            observable.Unsubscribe<OnNewRoomHasStartedEvent>(OnNewRoomHasStartedHandler);
         }
 
-        private void RefreshAllRooms(RefreshAllRoomsCommand command)
+        private void RefreshAllRoomsHandler(RefreshAllRoomsCommand command)
         {
-            roomConnection.GetAllRoomsAsync().ContinueWith(data =>
-            {
-                CreateRoomsUpdatedEvent(data.Result);
-            });
+            observable.Publish(new StartRoomsUpdatingCommand());
         }
 
-        private void CreateRoomsUpdatedEvent(IEnumerable<RoomData> allRooms)
+        private void StartNewRoomHandler(StartNewRoomCommand command)
         {
-            threadLocker.Do(() =>
-            {
-                var allRoomsData = allRooms.Select(room => new RoomShortData(room.OwnerId, room.Header));
-                allRoomsUpdatedEvent = new OnAllRoomsUpdatedEvent(allRoomsData);
-            });
+            observable.Publish(new StartRoomCommand(command.Header));
         }
 
-        private void RefreshRoom(RefreshRoomCommand command)
+        private void OnNewRoomHasStartedHandler(OnNewRoomHasStartedEvent e)
         {
-            roomConnection.GetRoomDescriptionAsync(command.OwnerId).ContinueWith(data =>
-            {
-                CreateRoomUpdatedEvent(data.Result);
-            });
+            StartRoomOwnerState();
+            Disable();
         }
 
-        private void CreateRoomUpdatedEvent(RoomDescriptionData data)
+        private void StartRoomOwnerState()
         {
-            threadLocker.Do(() =>
-            {
-                roomUpdatedEvent = new OnRoomUpdatedEvent(data.OwnerId, data.Header, data.Description);
-            });
-        }
-
-        public void SetRoomConnection(IRoomConnection connection)
-        {
-            roomConnection = connection;
+            var state = GetComponent<RoomOwnerState>();
+            state.enabled = true;
         }
 
         private void Disable()

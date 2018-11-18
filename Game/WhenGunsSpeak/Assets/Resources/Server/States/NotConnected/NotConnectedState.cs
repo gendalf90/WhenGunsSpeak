@@ -1,6 +1,4 @@
-﻿using Connection;
-using Messages;
-using System;
+﻿using Messages;
 using UnityEngine;
 
 namespace Server
@@ -8,7 +6,6 @@ namespace Server
     class NotConnectedState : MonoBehaviour
     {
         private Observable observable;
-        private volatile IRoomConnection roomConnection;
 
         private void Awake()
         {
@@ -28,54 +25,31 @@ namespace Server
         private void SubscribeAll()
         {
             observable.Subscribe<ConnectCommand>(ConnectHandler);
+            observable.Subscribe<OnConnectEvent>(ConnectionIsReadyHandler);
         }
 
         private void UnsubscribeAll()
         {
             observable.Unsubscribe<ConnectCommand>(ConnectHandler);
+            observable.Unsubscribe<OnConnectEvent>(ConnectionIsReadyHandler);
         }
 
         private void ConnectHandler(ConnectCommand command)
         {
-            StartConnection();
+            observable.Publish(new StartRoomConnectionCommand());
         }
 
-        private void Update()
+        private void ConnectionIsReadyHandler(OnConnectEvent e)
         {
-            if(!ConnectionReady)
-            {
-                return;
-            }
-
-            SendConnectEvent();
             StartConnectedState();
             Disable();
-        }
-
-        private void StartConnection()
-        {
-            new Bootstrap().StartRoomConnectionAsync(new RoomConnectionOptions
-            {
-                RoomsAddress = new Uri("http://localhost:50557")
-            }).ContinueWith(result =>
-            {
-                roomConnection = result.Result;
-            });
         }
 
         private void StartConnectedState()
         {
             var state = GetComponent<ConnectedState>();
-            state.SetRoomConnection(roomConnection);
             state.enabled = true;
         }
-
-        private void SendConnectEvent()
-        {
-            observable.Publish(new OnConnectEvent());
-        }
-
-        private bool ConnectionReady => roomConnection != null;
 
         private void Disable()
         {
