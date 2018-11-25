@@ -33,7 +33,7 @@ namespace Server
         {
             observable.Subscribe<OnDisconnectionEvent>(OnDisconnect);
             observable.Subscribe<OnSendEvent>(ReceiveFromServer);
-            observable.Subscribe<SendToServerCommand>(SendToServer);
+            //observable.Subscribe<SendToServerCommand>(SendToServer);
             observable.Subscribe<StopCommand>(Stop);
         }
 
@@ -41,7 +41,7 @@ namespace Server
         {
             observable.Unsubscribe<OnDisconnectionEvent>(OnDisconnect);
             observable.Unsubscribe<OnSendEvent>(ReceiveFromServer);
-            observable.Unsubscribe<SendToServerCommand>(SendToServer);
+            //observable.Unsubscribe<SendToServerCommand>(SendToServer);
             observable.Unsubscribe<StopCommand>(Stop);
         }
 
@@ -73,10 +73,10 @@ namespace Server
             observable.Publish(new OnReceiveFromServerEvent(e.Data));
         }
 
-        private void SendToServer(SendToServerCommand command)
-        {
-            udp.Send(new SendDecorator(command.Data, CurrentSession, ServerSession));
-        }
+        //private void SendToServer(SendToServerCommand command)
+        //{
+        //    udp.Send(new SendDecorator(command.Data, CurrentSession, ServerSession));
+        //}
 
         private void Stop(StopCommand command)
         {

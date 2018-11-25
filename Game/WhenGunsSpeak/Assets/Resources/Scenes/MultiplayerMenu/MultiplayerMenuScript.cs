@@ -19,7 +19,7 @@ namespace Menu.Multiplayer
 
         private void Start()
         {
-            observable.Publish(new ConnectCommand());
+            observable.Publish(new ConnectToRoomsServiceCommand());
         }
 
         public void MainMenu()

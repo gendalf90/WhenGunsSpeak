@@ -26,14 +26,14 @@ namespace Server
         {
             observable.Subscribe<RefreshAllRoomsCommand>(RefreshAllRoomsHandler);
             observable.Subscribe<StartNewRoomCommand>(StartNewRoomHandler);
-            observable.Subscribe<OnNewRoomHasStartedEvent>(OnNewRoomHasStartedHandler);
+            observable.Subscribe<OnNewRoomStartedEvent>(OnNewRoomHasStartedHandler);
         }
 
         private void UnsubscribeAll()
         {
             observable.Unsubscribe<RefreshAllRoomsCommand>(RefreshAllRoomsHandler);
             observable.Unsubscribe<StartNewRoomCommand>(StartNewRoomHandler);
-            observable.Unsubscribe<OnNewRoomHasStartedEvent>(OnNewRoomHasStartedHandler);
+            observable.Unsubscribe<OnNewRoomStartedEvent>(OnNewRoomHasStartedHandler);
         }
 
         private void RefreshAllRoomsHandler(RefreshAllRoomsCommand command)
@@ -46,7 +46,7 @@ namespace Server
             observable.Publish(new StartRoomCommand(command.Header));
         }
 
-        private void OnNewRoomHasStartedHandler(OnNewRoomHasStartedEvent e)
+        private void OnNewRoomHasStartedHandler(OnNewRoomStartedEvent e)
         {
             StartRoomOwnerState();
             Disable();

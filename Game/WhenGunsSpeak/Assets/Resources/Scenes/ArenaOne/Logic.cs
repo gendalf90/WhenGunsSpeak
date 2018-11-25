@@ -15,16 +15,16 @@ namespace Rooms.ArenaOne
         {
             observable = FindObjectOfType<Observable>();
             parameters = FindObjectOfType<Parameters>();
-            observable.Subscribe<OnConnectEvent>(ConnectionIsReadyHandler);
-            observable.Subscribe<OnNewRoomHasStartedEvent>(OnNewRoomHasStartedHandler);
+            observable.Subscribe<OnConnectedToRoomsServiceEvent>(ConnectionIsReadyHandler);
+            observable.Subscribe<OnNewRoomStartedEvent>(OnNewRoomHasStartedHandler);
         }
 
         private void Start()
         {
-            observable.Publish(new ConnectCommand());
+            observable.Publish(new ConnectToRoomsServiceCommand());
         }
 
-        private void ConnectionIsReadyHandler(OnConnectEvent e)
+        private void ConnectionIsReadyHandler(OnConnectedToRoomsServiceEvent e)
         {
             var myLogin = parameters.GetLocalOrDefault<string>("Login");
             var ownerId = parameters.GetLocalOrDefault<Guid?>("RoomOwnerId");
@@ -39,7 +39,7 @@ namespace Rooms.ArenaOne
             }
         }
 
-        private void OnNewRoomHasStartedHandler(OnNewRoomHasStartedEvent e)
+        private void OnNewRoomHasStartedHandler(OnNewRoomStartedEvent e)
         {
             
         }

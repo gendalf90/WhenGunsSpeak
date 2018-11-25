@@ -24,22 +24,22 @@ namespace Server
 
         private void SubscribeAll()
         {
-            observable.Subscribe<ConnectCommand>(ConnectHandler);
-            observable.Subscribe<OnConnectEvent>(ConnectionIsReadyHandler);
+            observable.Subscribe<ConnectToRoomsServiceCommand>(ConnectHandler);
+            observable.Subscribe<OnConnectedToRoomsServiceEvent>(ConnectionIsReadyHandler);
         }
 
         private void UnsubscribeAll()
         {
-            observable.Unsubscribe<ConnectCommand>(ConnectHandler);
-            observable.Unsubscribe<OnConnectEvent>(ConnectionIsReadyHandler);
+            observable.Unsubscribe<ConnectToRoomsServiceCommand>(ConnectHandler);
+            observable.Unsubscribe<OnConnectedToRoomsServiceEvent>(ConnectionIsReadyHandler);
         }
 
-        private void ConnectHandler(ConnectCommand command)
+        private void ConnectHandler(ConnectToRoomsServiceCommand command)
         {
             observable.Publish(new StartRoomConnectionCommand());
         }
 
-        private void ConnectionIsReadyHandler(OnConnectEvent e)
+        private void ConnectionIsReadyHandler(OnConnectedToRoomsServiceEvent e)
         {
             StartConnectedState();
             Disable();
