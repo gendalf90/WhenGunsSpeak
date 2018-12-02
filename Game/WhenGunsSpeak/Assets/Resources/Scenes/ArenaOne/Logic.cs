@@ -16,7 +16,7 @@ namespace Rooms.ArenaOne
             observable = FindObjectOfType<Observable>();
             parameters = FindObjectOfType<Parameters>();
             observable.Subscribe<OnConnectedToRoomsServiceEvent>(ConnectionIsReadyHandler);
-            observable.Subscribe<OnNewRoomStartedEvent>(OnNewRoomHasStartedHandler);
+            observable.Subscribe<NewRoomIsStartedEvent>(OnNewRoomHasStartedHandler);
         }
 
         private void Start()
@@ -39,7 +39,7 @@ namespace Rooms.ArenaOne
             }
         }
 
-        private void OnNewRoomHasStartedHandler(OnNewRoomStartedEvent e)
+        private void OnNewRoomHasStartedHandler(NewRoomIsStartedEvent e)
         {
             
         }

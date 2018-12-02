@@ -51,10 +51,10 @@ namespace Menu.Multiplayer
 
         private void SubscribeAll()
         {
-            observable.Subscribe<OnAllRoomsUpdatedEvent>(RefreshAllHandler);
+            observable.Subscribe<AllRoomsAreUpdatedEvent>(RefreshAllHandler);
         }
 
-        private void RefreshAllHandler(OnAllRoomsUpdatedEvent e)
+        private void RefreshAllHandler(AllRoomsAreUpdatedEvent e)
         {
             CreateNewItems(e.AllRooms);
             RemoveOldItems(e.AllRooms);

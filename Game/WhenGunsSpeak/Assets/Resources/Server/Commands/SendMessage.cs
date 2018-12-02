@@ -2,11 +2,11 @@
 {
     public class SendMessageCommand
     {
-        public SendMessageCommand(string json)
+        public SendMessageCommand(byte[] data)
         {
-            Json = json;
+            Data = data;
         }
 
-        public string Json { get; private set; }
+        public byte[] Data { get; private set; }
     }
 }

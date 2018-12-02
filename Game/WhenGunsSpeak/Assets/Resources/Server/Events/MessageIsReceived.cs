@@ -2,11 +2,11 @@
 {
     public class MessageIsReceivedEvent
     {
-        public MessageIsReceivedEvent(string json)
+        public MessageIsReceivedEvent(byte[] data)
         {
-            Json = json;
+            Data = data;
         }
 
-        public string Json { get; private set; }
+        public byte[] Data { get; private set; }
     }
 }
