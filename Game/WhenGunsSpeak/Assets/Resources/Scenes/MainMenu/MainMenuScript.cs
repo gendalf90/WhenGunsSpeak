@@ -1,4 +1,5 @@
 ﻿using Configuration;
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,7 +14,7 @@ namespace Menu.Main
             parameters = FindObjectOfType<Parameters>();
 
             parameters.SetLocal("Login", "test_login");
-            parameters.SetLocal("RoomsServiceAddress", "http://localhost:50557");
+            parameters.SetLocal("RoomsServiceAddress", new Uri("http://localhost:50557"));
         }
 
         public void MultiplayerMenu()

@@ -32,8 +32,8 @@ namespace Utils
                 return;
             }
 
-            Action?.Invoke();
             startTimeInSeconds = Time.realtimeSinceStartup;
+            Action?.Invoke();
         }
 
         public void Stop()

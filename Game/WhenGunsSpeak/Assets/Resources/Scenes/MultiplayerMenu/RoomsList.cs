@@ -30,7 +30,11 @@ namespace Menu.Multiplayer
             observable = FindObjectOfType<Observable>();
             itemPrefab = Resources.Load<GameObject>("Scenes/MultiplayerMenu/RoomItem");
             toggleGroup = GetComponent<ToggleGroup>();
+        }
 
+        private void OnEnable()
+        {
+            observable.Subscribe<AllRoomsAreUpdatedEvent>(RefreshAllHandler);
             refreshAllRoomsTimer.Action += SendRefreshAllRoomsCommand;
         }
 
@@ -42,16 +46,6 @@ namespace Menu.Multiplayer
         private void SendRefreshAllRoomsCommand()
         {
             observable.Publish(new RefreshAllRoomsCommand());
-        }
-
-        private void OnEnable()
-        {
-            SubscribeAll();
-        }
-
-        private void SubscribeAll()
-        {
-            observable.Subscribe<AllRoomsAreUpdatedEvent>(RefreshAllHandler);
         }
 
         private void RefreshAllHandler(AllRoomsAreUpdatedEvent e)

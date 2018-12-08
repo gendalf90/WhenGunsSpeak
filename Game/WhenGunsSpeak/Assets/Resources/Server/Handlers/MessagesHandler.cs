@@ -17,6 +17,8 @@ namespace Server
         private IDictionary<Guid, IDisposable> receiveMessageUnsubscribers;
         private IDictionary<Guid, IMessageConnection> messageConnections;
         private IDictionary<Guid, IPEndPoint> sendingAddresses;
+        private StartMessagingConnectionHandler messagingConnectionHandler;
+        private StartRoomConnectionHandler roomsConnectionHandler;
 
         public MessagesHandler()
         {
@@ -27,17 +29,28 @@ namespace Server
 
         private void Awake()
         {
-            observable = FindObjectOfType<Observable>();
-        }
-
-        private void Start()
-        {
             synchronization = SynchronizationContext.Current;
+            observable = FindObjectOfType<Observable>();
+            messagingConnectionHandler = GetComponent<StartMessagingConnectionHandler>();
+            roomsConnectionHandler = GetComponent<StartRoomConnectionHandler>();
         }
 
-        public void Start(IRoomConnection connection)
+        private void OnEnable()
         {
-            connection.Subscribe<UserIPData>(next: UserIPDataHandler);
+            roomsConnectionHandler.OnConnected += ConnectionHandler_OnConnected;
+            messagingConnectionHandler.OnStarted += MessagingConnectionHandler_OnStarted;
+        }
+
+        private void MessagingConnectionHandler_OnStarted(object sender, StartMessagingConnectionEventArgs e)
+        {
+            sendingAddresses.Add(e.UserId, null);
+            receiveMessageUnsubscribers.Add(e.UserId, e.MessageConnection.Subscribe<MessageData>(next: MessageDataHandle));
+            messageConnections.Add(e.UserId, e.MessageConnection);
+        }
+
+        private void ConnectionHandler_OnConnected(object sender, StartRoomConnectionEventArgs e)
+        {
+            e.RoomConnection.Subscribe<UserIPData>(next: UserIPDataHandler);
             observable.Subscribe<SendMessageCommand>(SendMessageHandle);
         }
 
@@ -68,13 +81,6 @@ namespace Server
             }
         }
 
-        public void AddConnection(IMessageConnection connection, Guid userId)
-        {
-            sendingAddresses.Add(userId, null);
-            receiveMessageUnsubscribers.Add(userId, connection.Subscribe<MessageData>(next: MessageDataHandle));
-            messageConnections.Add(userId, connection);
-        }
-
         private void MessageDataHandle(MessageData data)
         {
             synchronization.Post(state =>
@@ -83,17 +89,17 @@ namespace Server
             }, data);
         }
 
-        public void RemoveConnection(Guid userId)
-        {
-            if(!sendingAddresses.Remove(userId))
-            {
-                return;
-            }
+        //public void RemoveConnection(Guid userId)
+        //{
+        //    if(!sendingAddresses.Remove(userId))
+        //    {
+        //        return;
+        //    }
 
-            var receiveMessageUnsubscriber = receiveMessageUnsubscribers[userId];
-            receiveMessageUnsubscriber.Dispose();
-            receiveMessageUnsubscribers.Remove(userId);
-            messageConnections.Remove(userId);
-        }
+        //    var receiveMessageUnsubscriber = receiveMessageUnsubscribers[userId];
+        //    receiveMessageUnsubscriber.Dispose();
+        //    receiveMessageUnsubscribers.Remove(userId);
+        //    messageConnections.Remove(userId);
+        //}
     }
 }

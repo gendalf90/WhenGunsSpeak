@@ -11,20 +11,23 @@ namespace Server
         private IRoomConnection roomConnection;
         private Observable observable;
         private SynchronizationContext synchronization;
+        private StartRoomConnectionHandler roomsConnectionHandler;
 
         private void Awake()
         {
-            observable = FindObjectOfType<Observable>();
-        }
-
-        private void Start()
-        {
             synchronization = SynchronizationContext.Current;
+            observable = FindObjectOfType<Observable>();
+            roomsConnectionHandler = GetComponent<StartRoomConnectionHandler>();
         }
 
-        public void Start(IRoomConnection connection)
+        private void OnEnable()
         {
-            roomConnection = connection;
+            roomsConnectionHandler.OnConnected += ConnectionHandler_OnConnected;
+        }
+
+        private void ConnectionHandler_OnConnected(object sender, StartRoomConnectionEventArgs e)
+        {
+            roomConnection = e.RoomConnection;
             roomConnection.Subscribe<RoomJoiningData>(next: UserJoiningHandle);
             observable.Subscribe<JoinUserToRoomCommand>(JoinUserToRoomHandle);
             observable.Subscribe<DenyUserRoomJoiningCommand>(DenyUserRoomJoiningHandle);

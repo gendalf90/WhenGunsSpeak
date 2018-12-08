@@ -10,19 +10,19 @@ namespace Menu.Multiplayer
     class ConnectToRoomButton : MonoBehaviour
     {
         private Button button;
-
         private Parameters parameters;
         private Observable observable;
-
         private Guid selectedRoomOwnerId;
 
         private void Awake()
         {
             button = GetComponent<Button>();
-
             observable = FindObjectOfType<Observable>();
             parameters = FindObjectOfType<Parameters>();
+        }
 
+        private void OnEnable()
+        {
             observable.Subscribe<RoomIsSelectedEvent>(OnRoomIsSelectedHandler);
             observable.Subscribe<AllRoomsAreUnselectedEvent>(OnAllRoomsAreUnselectedHandler);
         }

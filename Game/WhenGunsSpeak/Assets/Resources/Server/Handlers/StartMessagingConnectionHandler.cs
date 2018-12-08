@@ -11,7 +11,7 @@ using Utils;
 
 namespace Server
 {
-    class StartMessagingHandler : MonoBehaviour
+    class StartMessagingConnectionHandler : MonoBehaviour
     {
         private static readonly int SecurityKeyLength = 20;
 
@@ -20,26 +20,20 @@ namespace Server
         private Parameters parameters;
         private SynchronizationContext synchronization;
         private Guid myId;
-        private MyIPHandler myIPHandler;
-        private MessagesHandler messagesHandler;
         private SystemRandom random;
+        private StartRoomConnectionHandler roomsConnectionHandler;
 
-        public StartMessagingHandler()
+        public StartMessagingConnectionHandler()
         {
             random = new SystemRandom();
         }
 
         private void Awake()
         {
+            synchronization = SynchronizationContext.Current;
             observable = FindObjectOfType<Observable>();
             parameters = FindObjectOfType<Parameters>();
-            myIPHandler = GetComponent<MyIPHandler>();
-            messagesHandler = GetComponent<MessagesHandler>();
-        }
-
-        private void Start()
-        {
-            synchronization = SynchronizationContext.Current;
+            roomsConnectionHandler = GetComponent<StartRoomConnectionHandler>();
         }
 
         private async void StartMessaging(StartMessagingCommand command)
@@ -66,12 +60,15 @@ namespace Server
             });
         }
 
-        public void Start(IRoomConnection connection, Guid myId)
+        private void OnEnable()
         {
-            this.myId = myId;
-            roomConnection = connection;
-            myIPHandler.Start(connection);
-            messagesHandler.Start(connection);
+            roomsConnectionHandler.OnConnected += ConnectionHandler_OnConnected;
+        }
+
+        private void ConnectionHandler_OnConnected(object sender, StartRoomConnectionEventArgs e)
+        {
+            myId = e.MyId;
+            roomConnection = e.RoomConnection;
             roomConnection.Subscribe<MessagingStartingData>(next: MessagingStartingHandle);
             roomConnection.Subscribe<MessagingStartedData>(next: MessagingStartedHandle);
             observable.Subscribe<StartMessagingCommand>(StartMessaging);
@@ -84,8 +81,7 @@ namespace Server
                 var securityKey = GenerateSecurityKey();
                 var connection = await CreateConnectionAsync(myId, securityKey);
                 await roomConnection.StartMessagingAsync(value.UserId, securityKey);
-                myIPHandler.AddConnection(connection, value.UserId);
-                messagesHandler.AddConnection(connection, value.UserId);
+                OnStarted?.Invoke(this, new StartMessagingConnectionEventArgs(connection, value.UserId));
             }, value);
         }
 
@@ -94,9 +90,10 @@ namespace Server
             synchronization.Post(async state =>
             {
                 var connection = await CreateConnectionAsync(myId, value.SecurityKey);
-                myIPHandler.AddConnection(connection, value.UserId);
-                messagesHandler.AddConnection(connection, value.UserId);
+                OnStarted?.Invoke(this, new StartMessagingConnectionEventArgs(connection, value.UserId));
             }, value);
         }
+
+        public event EventHandler<StartMessagingConnectionEventArgs> OnStarted;
     }
 }

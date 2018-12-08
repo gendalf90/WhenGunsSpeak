@@ -13,27 +13,17 @@ namespace Server
         private IRoomConnection roomConnection;
         private Observable observable;
         private Parameters parameters;
-        private StartMessagingHandler startMessagingHandler;
-        private UpdateRoomsHandler updateRoomsHandler;
-        private StartNewRoomHandler startNewRoomHandler;
-        private UserRoomJoiningAttemptHandler userJoiningAttemptHandler;
-        private MyRoomJoiningAttemptHandler myRoomJoiningAttemptHandler;
         private SynchronizationContext synchronization;
 
         private void Awake()
         {
+            synchronization = SynchronizationContext.Current;
             observable = FindObjectOfType<Observable>();
             parameters = FindObjectOfType<Parameters>();
-            startMessagingHandler = GetComponent<StartMessagingHandler>();
-            updateRoomsHandler = GetComponent<UpdateRoomsHandler>();
-            startNewRoomHandler = GetComponent<StartNewRoomHandler>();
-            myRoomJoiningAttemptHandler = GetComponent<MyRoomJoiningAttemptHandler>();
-            userJoiningAttemptHandler = GetComponent<UserRoomJoiningAttemptHandler>();
         }
 
-        private void Start()
+        private void OnEnable()
         {
-            synchronization = SynchronizationContext.Current;
             observable.Subscribe<ConnectToRoomsServiceCommand>(StartHandle);
         }
 
@@ -51,13 +41,11 @@ namespace Server
         {
             synchronization.Post(state =>
             {
-                startMessagingHandler.Start(roomConnection, value.Id);
-                updateRoomsHandler.Start(roomConnection);
-                startNewRoomHandler.Start(roomConnection);
-                userJoiningAttemptHandler.Start(roomConnection);
-                myRoomJoiningAttemptHandler.Start(roomConnection);
+                OnConnected?.Invoke(this, new StartRoomConnectionEventArgs(roomConnection, value.Id));
                 observable.Publish(new OnConnectedToRoomsServiceEvent());
             }, value);
         }
+
+        public event EventHandler<StartRoomConnectionEventArgs> OnConnected;
     }
 }

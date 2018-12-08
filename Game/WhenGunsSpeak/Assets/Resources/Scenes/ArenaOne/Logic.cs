@@ -41,7 +41,7 @@ namespace Rooms.ArenaOne
 
         private void OnNewRoomHasStartedHandler(NewRoomIsStartedEvent e)
         {
-            
+            Debug.Log("success");
         }
     }
 }

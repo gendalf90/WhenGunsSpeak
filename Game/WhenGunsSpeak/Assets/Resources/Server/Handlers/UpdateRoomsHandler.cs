@@ -9,15 +9,22 @@ namespace Server
     {
         private IRoomConnection roomConnection;
         private Observable observable;
+        private StartRoomConnectionHandler roomsConnectionHandler;
 
         private void Awake()
         {
             observable = FindObjectOfType<Observable>();
+            roomsConnectionHandler = GetComponent<StartRoomConnectionHandler>();
         }
 
-        public void Start(IRoomConnection connection)
+        private void OnEnable()
         {
-            roomConnection = connection;
+            roomsConnectionHandler.OnConnected += ConnectionHandler_OnConnected;
+        }
+
+        private void ConnectionHandler_OnConnected(object sender, StartRoomConnectionEventArgs e)
+        {
+            roomConnection = e.RoomConnection;
             observable.Subscribe<RefreshAllRoomsCommand>(RefreshAllRoomsHandler);
         }
 
