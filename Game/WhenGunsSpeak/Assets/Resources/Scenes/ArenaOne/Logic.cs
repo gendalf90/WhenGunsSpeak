@@ -15,6 +15,10 @@ namespace Rooms.ArenaOne
         {
             observable = FindObjectOfType<Observable>();
             parameters = FindObjectOfType<Parameters>();
+        }
+
+        private void OnEnable()
+        {
             observable.Subscribe<OnConnectedToRoomsServiceEvent>(ConnectionIsReadyHandler);
             observable.Subscribe<NewRoomIsStartedEvent>(OnNewRoomHasStartedHandler);
         }

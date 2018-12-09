@@ -91,6 +91,7 @@ namespace Server
             {
                 var connection = await CreateConnectionAsync(myId, value.SecurityKey);
                 OnStarted?.Invoke(this, new StartMessagingConnectionEventArgs(connection, value.UserId));
+                observable.Publish(new MessagingIsStartedEvent());
             }, value);
         }
 
