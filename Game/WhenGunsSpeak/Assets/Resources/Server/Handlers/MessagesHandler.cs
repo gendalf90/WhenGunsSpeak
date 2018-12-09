@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading;
+using System.Threading.Tasks;
 using UnityEngine;
 using Utils;
 
@@ -67,18 +68,12 @@ namespace Server
 
         private async void SendMessageHandle(SendMessageCommand command)
         {
-            var sendingInfo = messageConnections.Where(pair => sendingAddresses[pair.Key] != null)
-                                                .Select(pair => new { Connection = pair.Value, Address = sendingAddresses[pair.Key] })
-                                                .ToList();
+            var sendingTasks = messageConnections.Where(pair => sendingAddresses[pair.Key] != null)
+                                                 .Select(pair => new { Connection = pair.Value, Address = sendingAddresses[pair.Key] })
+                                                 .Select(info => info.Connection.SendAsync(new MessageData { Bytes = command.Data, IP = info.Address }))
+                                                 .ToArray();
 
-            foreach(var info in sendingInfo)
-            {
-                await info.Connection.SendAsync(new MessageData
-                {
-                    Bytes = command.Data,
-                    IP = info.Address
-                });
-            }
+            await Task.WhenAll(sendingTasks);
         }
 
         private void MessageDataHandle(MessageData data)
