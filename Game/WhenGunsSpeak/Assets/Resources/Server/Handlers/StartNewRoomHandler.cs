@@ -30,7 +30,7 @@ namespace Server
         private async void StartHandle(StartNewRoomCommand command)
         {
             await roomConnection.CreateMyRoomAsync(command.Header);
-            observable.Publish(new NewRoomIsStartedEvent());
+            observable.Publish(new MyRoomIsStartedEvent());
         }
     }
 }

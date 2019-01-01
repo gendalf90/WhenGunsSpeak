@@ -20,7 +20,7 @@ namespace Rooms.ArenaOne
         private void OnEnable()
         {
             observable.Subscribe<OnConnectedToRoomsServiceEvent>(ConnectionIsReadyHandler);
-            observable.Subscribe<NewRoomIsStartedEvent>(OnNewRoomHasStartedHandler);
+            observable.Subscribe<MyRoomIsStartedEvent>(OnNewRoomHasStartedHandler);
         }
 
         private void Start()
@@ -30,8 +30,8 @@ namespace Rooms.ArenaOne
 
         private void ConnectionIsReadyHandler(OnConnectedToRoomsServiceEvent e)
         {
-            var myLogin = parameters.GetLocalOrDefault<string>("Login");
-            var ownerId = parameters.GetLocalOrDefault<Guid?>("RoomOwnerId");
+            var myLogin = parameters.Get<string>("Login");
+            var ownerId = parameters.Get<Guid?>("RoomOwnerId");
 
             if(ownerId.HasValue)
             {
@@ -43,7 +43,7 @@ namespace Rooms.ArenaOne
             }
         }
 
-        private void OnNewRoomHasStartedHandler(NewRoomIsStartedEvent e)
+        private void OnNewRoomHasStartedHandler(MyRoomIsStartedEvent e)
         {
             Debug.Log("success");
         }

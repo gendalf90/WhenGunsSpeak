@@ -45,7 +45,7 @@ namespace Server
         private void MessagingConnectionHandler_OnStarted(object sender, StartMessagingConnectionEventArgs e)
         {
             sendingAddresses.Add(e.UserId, null);
-            receiveMessageUnsubscribers.Add(e.UserId, e.MessageConnection.Subscribe<MessageData>(next: MessageDataHandle));
+            receiveMessageUnsubscribers.Add(e.UserId, e.MessageConnection.Subscribe<MessageData>(next: data => { MessageDataHandle(e.UserId, data); }));
             messageConnections.Add(e.UserId, e.MessageConnection);
         }
 
@@ -70,17 +70,17 @@ namespace Server
         {
             var sendingTasks = messageConnections.Where(pair => sendingAddresses[pair.Key] != null)
                                                  .Select(pair => new { Connection = pair.Value, Address = sendingAddresses[pair.Key] })
-                                                 .Select(info => info.Connection.SendAsync(new MessageData { Bytes = command.Data, IP = info.Address }))
+                                                 .Select(info => info.Connection.SendAsync(new MessageData { Bytes = command.Data.ToBytes(), IP = info.Address }))
                                                  .ToArray();
 
             await Task.WhenAll(sendingTasks);
         }
 
-        private void MessageDataHandle(MessageData data)
+        private void MessageDataHandle(Guid userId, MessageData data)
         {
             synchronization.Post(state =>
             {
-                observable.Publish(new MessageIsReceivedEvent(data.Bytes));
+                observable.Publish(new MessageIsReceivedEvent(data.Bytes, userId));
             }, data);
         }
 

@@ -40,7 +40,7 @@ namespace Menu.Multiplayer
 
         public void Connect()
         {
-            parameters.SetLocal("RoomOwnerId", selectedRoomOwnerId);
+            parameters.Set("RoomOwnerId", selectedRoomOwnerId);
             SceneManager.LoadScene("ArenaOne", LoadSceneMode.Single);
         }
     }

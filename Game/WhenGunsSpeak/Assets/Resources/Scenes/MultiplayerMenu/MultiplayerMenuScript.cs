@@ -29,7 +29,7 @@ namespace Menu.Multiplayer
 
         public void Create()
         {
-            parameters.ClearLocal("RoomOwnerId");
+            parameters.Remove("RoomOwnerId");
             SceneManager.LoadScene("ArenaOne", LoadSceneMode.Single);
         }
     }

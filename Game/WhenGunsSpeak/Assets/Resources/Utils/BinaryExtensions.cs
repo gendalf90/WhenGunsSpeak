@@ -7,44 +7,40 @@ namespace Utils
     {
         private const int GuidLengthInBytes = 16;
 
-        public static bool HasGuidAtBegin(this byte[] source, Guid value)
+        public static bool HasGuidAtBegin(this Binary source, Guid value)
         {
             if(source.Length < GuidLengthInBytes)
             {
                 return false;
             }
 
-            var binarySource = new Binary(source);
-            var sourceGuidBytes = binarySource * GuidLengthInBytes;
+            var sourceGuidBytes = source * GuidLengthInBytes;
             var valueGuidBytes = value.ToByteArray();
             return sourceGuidBytes == valueGuidBytes;
         }
 
-        public static byte[] AddGuidAtBegin(this byte[] body, Guid value)
+        public static Binary AddGuidAtBegin(this Binary body, Guid value)
         {
-            var guidBinary = new Binary(value.ToByteArray());
-            var bodyBinary = new Binary(body);
-            var result = guidBinary + bodyBinary;
-            return result.ToBytes();
+            return value.ToByteArray() + body;
         }
 
-        public static bool TryGetNotEmptyBodyIfGuidAtBeginIs(this byte[] source, Guid value, out byte[] body)
+        public static bool TryGetNotEmptyBodyIfGuidAtBeginIs(this Binary source, Guid value, out Binary result)
         {
-            body = null;
+            result = null;
 
             if(!source.HasGuidAtBegin(value))
             {
                 return false;
             }
 
-            var binaryBody = new Binary(source) / GuidLengthInBytes;
+            var body = source / GuidLengthInBytes;
 
-            if(binaryBody.IsEmpty)
+            if(body.IsEmpty)
             {
                 return false;
             }
 
-            body = binaryBody.ToBytes();
+            result = body;
             return true;
         }
     }

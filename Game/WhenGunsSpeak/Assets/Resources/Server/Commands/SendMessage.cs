@@ -1,12 +1,14 @@
-﻿namespace Server
+﻿using BinaryProcessing;
+
+namespace Server
 {
     public class SendMessageCommand
     {
-        public SendMessageCommand(byte[] data)
+        public SendMessageCommand(Binary data)
         {
             Data = data;
         }
 
-        public byte[] Data { get; private set; }
+        public Binary Data { get; private set; }
     }
 }

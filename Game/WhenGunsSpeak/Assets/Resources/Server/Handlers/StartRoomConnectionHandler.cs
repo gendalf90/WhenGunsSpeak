@@ -31,7 +31,7 @@ namespace Server
         {
             roomConnection = await new Bootstrap().StartRoomConnectionAsync(new RoomConnectionOptions
             {
-                RoomsAddress = parameters.GetLocalOrDefault<Uri>("RoomsServiceAddress")
+                RoomsAddress = parameters.Get<Uri>("RoomsServiceAddress")
             });
             roomConnection.Subscribe<MyData>(next: MyDataHandler);
             await roomConnection.KnowAboutMeAsync();
@@ -42,7 +42,7 @@ namespace Server
             synchronization.Post(state =>
             {
                 OnConnected?.Invoke(this, new StartRoomConnectionEventArgs(roomConnection, value.Id));
-                observable.Publish(new OnConnectedToRoomsServiceEvent());
+                observable.Publish(new OnConnectedToRoomsServiceEvent(value.Id));
             }, value);
         }
 

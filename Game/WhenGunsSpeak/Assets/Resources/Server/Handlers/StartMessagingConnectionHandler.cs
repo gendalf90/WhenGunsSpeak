@@ -52,9 +52,9 @@ namespace Server
         {
             return await new Bootstrap().StartMessageConnectionAsync(new MessageConnectionOptions
             {
-                ListeningPoint = parameters.GetLocalOrDefault<IPEndPoint>("MessagesListeningPort"),
-                NatFuckerAddress = parameters.GetLocalOrDefault<IPEndPoint>("NatFuckerAddress"),
-                NatFuckingPeriod = parameters.GetLocalOrDefault<TimeSpan>("NatFuckingPeriod"),
+                ListeningPoint = parameters.Get<IPEndPoint>("MessagesListeningPort"),
+                NatFuckerAddress = parameters.Get<IPEndPoint>("NatFuckerAddress"),
+                NatFuckingPeriod = parameters.Get<TimeSpan>("NatFuckingPeriod"),
                 SecurityKey = securityKey,
                 UserId = myId
             });
@@ -91,7 +91,6 @@ namespace Server
             {
                 var connection = await CreateConnectionAsync(myId, value.SecurityKey);
                 OnStarted?.Invoke(this, new StartMessagingConnectionEventArgs(connection, value.UserId));
-                observable.Publish(new MessagingIsStartedEvent());
             }, value);
         }
 
