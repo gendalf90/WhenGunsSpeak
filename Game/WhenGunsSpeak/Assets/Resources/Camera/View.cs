@@ -7,7 +7,6 @@ namespace Camera
     public class View : MonoBehaviour
     {
         private Observable observable;
-        private Vector3 currentPosition;
 
         private void Awake()
         {
@@ -19,24 +18,16 @@ namespace Camera
             observable.Subscribe<SetCameraPositionCommand>(SetCameraPositionHandle);
         }
 
+        private void OnDisable()
+        {
+            observable.Unsubscribe<SetCameraPositionCommand>(SetCameraPositionHandle);
+        }
+
         private void SetCameraPositionHandle(SetCameraPositionCommand command)
         {
-            currentPosition = new Vector3(command.WorldPositon.x, command.WorldPositon.y, currentPosition.z);
-        }
-
-        private void Start()
-        {
-            InitializeCurrentPostion();
-        }
-
-        private void InitializeCurrentPostion()
-        {
-            currentPosition = UnityCamera.main.transform.position;
-        }
-
-        private void LateUpdate()
-        {
-            UnityCamera.main.transform.position = currentPosition;
+            var currentPosition = UnityCamera.main.transform.position;
+            var newPosition = new Vector3(command.WorldPositon.x, command.WorldPositon.y, currentPosition.z);
+            UnityCamera.main.transform.position = newPosition;
         }
     }
 }

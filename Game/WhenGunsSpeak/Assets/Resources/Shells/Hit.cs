@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Shells
 {
-    class Hitter : MonoBehaviour
+    class Hit : MonoBehaviour
     {
         private Observable observable;
 

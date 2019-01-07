@@ -14,7 +14,7 @@ namespace Input
             observable = FindObjectOfType<Observable>();
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
             UpdateCursor();
             UpdateFire();

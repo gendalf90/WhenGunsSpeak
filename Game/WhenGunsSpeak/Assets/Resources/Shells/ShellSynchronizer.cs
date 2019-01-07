@@ -9,33 +9,28 @@ namespace Shells
     class ShellSynchronizer : MonoBehaviour
     {
         private Observable observable;
-        private Rigidbody2D rigidbody2d;
 
         private void Awake()
         {
             observable = FindObjectOfType<Observable>();
-            rigidbody2d = GetComponent<Rigidbody2D>();
         }
 
         private void OnEnable()
         {
-            observable.Subscribe<MessageIsReceivedEvent>(ReceiveMessage);
+            observable.Subscribe<AtRoomClientMessageReceivingEvent>(ReceiveMessage);
+            observable.Subscribe<AtRoomUpdatingEvent>(SendMessage);
         }
 
         private void OnDisable()
         {
-            observable.Unsubscribe<MessageIsReceivedEvent>(ReceiveMessage);
+            observable.Unsubscribe<AtRoomClientMessageReceivingEvent>(ReceiveMessage);
+            observable.Unsubscribe<AtRoomUpdatingEvent>(SendMessage);
         }
 
         public Guid ShellGuid { get; set; }
 
-        private void ReceiveMessage(MessageIsReceivedEvent e)
+        private void ReceiveMessage(AtRoomClientMessageReceivingEvent e)
         {
-            if(!IsKinematic)
-            {
-                return;
-            }
-
             var syncData = e.Data.DeserializeByMessagePack<ShellSyncData>();
 
             if (syncData == null)
@@ -52,13 +47,8 @@ namespace Shells
             Rotation = syncData.Rotation;
         }
 
-        private void Update()
+        private void SendMessage(AtRoomUpdatingEvent e)
         {
-            if (IsKinematic)
-            {
-                return;
-            }
-
             var syncData = new ShellSyncData
             {
                 Guid = ShellGuid,
@@ -69,8 +59,6 @@ namespace Shells
             var syncDataBytes = syncData.SerializeByMessagePack();
             observable.Publish(new SendMessageCommand(syncDataBytes));
         }
-
-        private bool IsKinematic => rigidbody2d.isKinematic;
 
         private Vector2 Position
         {

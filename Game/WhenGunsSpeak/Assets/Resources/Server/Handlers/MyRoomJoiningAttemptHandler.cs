@@ -1,5 +1,6 @@
 ﻿using Connection;
 using Messages;
+using System;
 using System.Threading;
 using UnityEngine;
 using Utils;
@@ -8,6 +9,7 @@ namespace Server
 {
     class MyRoomJoiningAttemptHandler : MonoBehaviour
     {
+        private Guid myId;
         private IRoomConnection roomConnection;
         private Observable observable;
         private SynchronizationContext synchronization;
@@ -27,6 +29,7 @@ namespace Server
 
         private void ConnectionHandler_OnConnected(object sender, StartRoomConnectionEventArgs e)
         {
+            myId = e.MyId;
             roomConnection = e.RoomConnection;
             roomConnection.Subscribe<RoomJoinedData>(next: AcceptMyJoiningHandle);
             roomConnection.Subscribe<RoomRejectedData>(next: DeclineMyJoiningHandle);
@@ -37,7 +40,7 @@ namespace Server
         {
             synchronization.Post(state =>
             {
-                observable.Publish(new IAmJoinedToRoomEvent(value.OwnerId));
+                observable.Publish(new IAmJoinedToRoomEvent(value.OwnerId, myId));
             }, value);
         }
 

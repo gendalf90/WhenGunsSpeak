@@ -1,4 +1,5 @@
 ﻿using Messages;
+using System;
 using UnityEngine;
 
 namespace Server
@@ -16,16 +17,19 @@ namespace Server
         {
             observable.Subscribe<IAmJoinedToRoomEvent>(IAmJoinedToRoomHandle);
             observable.Subscribe<MessageIsReceivedEvent>(ReceiveMessage);
+            observable.Subscribe<SendMessageAtRoomClientCommand>(SendMessage);
         }
 
         private void OnDisable()
         {
             observable.Unsubscribe<IAmJoinedToRoomEvent>(IAmJoinedToRoomHandle);
             observable.Unsubscribe<MessageIsReceivedEvent>(ReceiveMessage);
+            observable.Unsubscribe<SendMessageAtRoomClientCommand>(SendMessage);
         }
 
         private void IAmJoinedToRoomHandle(IAmJoinedToRoomEvent e)
         {
+            MyId = e.MyId;
             AmIRoomClient = true;
         }
 
@@ -33,7 +37,15 @@ namespace Server
         {
             if (AmIRoomClient)
             {
-                observable.Publish(new WhenIAmRoomClientMessageReceivingEvent(e.Data, e.FromUserId));
+                observable.Publish(new AtRoomClientMessageReceivingEvent(e.Data, e.FromUserId));
+            }
+        }
+
+        private void SendMessage(SendMessageAtRoomClientCommand command)
+        {
+            if (AmIRoomClient)
+            {
+                observable.Publish(new SendMessageCommand(command.Data));
             }
         }
 
@@ -41,10 +53,12 @@ namespace Server
         {
             if (AmIRoomClient)
             {
-                observable.Publish(new WhenIAmRoomClientUpdatingEvent());
+                observable.Publish(new AtRoomClientUpdatingEvent(MyId));
             }
         }
 
         private bool AmIRoomClient { get; set; }
+
+        private Guid MyId { get; set; }
     }
 }

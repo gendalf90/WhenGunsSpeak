@@ -3,9 +3,9 @@ using System;
 
 namespace Server
 {
-    public class WhenIAmRoomClientMessageReceivingEvent
+    public class AtRoomMessageReceivingEvent
     {
-        public WhenIAmRoomClientMessageReceivingEvent(Binary data, Guid fromUserId)
+        public AtRoomMessageReceivingEvent(Binary data, Guid fromUserId)
         {
             FromUserId = fromUserId;
             Data = data;

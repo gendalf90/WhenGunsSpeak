@@ -1,7 +1,6 @@
 ﻿using Messages;
 using System;
 using UnityEngine;
-using Server;
 using System.Linq;
 
 namespace Shells
@@ -30,9 +29,11 @@ namespace Shells
             var rigidbody = newObject.GetComponent<Rigidbody2D>();
             rigidbody.isKinematic = true;
             var hitDestroyer = newObject.GetComponent<HitDestroyer>();
-            hitDestroyer.ShellGuid = id;
-            var hitter = newObject.GetComponent<Hitter>();
-            hitter.ShellGuid = id;
+            hitDestroyer.enabled = false;
+            var hit = newObject.GetComponent<Hit>();
+            hit.enabled = false;
+            var thrower = newObject.GetComponent<Thrower>();
+            thrower.enabled = false;
             var shellSynchronizer = newObject.GetComponent<ShellSynchronizer>();
             shellSynchronizer.ShellGuid = id;
         }
@@ -45,17 +46,15 @@ namespace Shells
         private void OnEnable()
         {
             observable.Subscribe<Throw7dot62Command>(CreateAndThrow);
-            observable.Subscribe<WhenIAmRoomOwnerUpdatingEvent>(UpdateIfIAmRoomOwner);
-            synchronizer.OnCreated += CreateStatic;
-            synchronizer.OnDeleted += Destroy;
+            synchronizer.WhenCreatedOnRoomClient += CreateStatic;
+            synchronizer.WhenDeletedOnRoomClient += Destroy;
         }
 
         private void OnDisable()
         {
             observable.Unsubscribe<Throw7dot62Command>(CreateAndThrow);
-            observable.Unsubscribe<WhenIAmRoomOwnerUpdatingEvent>(UpdateIfIAmRoomOwner);
-            synchronizer.OnCreated -= CreateStatic;
-            synchronizer.OnDeleted -= Destroy;
+            synchronizer.WhenCreatedOnRoomClient -= CreateStatic;
+            synchronizer.WhenDeletedOnRoomClient -= Destroy;
         }
 
         private void CreateAndThrow(Throw7dot62Command command)
@@ -68,16 +67,16 @@ namespace Shells
             transform.rotation = Quaternion.Euler(0, 0, command.Rotation);
             var hitDestroyer = newObject.GetComponent<HitDestroyer>();
             hitDestroyer.ShellGuid = command.Id;
-            var hitter = newObject.GetComponent<Hitter>();
+            var hitter = newObject.GetComponent<Hit>();
             hitter.ShellGuid = command.Id;
             var shellSynchronizer = newObject.GetComponent<ShellSynchronizer>();
             shellSynchronizer.ShellGuid = command.Id;
         }
 
-        private void UpdateIfIAmRoomOwner(WhenIAmRoomOwnerUpdatingEvent e)
+        private void Update()
         {
             var syncIds = FindObjectsOfType<Bullet7dot62>().Select(obj => obj.ShellGuid);
-            synchronizer.SendTheseShellIds(syncIds);
+            synchronizer.SetRoomOwnerIdsToSynchronization(syncIds);
         }
     }
 }

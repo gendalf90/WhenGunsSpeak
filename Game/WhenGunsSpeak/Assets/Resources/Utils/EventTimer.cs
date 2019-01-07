@@ -5,40 +5,72 @@ namespace Utils
 {
     public class EventTimer
     {
-        private double periodInSeconds;
-        private float startTimeInSeconds;
-        private bool isStarted;
+        private double? periodInSeconds;
+        private float? startTimeInSeconds;
+        private bool isStartImmediately;
 
         public void Start(TimeSpan period)
         {
-            startTimeInSeconds = Time.realtimeSinceStartup;
             periodInSeconds = period.TotalSeconds;
-            isStarted = true;
+            startTimeInSeconds = null;
+            isStartImmediately = false;
+        }
+
+        public void StartImmediately(TimeSpan period)
+        {
+            periodInSeconds = period.TotalSeconds;
+            startTimeInSeconds = null;
+            isStartImmediately = true;
         }
 
         public event Action Action;
 
         public void Update()
         {
-            if(!isStarted)
+            if(!IsStarted)
             {
                 return;
             }
 
-            var isItTime = Time.realtimeSinceStartup - startTimeInSeconds > periodInSeconds;
+            if(IsFirstUpdate)
+            {
+                UpdateStartTime();
+            }
 
-            if(!isItTime)
+            if(!IsTimeToInvoke)
             {
                 return;
             }
 
+            InvokeAction();
+            UpdateStartTime();
+            StopImmediatelyInvoking();
+        }
+
+        private bool IsStarted => periodInSeconds.HasValue;
+
+        private bool IsFirstUpdate => !startTimeInSeconds.HasValue;
+
+        private void UpdateStartTime()
+        {
             startTimeInSeconds = Time.realtimeSinceStartup;
+        }
+
+        private bool IsTimeToInvoke => Time.realtimeSinceStartup - startTimeInSeconds > periodInSeconds || isStartImmediately;
+
+        private void InvokeAction()
+        {
             Action?.Invoke();
+        }
+
+        private void StopImmediatelyInvoking()
+        {
+            isStartImmediately = false;
         }
 
         public void Stop()
         {
-            isStarted = false;
+            periodInSeconds = null;
         }
     }
 }

@@ -13,11 +13,13 @@ namespace Shells
         private string typeMarker;
 
         private Observable observable;
-        private HashSet<Guid> shellIdsToSynchronization;
+        private HashSet<Guid> roomClientShellIds;
+        private HashSet<Guid> roomOwnerShellIds;
 
         public ShellsSynchronizer()
         {
-            shellIdsToSynchronization = new HashSet<Guid>();
+            roomClientShellIds = new HashSet<Guid>();
+            roomOwnerShellIds = new HashSet<Guid>();
         }
 
         private void Awake()
@@ -27,15 +29,17 @@ namespace Shells
 
         private void OnEnable()
         {
-            observable.Subscribe<WhenIAmRoomClientMessageReceivingEvent>(ReceiveIfIAmRoomClient);
+            observable.Subscribe<AtRoomClientMessageReceivingEvent>(ReceiveIfIAmRoomClient);
+            observable.Subscribe<AtRoomUpdatingEvent>(UpdateIfIAmRoomOwner);
         }
 
         private void OnDisable()
         {
-            observable.Unsubscribe<WhenIAmRoomClientMessageReceivingEvent>(ReceiveIfIAmRoomClient);
+            observable.Unsubscribe<AtRoomClientMessageReceivingEvent>(ReceiveIfIAmRoomClient);
+            observable.Unsubscribe<AtRoomUpdatingEvent>(UpdateIfIAmRoomOwner);
         }
 
-        private void ReceiveIfIAmRoomClient(WhenIAmRoomClientMessageReceivingEvent e)
+        private void ReceiveIfIAmRoomClient(AtRoomClientMessageReceivingEvent e)
         {
             var syncData = e.Data.DeserializeByMessagePack<ShellsSyncData>();
 
@@ -49,23 +53,28 @@ namespace Shells
                 return;
             }
 
-            shellIdsToSynchronization.SynchronizeWith(syncData.ShellIdsCreatedAtNow, OnCreated, OnDeleted);
+            roomClientShellIds.SynchronizeWith(syncData.ShellIdsCreatedAtNow, WhenCreatedOnRoomClient, WhenDeletedOnRoomClient);
         }
 
-        public void SendTheseShellIds(IEnumerable<Guid> ids)
+        public void SetRoomOwnerIdsToSynchronization(IEnumerable<Guid> ids)
+        {
+            roomOwnerShellIds = new HashSet<Guid>(ids);
+        }
+
+        private void UpdateIfIAmRoomOwner(AtRoomUpdatingEvent e)
         {
             var syncData = new ShellsSyncData
             {
                 TypeMarker = typeMarker,
-                ShellIdsCreatedAtNow = shellIdsToSynchronization
+                ShellIdsCreatedAtNow = roomOwnerShellIds
             };
 
             var syncDataBytes = syncData.SerializeByMessagePack();
             observable.Publish(new SendMessageCommand(syncDataBytes));
         }
 
-        public event Action<Guid> OnCreated;
+        public event Action<Guid> WhenCreatedOnRoomClient;
 
-        public event Action<Guid> OnDeleted;
+        public event Action<Guid> WhenDeletedOnRoomClient;
     }
 }

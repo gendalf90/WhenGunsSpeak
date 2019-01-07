@@ -39,16 +39,14 @@ namespace Messages
             });
         }
 
-        private void Update()
+        private void LateUpdate()
         {
             RunAllHandlers();
         }
 
         private void RunAllHandlers()
         {
-            var toHandleCount = handlers.Count;
-
-            for(int i = 0; i < toHandleCount; i++)
+            while(handlers.Count > 0)
             {
                 RunHandler();
             }

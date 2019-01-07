@@ -20,7 +20,7 @@ namespace Input
             observable = FindObjectOfType<Observable>();
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
             UpdateRightAndLeft();
             UpdateJump();
@@ -79,7 +79,7 @@ namespace Input
 
         private void UpdateCurrentJumpState()
         {
-            currentJumpState = UnityInput.GetButtonDown("Jump");
+            currentJumpState = UnityInput.GetButton("Jump");
         }
 
         private void UpdateJumpEvents()
