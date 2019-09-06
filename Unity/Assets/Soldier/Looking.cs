@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Messages;
+using UnityEngine;
 
 namespace Soldier
 {
@@ -60,6 +61,13 @@ namespace Soldier
         private bool IsLeftLooking
         {
             get => transform.position.x >= lookingPoint.x;
+        }
+
+        public void FillMessage(SoldierPositionEvent message)
+        {
+            message.LookingPoint = lookingPoint;
+            message.IsLeftLooking = IsLeftLooking;
+            message.IsRightLooking = IsRightLooking;
         }
     }
 }

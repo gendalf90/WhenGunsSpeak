@@ -25,8 +25,8 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
+  - Soldier
+  - Weapon
   - 
   - 
   - 
@@ -40,4 +40,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Soldier
+    uniqueID: 384649683
+    locked: 0
+  - name: Weapon
+    uniqueID: 1074271479
     locked: 0
