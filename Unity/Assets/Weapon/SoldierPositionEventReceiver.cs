@@ -10,7 +10,6 @@ namespace Weapon
     {
         private Identificator identificator;
         private IFlippable[] flippables;
-        private IDisposable unsubscriber;
 
         private void Awake()
         {
@@ -20,17 +19,13 @@ namespace Weapon
 
         private void OnEnable()
         {
-            unsubscriber = MessageBroker.Default
+            MessageBroker.Default
                 .Receive<SoldierPositionEvent>()
                 .Where(message => message.SoldierId == identificator.SoldierId)
                 .Do(SetPosition)
                 .Do(SetFlip)
+                .TakeUntilDisable(this)
                 .Subscribe();
-        }
-
-        private void OnDisable()
-        {
-            unsubscriber.Dispose();
         }
 
         private void SetPosition(SoldierPositionEvent message)

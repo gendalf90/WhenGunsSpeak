@@ -4,6 +4,13 @@ namespace Soldier
 {
     public class Identificator : MonoBehaviour
     {
-        public string SoldierId { get; set; }
+        [SerializeField]
+        private string soldierId;
+
+        public string SoldierId
+        {
+            get => soldierId;
+            set => soldierId = value;
+        }
     }
 }

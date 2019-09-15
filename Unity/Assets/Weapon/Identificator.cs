@@ -4,8 +4,22 @@ namespace Weapon
 {
     public class Identificator : MonoBehaviour
     {
-        public string WeaponId { get; set; }
+        [SerializeField]
+        private string weaponId;
 
-        public string SoldierId { get; set; }
+        [SerializeField]
+        private string soldierId;
+
+        public string WeaponId
+        {
+            get => weaponId;
+            set => weaponId = value;
+        }
+
+        public string SoldierId
+        {
+            get => soldierId;
+            set => soldierId = value;
+        }
     }
 }

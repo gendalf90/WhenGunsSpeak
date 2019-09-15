@@ -5,6 +5,7 @@ namespace Soldier
 {
     public class Looking : MonoBehaviour
     {
+        [SerializeField]
         private Vector2 lookingPoint = Vector2.zero;
 
         private ILookable[] lookables;
