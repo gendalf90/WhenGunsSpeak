@@ -9,8 +9,6 @@ namespace Soldier
         private void Awake()
         {
             prefab = Resources.Load<GameObject>("Soldier");
-
-            prefab.SetActive(false);
         }
 
         public void CreateOfflineSoldier(string soldierId)
@@ -23,6 +21,7 @@ namespace Soldier
             var newSoldier = Instantiate(prefab);
 
             newSoldier.GetComponent<Identificator>().SoldierId = soldierId;
+            newSoldier.GetComponent<Movement>().SetDefaultForce();
 
             return newSoldier;
         }

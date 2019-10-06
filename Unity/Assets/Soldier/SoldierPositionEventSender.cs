@@ -11,8 +11,8 @@ namespace Soldier
 
         private void Awake()
         {
-            identificator = GetComponent<Identificator>();
-            looking = GetComponent<Looking>();
+            identificator = GetComponentInParent<Identificator>();
+            looking = GetComponentInParent<Looking>();
         }
 
         public void FixedUpdate()

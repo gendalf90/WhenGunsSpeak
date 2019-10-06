@@ -8,7 +8,7 @@ namespace Soldier
 
         private void Awake()
         {
-            looking = GetComponent<Looking>();
+            looking = GetComponentInParent<Looking>();
         }
 
         private void FixedUpdate()

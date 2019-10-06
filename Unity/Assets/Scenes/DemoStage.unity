@@ -132,6 +132,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoldierController
       objectReference: {fileID: 0}
+    - target: {fileID: 3069858647317578016, guid: ec49c749ab748154ab44941ab4c16d7e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4778644709930181220, guid: ec49c749ab748154ab44941ab4c16d7e,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -13,8 +13,8 @@ namespace Soldier
 
         private void Awake()
         {
-            lookables = GetComponentsInChildren<ILookable>();
-            flippables = GetComponentsInChildren<IFlippable>();
+            lookables = GetComponentsInChildren<ILookable>(true);
+            flippables = GetComponentsInChildren<IFlippable>(true);
         }
 
         public void LookToPoint(Vector2 point)

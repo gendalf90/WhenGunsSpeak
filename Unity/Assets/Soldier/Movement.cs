@@ -14,7 +14,7 @@ namespace Soldier
         private void Awake()
         {
             rigidbody2d = GetComponent<Rigidbody2D>();
-            moveables = GetComponentsInChildren<IMoveable>();
+            moveables = GetComponentsInChildren<IMoveable>(true);
         }
 
         public void MoveToPoint(Vector2 destination)
@@ -37,6 +37,11 @@ namespace Soldier
             {
                 moveable.Stop();
             }
+        }
+
+        public void SetDefaultForce()
+        {
+            movingForce = 3.0f;
         }
     }
 }

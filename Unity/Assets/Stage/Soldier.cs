@@ -26,6 +26,11 @@ namespace Stage
             spawners = GetComponentsInParent<ISoldierSpawner>();
         }
 
+        private void Start()
+        {
+            PlanToSpawn();
+        }
+
         public void SetSoldierId(string id)
         {
             soldierId = id;

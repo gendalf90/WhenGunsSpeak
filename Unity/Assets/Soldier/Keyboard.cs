@@ -8,7 +8,7 @@ namespace Soldier
 
         private void Awake()
         {
-            movement = GetComponent<Movement>();
+            movement = GetComponentInParent<Movement>();
         }
 
         private void FixedUpdate()

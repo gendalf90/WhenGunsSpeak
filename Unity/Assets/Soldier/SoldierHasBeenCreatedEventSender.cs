@@ -1,6 +1,4 @@
 ﻿using Messages;
-using System;
-using System.Linq;
 using UniRx;
 using UnityEngine;
 
@@ -8,25 +6,19 @@ namespace Soldier
 {
     public class SoldierHasBeenCreatedEventSender : MonoBehaviour
     {
-        private GameObject[] instantiatedSoldiers = Array.Empty<GameObject>();
+        private Identificator identificator;
 
-        private void Update()
+        private void Awake()
         {
-            var currentSoldiers = GameObject.FindGameObjectsWithTag("Soldier");
-            var newSoldierIds = currentSoldiers
-                .Except(instantiatedSoldiers)
-                .Select(soldier => soldier.GetComponent<Identificator>())
-                .Select(id => id.SoldierId);
+            identificator = GetComponent<Identificator>();
+        }
 
-            foreach (var newSoldierId in newSoldierIds)
+        private void Start()
+        {
+            MessageBroker.Default.Publish(new SoldierHasBeenCreatedEvent
             {
-                MessageBroker.Default.Publish(new SoldierHasBeenCreatedEvent
-                {
-                    SoldierId = newSoldierId
-                });
-            }
-
-            instantiatedSoldiers = currentSoldiers;
+                SoldierId = identificator.SoldierId
+            });
         }
     }
 }

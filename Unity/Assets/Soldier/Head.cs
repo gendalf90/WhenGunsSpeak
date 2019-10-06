@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Soldier
 {
     public class Head : MonoBehaviour, ILookable, IFlippable
     {
+        [SerializeField]
         private Vector2 lookingPoint;
+
         private SpriteRenderer[] renderers;
 
         private void Awake()
