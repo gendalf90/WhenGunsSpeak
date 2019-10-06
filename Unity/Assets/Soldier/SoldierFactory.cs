@@ -9,11 +9,13 @@ namespace Soldier
         private void Awake()
         {
             prefab = Resources.Load<GameObject>("Soldier");
+
+            prefab.SetActive(false);
         }
 
-        public void CreateOfflineUser(string soldierId)
+        public void CreateOfflineSoldier(string soldierId)
         {
-            InstantiateWithDefaults(soldierId);
+            var newSoldier = InstantiateWithDefaults(soldierId);
         }
 
         private GameObject InstantiateWithDefaults(string soldierId)
@@ -21,9 +23,6 @@ namespace Soldier
             var newSoldier = Instantiate(prefab);
 
             newSoldier.GetComponent<Identificator>().SoldierId = soldierId;
-            newSoldier.GetComponent<SoldierPositionEventSender>().enabled = false;
-            newSoldier.GetComponent<Mouse>().enabled = false;
-            newSoldier.GetComponent<Keyboard>().enabled = false;
 
             return newSoldier;
         }

@@ -1,5 +1,4 @@
 ﻿using Messages;
-using System;
 using System.Linq;
 using UniRx;
 using UnityEngine;
@@ -8,12 +7,13 @@ namespace Weapon
 {
     public class SoldierPositionEventReceiver : MonoBehaviour
     {
-        private Identificator identificator;
+        [SerializeField]
+        private string soldierId;
+
         private IFlippable[] flippables;
 
         private void Awake()
         {
-            identificator = GetComponent<Identificator>();
             flippables = GetComponentsInChildren<IFlippable>();
         }
 
@@ -21,7 +21,7 @@ namespace Weapon
         {
             MessageBroker.Default
                 .Receive<SoldierPositionEvent>()
-                .Where(message => message.SoldierId == identificator.SoldierId)
+                .Where(message => message.SoldierId == soldierId)
                 .Do(SetPosition)
                 .Do(SetFlip)
                 .TakeUntilDisable(this)

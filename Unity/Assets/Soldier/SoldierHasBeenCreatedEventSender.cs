@@ -1,32 +1,32 @@
 ﻿using Messages;
+using System;
+using System.Linq;
 using UniRx;
 using UnityEngine;
-using UniRx.Triggers;
 
 namespace Soldier
 {
     public class SoldierHasBeenCreatedEventSender : MonoBehaviour
     {
-        private Identificator identificator;
+        private GameObject[] instantiatedSoldiers = Array.Empty<GameObject>();
 
-        private void Awake()
+        private void Update()
         {
-            identificator = GetComponent<Identificator>();
-        }
+            var currentSoldiers = GameObject.FindGameObjectsWithTag("Soldier");
+            var newSoldierIds = currentSoldiers
+                .Except(instantiatedSoldiers)
+                .Select(soldier => soldier.GetComponent<Identificator>())
+                .Select(id => id.SoldierId);
 
-        private void Start()
-        {
-            this.UpdateAsObservable()
-                .First()
-                .Subscribe(count => PublishCreatedEvent());
-        }
-
-        private void PublishCreatedEvent()
-        {
-            MessageBroker.Default.Publish(new SoldierHasBeenCreatedEvent
+            foreach (var newSoldierId in newSoldierIds)
             {
-                SoldierId = identificator.SoldierId
-            });
+                MessageBroker.Default.Publish(new SoldierHasBeenCreatedEvent
+                {
+                    SoldierId = newSoldierId
+                });
+            }
+
+            instantiatedSoldiers = currentSoldiers;
         }
     }
 }

@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Soldier
 {
     public class Spawning : MonoBehaviour
     {
-        public void Spawn(Vector2 posiiton)
+        public void Spawn(Vector2 position)
         {
-            GetComponent<SoldierPositionEventSender>().enabled = true;
-            GetComponent<Mouse>().enabled = true;
-            GetComponent<Keyboard>().enabled = true;
+            transform.position = position;
+
+            gameObject.SetActive(true);
         }
     }
 }
