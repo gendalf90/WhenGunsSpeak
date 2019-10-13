@@ -17,7 +17,7 @@ namespace Soldier
         public void LookToPoint(Vector2 point)
         {
             var currentPosition = new Vector2(transform.position.x, transform.position.y);
-            var currentAngle = currentPosition.GetAngle(point);
+            var currentAngle = currentPosition.GetAngle2(point);
 
             transform.rotation = Quaternion.Euler(0, 0, currentAngle);
         }

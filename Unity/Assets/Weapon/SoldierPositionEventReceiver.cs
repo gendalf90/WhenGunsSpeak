@@ -10,11 +10,11 @@ namespace Weapon
         [SerializeField]
         private string soldierId;
 
-        private IFlippable[] flippables;
+        private Position position;
 
         private void Awake()
         {
-            flippables = GetComponentsInChildren<IFlippable>();
+            position = GetComponent<Position>();
         }
 
         private void OnEnable()
@@ -30,30 +30,20 @@ namespace Weapon
 
         private void SetPosition(SoldierPositionEvent message)
         {
-            var angleToRotate = message.Position.GetAngle(message.LookingPoint);
-
-            transform.position = message.Position;
-            transform.rotation = Quaternion.Euler(0, 0, angleToRotate);
+            position.SetPosition(message.Position);
+            position.AimTo(message.LookingPoint);
         }
 
         private void SetFlip(SoldierPositionEvent message)
         {
-            foreach (var flippable in flippables)
-            {
-                SetFlip(flippable, message);
-            }
-        }
-
-        private void SetFlip(IFlippable flippable, SoldierPositionEvent message)
-        {
             if (message.IsRightLooking)
             {
-                flippable.FlipToRight();
+                position.SetRightLooking();
             }
 
             if (message.IsLeftLooking)
             {
-                flippable.FlipToLeft();
+                position.SetLeftLooking();
             }
         }
     }

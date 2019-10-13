@@ -17,5 +17,10 @@ namespace Soldier
 
             instance.gameObject.SetActive(true);
         }
+
+        public void Unspawn()
+        {
+
+        }
     }
 }
