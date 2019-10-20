@@ -32,5 +32,10 @@ namespace Weapon
                 .TakeUntilDisable(this)
                 .Subscribe();
         }
+
+        public void SetSoldierId(string soldierId)
+        {
+            this.soldierId = soldierId;
+        }
     }
 }

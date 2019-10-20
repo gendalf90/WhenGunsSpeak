@@ -8,32 +8,29 @@ namespace Weapon
     public class WeaponMenu : MonoBehaviour
     {
         private Dropdown firstWeaponDropdown;
-        private IListable[] listableWeapons;
-        private IChooseable[] createableWeapons;
+        private Listing listing;
+        private Spawning spawning;
 
         private void Awake()
         {
             firstWeaponDropdown = transform
                 .GetComponentsInChildren<Dropdown>()
                 .First(component => component.name == "WeaponDropdown");
-
-            listableWeapons = GetComponentsInParent<IListable>();
-            createableWeapons = GetComponentsInParent<IChooseable>();
+            listing = GetComponentInParent<Listing>();
+            spawning = GetComponentInParent<Spawning>();
         }
 
         private void Start()
         {
             FillFirstWeaponList();
+            ChooseSelectedFirstWeapon();
         }
 
         private void FillFirstWeaponList()
         {
             var firstWeaponNameList = new List<string>();
 
-            foreach(var weapon in listableWeapons)
-            {
-                weapon.AddIfFirstWeapon(firstWeaponNameList);
-            }
+            listing.FillFirstWeaponList(firstWeaponNameList);
 
             firstWeaponDropdown.AddOptions(firstWeaponNameList);
         }
@@ -52,10 +49,7 @@ namespace Weapon
         {
             var selectedFirstWeapon = firstWeaponDropdown.captionText.text;
 
-            foreach(var weapon in createableWeapons)
-            {
-                weapon.ChooseIfNameIs(selectedFirstWeapon);
-            }
+            spawning.SetWeaponName(selectedFirstWeapon);
         }
     }
 }

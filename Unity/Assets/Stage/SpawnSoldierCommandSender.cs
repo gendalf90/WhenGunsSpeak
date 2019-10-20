@@ -7,27 +7,17 @@ namespace Stage
 {
     public class SpawnSoldierCommandSender : MonoBehaviour
     {
-        private ISoldierSpawner[] spawners;
-
-        private void Awake()
+        private void OnEnable()
         {
-            spawners = GetComponents<ISoldierSpawner>();
-        }
-
-        public void Update()
-        {
-            var spawnSoldierCommands = spawners
-                .SelectMany(spawner => spawner.ConsumeReadyToSpawn())
+            GetComponent<ISoldierSpawner>()
                 .Select(spawnData => new SpawnSoldierCommand
                 {
                     SoldierId = spawnData.SoldierId,
                     Position = spawnData.Position
-                });
-
-            foreach(var command in spawnSoldierCommands)
-            {
-                MessageBroker.Default.Publish(command);
-            }
+                })
+                .Do(MessageBroker.Default.Publish)
+                .TakeUntilDisable(this)
+                .Subscribe();
         }
     }
 }

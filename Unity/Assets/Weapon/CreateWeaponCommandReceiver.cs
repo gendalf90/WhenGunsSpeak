@@ -17,7 +17,7 @@ namespace Weapon
         {
             MessageBroker.Default
                 .Receive<CreateWeaponCommand>()
-                .Do(command => weaponFactory.CreateWeaponForSoldier(command.SoldierId))
+                .Do(command => weaponFactory.CreateWeaponForSoldier(command.WeaponId, command.SoldierId))
                 .TakeUntilDisable(this)
                 .Subscribe();
         }

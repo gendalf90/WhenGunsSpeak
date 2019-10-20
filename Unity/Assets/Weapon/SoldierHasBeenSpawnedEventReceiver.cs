@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Weapon
 {
-    public class ChooseSoldierWeaponCommandReceiver : MonoBehaviour
+    public class SoldierHasBeenSpawnedEventReceiver : MonoBehaviour
     {
         [SerializeField]
         private string soldierId;
@@ -20,9 +20,9 @@ namespace Weapon
         private void OnEnable()
         {
             MessageBroker.Default
-                .Receive<ChooseSoldierWeaponCommand>()
-                .Where(command => command.SoldierId == soldierId)
-                .Do(command => spawning.SetWeaponName(command.WeaponName))
+                .Receive<SoldierHasBeenSpawnedEvent>()
+                .Where(message => message.SoldierId == soldierId)
+                .Do(message => spawning.Spawn())
                 .TakeUntilDisable(this)
                 .Subscribe();
         }

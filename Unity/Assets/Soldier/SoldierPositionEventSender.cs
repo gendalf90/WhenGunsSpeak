@@ -6,12 +6,18 @@ namespace Soldier
 {
     public class SoldierPositionEventSender : MonoBehaviour
     {
-        private Identificator identificator;
+        [SerializeField]
+        private string soldierId;
+
         private Looking looking;
+
+        public void SetSoldierId(string id)
+        {
+            soldierId = id;
+        }
 
         private void Awake()
         {
-            identificator = GetComponentInParent<Identificator>();
             looking = GetComponentInParent<Looking>();
         }
 
@@ -19,7 +25,7 @@ namespace Soldier
         {
             var message = new SoldierPositionEvent
             {
-                SoldierId = identificator.SoldierId,
+                SoldierId = soldierId,
                 Position = transform.position,
             };
 

@@ -9,9 +9,18 @@ namespace Stage
     {
         private void Start()
         {
-            MessageBroker.Default.Publish(new CreateOfflineSoldierCommand
+            var soldierId = Guid.NewGuid().ToString();
+            var weaponId = Guid.NewGuid().ToString();
+
+            MessageBroker.Default.Publish(new CreateOfflinePlayerCommand
             {
-                SoldierId = Guid.NewGuid().ToString()
+                SoldierId = soldierId
+            });
+
+            MessageBroker.Default.Publish(new CreateWeaponCommand
+            {
+                SoldierId = soldierId,
+                WeaponId = weaponId
             });
         }
     }

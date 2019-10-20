@@ -6,18 +6,28 @@ namespace Soldier
 {
     public class SoldierHasBeenSpawnedEventSender : MonoBehaviour
     {
-        private Identificator identificator;
+        [SerializeField]
+        private string soldierId;
 
-        private void Awake()
+        [SerializeField]
+        private bool isPlayer;
+
+        public void SetSoldierId(string id)
         {
-            identificator = GetComponentInParent<Identificator>();
+            soldierId = id;
+        }
+
+        public void SetAsPlayer()
+        {
+            isPlayer = true;
         }
 
         private void OnEnable()
         {
             MessageBroker.Default.Publish(new SoldierHasBeenSpawnedEvent
             {
-                SoldierId = identificator.SoldierId
+                SoldierId = soldierId,
+                IsPlayer = isPlayer
             });
         }
     }

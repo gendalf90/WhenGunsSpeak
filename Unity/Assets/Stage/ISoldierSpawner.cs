@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Stage
@@ -21,10 +22,8 @@ namespace Stage
         public Vector2 Position { get; set; }
     }
 
-    public interface ISoldierSpawner
+    public interface ISoldierSpawner : IObservable<ReadyToSpawnSoldierData>
     {
         void AddSpawnData(ToSpawnSoldierData data);
-
-        IEnumerable<ReadyToSpawnSoldierData> ConsumeReadyToSpawn();
     }
 }

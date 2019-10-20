@@ -19,16 +19,22 @@ namespace Stage
         [SerializeField]
         private float deadTime;
 
-        private ISoldierSpawner[] spawners;
+        [SerializeField]
+        private bool isPlayer;
+
+        private ISoldierSpawner spawner;
+        private BeforeSpawnMenu beforeSpawnMenu;
 
         private void Awake()
         {
-            spawners = GetComponentsInParent<ISoldierSpawner>();
+            spawner = GetComponentInParent<ISoldierSpawner>();
+            beforeSpawnMenu = GetComponentInParent<BeforeSpawnMenu>();
         }
 
         private void Start()
         {
             PlanToSpawn();
+            ShowTheBeforeSpawnMenuIfPlayer();
         }
 
         public void SetSoldierId(string id)
@@ -36,35 +42,61 @@ namespace Stage
             soldierId = id;
         }
 
+        public bool HasSoldierId(string id)
+        {
+            return soldierId == id;
+        }
+
         public void HasKilled()
         {
             kills++;
         }
 
-        public void HasDied()
+        public void SetDied()
         {
             deads++;
             isSpawned = false;
             deadTime = Time.realtimeSinceStartup;
 
             PlanToSpawn();
+            ShowTheBeforeSpawnMenuIfPlayer();
         }
 
         private void PlanToSpawn()
         {
-            foreach (var spawner in spawners)
+            spawner.AddSpawnData(new ToSpawnSoldierData
             {
-                spawner.AddSpawnData(new ToSpawnSoldierData
-                {
-                    SoldierId = soldierId,
-                    DeadTime = deadTime
-                });
+                SoldierId = soldierId,
+                DeadTime = deadTime
+            });
+        }
+
+        public void SetSpawned()
+        {
+            isSpawned = true;
+
+            HideTheBeforeSpawnMenuIfPlayer();
+        }
+
+        public void SetAsPlayer()
+        {
+            isPlayer = true;
+        }
+
+        private void ShowTheBeforeSpawnMenuIfPlayer()
+        {
+            if(isPlayer)
+            {
+                beforeSpawnMenu.ShowForSoldier(soldierId);
             }
         }
 
-        public void HasSpawned()
+        private void HideTheBeforeSpawnMenuIfPlayer()
         {
-            isSpawned = true;
+            if (isPlayer)
+            {
+                beforeSpawnMenu.HideForSoldier(soldierId);
+            }
         }
     }
 }

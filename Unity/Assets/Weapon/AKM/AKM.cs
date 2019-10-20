@@ -1,45 +1,61 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using Utils;
 
 namespace Weapon
 {
-    public class AKM : MonoBehaviour, IFlippable, IShootable, IListable, IChooseable
+    public class AKM : MonoBehaviour, IFlippable, IShootable, IListable, ISpawnable
     {
+        private const string Name = "AKM";
+
         private GameObject prefab;
+
+        private Transform bodyTransform;
 
         private void Awake()
         {
-            prefab = Resources.Load<GameObject>("AKM");
+            bodyTransform = transform.Find("Body");
         }
 
         public void AddIfFirstWeapon(IList<string> list)
         {
-            list.Add("AKM");
+            list.Add(Name);
         }
 
         public void FlipToLeft()
         {
-            throw new System.NotImplementedException();
+            bodyTransform.SetFlipY(true);
         }
 
         public void FlipToRight()
         {
-            throw new System.NotImplementedException();
+            bodyTransform.SetFlipY(false);
         }
 
         public void StartShooting()
         {
-            throw new System.NotImplementedException();
+            
         }
 
         public void StopShooting()
         {
-            throw new System.NotImplementedException();
+            
         }
 
-        public void ChooseIfNameIs(string name)
+        public void SpawnIfNameIs(string name)
         {
-            throw new System.NotImplementedException();
+            if(name == Name)
+            {
+                gameObject.SetActive(true);
+            }
+        }
+
+        public void UnspawnIfNameIs(string name)
+        {
+            if (name == Name)
+            {
+                gameObject.SetActive(false);
+            }
         }
     }
 }

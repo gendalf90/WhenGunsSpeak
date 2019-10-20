@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using UniRx;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -14,16 +16,18 @@ namespace Stage
 
         private SoldierSpawnPoint[] points;
 
+        private Subject<ReadyToSpawnSoldierData> subject = new Subject<ReadyToSpawnSoldierData>();
+
         private void Awake()
         {
             points = GetComponentsInChildren<SoldierSpawnPoint>();
         }
 
-        public IEnumerable<ReadyToSpawnSoldierData> ConsumeReadyToSpawn()
+        private void Update()
         {
-            while(ConsumeNextReadyToSpawn(out var result))
+            while (ConsumeNextReadyToSpawn(out var result))
             {
-                yield return result;
+                subject.OnNext(result);
             }
         }
 
@@ -86,6 +90,11 @@ namespace Stage
         public void AddSpawnData(ToSpawnSoldierData data)
         {
             plannedToSpawn.Add(data);
+        }
+
+        public IDisposable Subscribe(IObserver<ReadyToSpawnSoldierData> observer)
+        {
+            return subject.Subscribe(observer);
         }
     }
 }

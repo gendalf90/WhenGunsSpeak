@@ -46,5 +46,10 @@ namespace Weapon
                 position.SetLeftLooking();
             }
         }
+
+        public void SetSoldierId(string soldierId)
+        {
+            this.soldierId = soldierId;
+        }
     }
 }

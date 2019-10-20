@@ -20,6 +20,11 @@ namespace Stage
             var newSoldier = gameObject.AddComponent<Soldier>();
 
             newSoldier.SetSoldierId(e.SoldierId);
+
+            if(e.IsPlayer)
+            {
+                newSoldier.SetAsPlayer();
+            }
         }
     }
 }

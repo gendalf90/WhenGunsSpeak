@@ -7,12 +7,18 @@ namespace Soldier
 {
     public class SpawnSoldierCommandReceiver : MonoBehaviour
     {
-        private Identificator identificator;
+        [SerializeField]
+        private string soldierId;
+
         private Spawning spawning;
+
+        public void SetSoldierId(string id)
+        {
+            soldierId = id;
+        }
 
         private void Awake()
         {
-            identificator = GetComponent<Identificator>();
             spawning = GetComponent<Spawning>();
         }
 
@@ -20,7 +26,7 @@ namespace Soldier
         {
             MessageBroker.Default
                 .Receive<SpawnSoldierCommand>()
-                .Where(command => command.SoldierId == identificator.SoldierId)
+                .Where(command => command.SoldierId == soldierId)
                 .Do(command => spawning.Spawn(command.Position))
                 .TakeUntilDisable(this)
                 .Subscribe();

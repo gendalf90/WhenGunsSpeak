@@ -16,15 +16,15 @@ namespace Soldier
         private void OnEnable()
         {
             MessageBroker.Default
-                .Receive<CreateOfflineSoldierCommand>()
+                .Receive<CreateOfflinePlayerCommand>()
                 .Do(CreateOfflineSoldier)
                 .TakeUntilDisable(this)
                 .Subscribe();
         }
 
-        private void CreateOfflineSoldier(CreateOfflineSoldierCommand command)
+        private void CreateOfflineSoldier(CreateOfflinePlayerCommand command)
         {
-            factory.CreateOfflineSoldier(command.SoldierId);
+            factory.CreateOfflinePlayer(command.SoldierId);
         }
     }
 }
