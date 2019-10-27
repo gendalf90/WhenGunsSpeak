@@ -16,7 +16,7 @@ namespace Soldier
             var newSoldier = InstantiateWithDefaults(soldierId);
 
             newSoldier.GetComponent<SoldierHasBeenCreatedEventSender>().SetAsPlayer();
-            newSoldier.GetComponent<SoldierHasBeenSpawnedEventSender>().SetAsPlayer();
+            newSoldier.GetComponentInChildren<SoldierHasBeenSpawnedEventSender>(true).SetAsPlayer();
         }
 
         private GameObject InstantiateWithDefaults(string soldierId)
@@ -25,9 +25,10 @@ namespace Soldier
 
             newSoldier.GetComponent<Movement>().SetDefaultForce();
             newSoldier.GetComponent<SpawnSoldierCommandReceiver>().SetSoldierId(soldierId);
-            newSoldier.GetComponent<SoldierPositionEventSender>().SetSoldierId(soldierId);
             newSoldier.GetComponent<SoldierHasBeenCreatedEventSender>().SetSoldierId(soldierId);
-            newSoldier.GetComponent<SoldierHasBeenSpawnedEventSender>().SetSoldierId(soldierId);
+
+            newSoldier.GetComponentInChildren<SoldierHasBeenSpawnedEventSender>(true).SetSoldierId(soldierId);
+            newSoldier.GetComponentInChildren<SoldierPositionEventSender>(true).SetSoldierId(soldierId);
 
             return newSoldier;
         }

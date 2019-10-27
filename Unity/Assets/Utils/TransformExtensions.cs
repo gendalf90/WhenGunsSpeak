@@ -22,7 +22,7 @@ namespace Utils
 
             if (IsFlipNeeded(transform.localScale.y, value))
             {
-                newScale.y = -1;
+                newScale.y *= -1;
             }
 
             transform.localScale = newScale;

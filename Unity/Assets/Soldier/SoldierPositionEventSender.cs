@@ -21,7 +21,7 @@ namespace Soldier
             looking = GetComponentInParent<Looking>();
         }
 
-        public void FixedUpdate()
+        public void Update()
         {
             var message = new SoldierPositionEvent
             {
