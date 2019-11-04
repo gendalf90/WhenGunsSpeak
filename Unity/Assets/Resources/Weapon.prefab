@@ -67,7 +67,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1074271479
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ad5c7673241f6a844bf5f5e4fbc2dc1b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -442,6 +442,7 @@ GameObject:
   - component: {fileID: 5648578263131705848}
   - component: {fileID: 4090728620626788252}
   - component: {fileID: 5289129096406438727}
+  - component: {fileID: 736917094145599876}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -563,6 +564,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 75b199ac782142c48a7d43949cccd4a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soldierId: 
+--- !u!114 &736917094145599876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5648578263131705840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8877006cf66d704f9396a9aa2b2da99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   soldierId: 

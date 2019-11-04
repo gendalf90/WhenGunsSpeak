@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Weapon
 {
-    public class CreateWeaponCommandReceiver : MonoBehaviour
+    public class CreateOfflinePlayerWeaponCommandReceiver : MonoBehaviour
     {
         private WeaponFactory weaponFactory;
 
@@ -16,8 +16,8 @@ namespace Weapon
         private void OnEnable()
         {
             MessageBroker.Default
-                .Receive<CreateWeaponCommand>()
-                .Do(command => weaponFactory.CreateWeaponForSoldier(command.WeaponId, command.SoldierId))
+                .Receive<CreateOfflinePlayerWeaponCommand>()
+                .Do(command => weaponFactory.CreateOfflinePlayerWeaponForSoldier(command.WeaponId, command.SoldierId))
                 .TakeUntilDisable(this)
                 .Subscribe();
         }

@@ -17,7 +17,7 @@ namespace Stage
                 SoldierId = soldierId
             });
 
-            MessageBroker.Default.Publish(new CreateWeaponCommand
+            MessageBroker.Default.Publish(new CreateOfflinePlayerWeaponCommand
             {
                 SoldierId = soldierId,
                 WeaponId = weaponId

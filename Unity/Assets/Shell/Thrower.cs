@@ -18,20 +18,19 @@ namespace Shell
             toTransform = transform.Find("To");
         }
 
+        private void Start()
+        {
+            Throw();
+        }
+
         private void Throw()
         {
-            SetForce(force);
-            AddForce();
+            rigidbody2d.AddForce(Speed, ForceMode2D.Impulse);
         }
 
-        private void SetForce(float force)
+        public void SetForce(float force)
         {
             this.force = force;
-        }
-
-        private void AddForce()
-        {
-            rigidbody2d.AddForce(Speed, ForceMode2D.Impulse);
         }
 
         private Vector2 Speed

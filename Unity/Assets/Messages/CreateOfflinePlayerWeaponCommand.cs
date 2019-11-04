@@ -1,6 +1,6 @@
 ﻿namespace Messages
 {
-    public class CreateWeaponCommand
+    public class CreateOfflinePlayerWeaponCommand
     {
         public string WeaponId { get; set; }
 

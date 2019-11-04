@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 using Utils;
 
@@ -7,10 +9,10 @@ namespace Weapon
     public class AKM : MonoBehaviour, IFlippable, IShootable, IListable, ISpawnable
     {
         private const string Name = "AKM";
-
-        private GameObject prefab;
+        private const string ShellName = "7dot62";
 
         private Transform bodyTransform;
+        private Subject<ShotData> subject = new Subject<ShotData>();
 
         private void Awake()
         {
@@ -56,6 +58,11 @@ namespace Weapon
             {
                 gameObject.SetActive(false);
             }
+        }
+
+        public IDisposable Subscribe(IObserver<ShotData> observer)
+        {
+            return subject.Subscribe(observer);
         }
     }
 }

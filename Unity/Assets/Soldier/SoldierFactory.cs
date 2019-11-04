@@ -16,7 +16,6 @@ namespace Soldier
             var newSoldier = InstantiateWithDefaults(soldierId);
 
             newSoldier.GetComponent<SoldierHasBeenCreatedEventSender>().SetAsPlayer();
-            newSoldier.GetComponentInChildren<SoldierHasBeenSpawnedEventSender>(true).SetAsPlayer();
         }
 
         private GameObject InstantiateWithDefaults(string soldierId)

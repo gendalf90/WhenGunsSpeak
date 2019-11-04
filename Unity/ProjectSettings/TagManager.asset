@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Soldier
   layers:
   - Default
   - TransparentFX
@@ -19,12 +20,12 @@ TagManager:
   - 
   - 
   - 
+  - BorderWall
+  - Wall
   - 
   - 
-  - 
-  - 
-  - 
-  - 
+  - ShellTarget
+  - Shell
   - Soldier
   - Weapon
   - 
@@ -43,6 +44,9 @@ TagManager:
     locked: 0
   - name: Floor
     uniqueID: 2829251447
+    locked: 0
+  - name: Shell
+    uniqueID: 4129704385
     locked: 0
   - name: Soldier
     uniqueID: 384649683

@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Shell
 {
+    // удалять shell после попадания или нет решает тот, в кого попали
     public class ShellSoldierHitEventSender : MonoBehaviour
     {
         [SerializeField]
@@ -16,9 +17,13 @@ namespace Shell
 
         private void OnTriggerEnter2D(Collider2D other)
         {
+            var identificator = other.GetComponent<Identificator>();
+
             MessageBroker.Default.Publish(new ShellSoldierHitEvent
             {
-                SoldierId = soldierId
+                ShellId = identificator.ShellId,
+                ToSoldierId = soldierId,
+                FromSoldierId = identificator.SoldierId
             });
         }
     }

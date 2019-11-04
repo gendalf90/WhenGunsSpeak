@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4372064606234590264}
   - component: {fileID: 4372064606234590246}
   - component: {fileID: 4372064606234590265}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: SoldierShellBorder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
