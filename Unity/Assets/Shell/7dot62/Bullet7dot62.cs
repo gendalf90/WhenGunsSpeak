@@ -2,9 +2,9 @@
 
 namespace Shell
 {
-    public class Bullet7dot62 : MonoBehaviour, IInitializable
+    public class Bullet7dot62 : MonoBehaviour, IThrowable
     {
-        private const string Name = "7dot62";
+        private const string Key = "7dot62";
         private const float ThrowForce = 3.0f;
 
         private Thrower thrower;
@@ -13,12 +13,14 @@ namespace Shell
         private void Awake()
         {
             thrower = GetComponent<Thrower>();
-            bullet = transform.Find("Bullet").gameObject;
+            bullet = transform
+                .Find("Bullet")
+                .gameObject;
         }
 
-        public void InitializeIfNameIs(string shellName)
+        public void ThrowIfKeyIs(string shellKey)
         {
-            if(shellName != Name)
+            if(shellKey != Key)
             {
                 return;
             }

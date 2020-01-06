@@ -1,6 +1,6 @@
 ﻿namespace Messages
 {
-    public class SoldierHasBeenCreatedEvent
+    public class SetSoldierAsPlayerCommand
     {
         public string SoldierId { get; set; }
     }

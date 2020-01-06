@@ -20,7 +20,7 @@ namespace Soldier
 
         public void Unspawn()
         {
-
+            
         }
     }
 }

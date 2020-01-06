@@ -11,15 +11,16 @@ namespace Weapon
             prefab = Resources.Load<GameObject>("Weapon");
         }
 
-        public void CreateOfflinePlayerWeaponForSoldier(string weaponId, string soldierId)
+        public void CreateWeaponForSoldier(string soldierId)
         {
             var weapon = Instantiate(prefab);
+
+            weapon.GetComponent<Identificator>().SoldierId = soldierId;
 
             weapon.GetComponent<ChooseSoldierWeaponCommandReceiver>().SetSoldierId(soldierId);
             weapon.GetComponent<WeaponMenuCommandReceivers>().SetSoldierId(soldierId);
             weapon.GetComponent<SoldierPositionEventReceiver>().SetSoldierId(soldierId);
             weapon.GetComponent<SoldierHasBeenSpawnedEventReceiver>().SetSoldierId(soldierId);
-            weapon.GetComponent<CreateOfflineShellCommandSender>().SetSoldierId(soldierId);
         }
     }
 }

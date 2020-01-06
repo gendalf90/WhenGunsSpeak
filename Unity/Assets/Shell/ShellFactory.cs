@@ -2,13 +2,13 @@
 
 namespace Shell
 {
-    public class CreateShellData
+    public class ShellData
     {
         public string SoldierId { get; set; }
 
         public string ShellId { get; set; }
 
-        public string ShellName { get; set; }
+        public string ShellKey { get; set; }
 
         public Vector2 Position { get; set; }
 
@@ -19,27 +19,27 @@ namespace Shell
     {
         private GameObject prefab;
 
-        private GameObject currentWeapon;
-        private CreateShellData currentData;
+        private GameObject currentShell;
+        private ShellData currentData;
 
         private void Awake()
         {
             prefab = Resources.Load<GameObject>("Shell");
         }
 
-        public void CreateOfflineShell(CreateShellData data)
+        public void CreateAndThrowShell(ShellData data)
         {
-            currentWeapon = Instantiate(prefab);
+            currentShell = Instantiate(prefab);
             currentData = data;
 
             SetIdentificator();
             SetPosition();
-            Initialize();
+            Throw();
         }
 
         private void SetIdentificator()
         {
-            var identificator = currentWeapon.GetComponent<Identificator>();
+            var identificator = currentShell.GetComponent<Identificator>();
 
             identificator.SoldierId = currentData.SoldierId;
             identificator.ShellId = currentData.ShellId;
@@ -47,19 +47,19 @@ namespace Shell
 
         private void SetPosition()
         {
-            var position = currentWeapon.GetComponent<Position>();
+            var position = currentShell.GetComponent<Position>();
 
             position.SetPosition(currentData.Position);
             position.SetRotation(currentData.Rotation);
         }
 
-        private void Initialize()
+        private void Throw()
         {
-            var initializers = currentWeapon.GetComponents<IInitializable>();
+            var throwers = currentShell.GetComponents<IThrowable>();
 
-            foreach (var initializer in initializers)
+            foreach (var thrower in throwers)
             {
-                initializer.InitializeIfNameIs(currentData.ShellName);
+                thrower.ThrowIfKeyIs(currentData.ShellKey);
             }
         }
     }

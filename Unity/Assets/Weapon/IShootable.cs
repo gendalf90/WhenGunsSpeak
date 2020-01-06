@@ -7,7 +7,7 @@ namespace Weapon
     {
         public string ShellId { get; set; }
 
-        public string ShellName { get; set; }
+        public string ShellKey { get; set; }
 
         public Vector2 Position { get; set; }
 
