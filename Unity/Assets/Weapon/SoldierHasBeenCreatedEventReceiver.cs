@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Weapon
 {
-    public class CreateSoldierWeaponCommandReceiver : MonoBehaviour
+    public class SoldierHasBeenCreatedEventReceiver : MonoBehaviour
     {
         private WeaponFactory weaponFactory;
 

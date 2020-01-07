@@ -16,11 +16,6 @@ namespace Weapon
             var weapon = Instantiate(prefab);
 
             weapon.GetComponent<Identificator>().SoldierId = soldierId;
-
-            weapon.GetComponent<ChooseSoldierWeaponCommandReceiver>().SetSoldierId(soldierId);
-            weapon.GetComponent<WeaponMenuCommandReceivers>().SetSoldierId(soldierId);
-            weapon.GetComponent<SoldierPositionEventReceiver>().SetSoldierId(soldierId);
-            weapon.GetComponent<SoldierHasBeenSpawnedEventReceiver>().SetSoldierId(soldierId);
         }
     }
 }

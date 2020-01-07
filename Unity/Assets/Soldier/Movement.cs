@@ -38,10 +38,5 @@ namespace Soldier
                 moveable.Stop();
             }
         }
-
-        public void SetDefaultForce()
-        {
-            movingForce = 3.0f;
-        }
     }
 }

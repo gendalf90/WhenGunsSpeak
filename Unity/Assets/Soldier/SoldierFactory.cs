@@ -22,11 +22,6 @@ namespace Soldier
 
             newSoldier.GetComponent<Identificator>().SoldierId = soldierId;
 
-            newSoldier.GetComponent<Movement>().SetDefaultForce();
-
-            newSoldier.GetComponentInChildren<SoldierHasBeenSpawnedEventSender>(true).SetSoldierId(soldierId);
-            newSoldier.GetComponentInChildren<SoldierPositionEventSender>(true).SetSoldierId(soldierId);
-
             return newSoldier;
         }
     }

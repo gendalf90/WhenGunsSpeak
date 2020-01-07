@@ -7,13 +7,12 @@ namespace Weapon
 {
     public class SoldierPositionEventReceiver : MonoBehaviour
     {
-        [SerializeField]
-        private string soldierId;
-
+        private Identificator identificator;
         private Position position;
 
         private void Awake()
         {
+            identificator = GetComponent<Identificator>();
             position = GetComponent<Position>();
         }
 
@@ -21,7 +20,7 @@ namespace Weapon
         {
             MessageBroker.Default
                 .Receive<SoldierPositionEvent>()
-                .Where(message => message.SoldierId == soldierId)
+                .Where(message => message.SoldierId == identificator.SoldierId)
                 .Do(SetPosition)
                 .Do(SetFlip)
                 .TakeUntilDisable(this)
@@ -45,11 +44,6 @@ namespace Weapon
             {
                 position.SetLeftLooking();
             }
-        }
-
-        public void SetSoldierId(string soldierId)
-        {
-            this.soldierId = soldierId;
         }
     }
 }

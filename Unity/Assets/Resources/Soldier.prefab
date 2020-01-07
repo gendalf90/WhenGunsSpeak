@@ -67,7 +67,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 384649683
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 5101b21388137804bbc9342ca4752f33, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -170,7 +170,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 562de2c273ced814588d8b4b3b96a91b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soldierId: 
 --- !u!114 &2346777215341940556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,8 +182,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3d856596efdb5045846278ab3586450, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soldierId: 
-  isPlayer: 0
 --- !u!1 &3964282626348398638
 GameObject:
   m_ObjectHideFlags: 0
@@ -252,7 +249,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 384649683
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: ec1f6a4398265ab468c3e51424eec68d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -324,7 +321,12 @@ GameObject:
   - component: {fileID: 3964282626884409853}
   - component: {fileID: 8168669687377910667}
   - component: {fileID: 1240576326330144120}
-  - component: {fileID: 6377703560749566625}
+  - component: {fileID: 254895051332699080}
+  - component: {fileID: 7248941421885768084}
+  - component: {fileID: 4212578334232592837}
+  - component: {fileID: 720152143336109934}
+  - component: {fileID: 8356989685896940995}
+  - component: {fileID: 2471334233563904615}
   m_Layer: 0
   m_Name: Soldier
   m_TagString: Soldier
@@ -380,7 +382,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e63a4f697f8aef49a36bba3f700ed4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movingForce: 0
+  movingForce: 3
 --- !u!114 &3964282626884409853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -418,9 +420,58 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dffff53c0b174ef49b01f4a5f4724780, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &254895051332699080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3964282626884409831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9b3d2e3ac787d14092ff70113fc94c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   soldierId: 
+--- !u!114 &7248941421885768084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3964282626884409831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dd78be9868ff1f4dada205ba00a9d8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   isPlayer: 0
---- !u!114 &6377703560749566625
+--- !u!114 &4212578334232592837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3964282626884409831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 807fab90efb7ca742abfb5b4be15b1ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnDelaySeconds: 3
+--- !u!114 &720152143336109934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3964282626884409831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 956d2c9f67af89b4a9eb2e7e17ad9284, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8356989685896940995
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -432,7 +483,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a308b0d6cab27e24f8793b2f3ccaabe1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soldierId: 
+--- !u!114 &2471334233563904615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3964282626884409831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5caddcda29e756343a6b7ead32cc0ab6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3964282627128415391
 GameObject:
   m_ObjectHideFlags: 0
@@ -500,7 +562,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 384649683
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f1ce133d3c64de747b2c35b6cbe8787d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

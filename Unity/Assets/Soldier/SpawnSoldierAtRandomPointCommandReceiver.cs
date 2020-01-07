@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Soldier
 {
-    public class SpawnSoldierCommandAtRandomPointReceiver : MonoBehaviour
+    public class SpawnSoldierAtRandomPointCommandReceiver : MonoBehaviour
     {
         private RandomSpawner spawner;
         private Identificator identificator;

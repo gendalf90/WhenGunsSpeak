@@ -201,6 +201,7 @@ GameObject:
   - component: {fileID: 9080587667392019115}
   - component: {fileID: 9080587666282166880}
   - component: {fileID: 9080587666282166881}
+  - component: {fileID: 4599388004367985499}
   m_Layer: 0
   m_Name: Shell
   m_TagString: Untagged
@@ -283,3 +284,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b86cd58e6794e545956498f30dd1d0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4599388004367985499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9080587667392019118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92d089222c7d5164387094ffcfe01886, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soldierId: 
+  shellId: 

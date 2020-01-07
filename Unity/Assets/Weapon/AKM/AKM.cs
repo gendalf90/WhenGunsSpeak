@@ -15,6 +15,7 @@ namespace Weapon
         private static readonly TimeSpan beetwenShotsDelay = TimeSpan.FromMilliseconds(800);
 
         private Transform bodyTransform;
+        private Transform barrelTransform;
 
         private IShot shot;
 
@@ -31,6 +32,7 @@ namespace Weapon
         private void Awake()
         {
             bodyTransform = transform.Find("Body");
+            barrelTransform = transform.Find("Barrel");
         }
 
         private void Update()
@@ -91,8 +93,8 @@ namespace Weapon
                 {
                     ShellId = IdGenerator.Generate(),
                     ShellKey = ShellKey,
-                    //Position = 
-                    //Rotation =
+                    //Position = barrelTransform.position,
+                    //Rotation = transform.rotation.z
                 })
                 .Subscribe(observer);
         }

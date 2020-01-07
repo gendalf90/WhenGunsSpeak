@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Weapon
 {
-    public class CreateShellCommandSender : MonoBehaviour
+    public class CreateAndThrowShellCommandSender : MonoBehaviour
     {
         private Identificator identificator;
         private IShootable[] shootables;

@@ -7,13 +7,12 @@ namespace Weapon
 {
     public class SoldierHasBeenSpawnedEventReceiver : MonoBehaviour
     {
-        [SerializeField]
-        private string soldierId;
-
+        private Identificator identificator;
         private Spawning spawning;
 
         private void Awake()
         {
+            identificator = GetComponent<Identificator>();
             spawning = GetComponent<Spawning>();
         }
 
@@ -21,15 +20,10 @@ namespace Weapon
         {
             MessageBroker.Default
                 .Receive<SoldierHasBeenSpawnedEvent>()
-                .Where(message => message.SoldierId == soldierId)
+                .Where(message => message.SoldierId == identificator.SoldierId)
                 .Do(message => spawning.Spawn())
                 .TakeUntilDisable(this)
                 .Subscribe();
-        }
-
-        public void SetSoldierId(string soldierId)
-        {
-            this.soldierId = soldierId;
         }
     }
 }
