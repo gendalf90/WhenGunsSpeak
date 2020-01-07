@@ -17,7 +17,7 @@ namespace Shell
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            var identificator = other.GetComponent<Identificator>();
+            var identificator = other.GetComponentInParent<Identificator>();
 
             MessageBroker.Default.Publish(new ShellSoldierHitEvent
             {

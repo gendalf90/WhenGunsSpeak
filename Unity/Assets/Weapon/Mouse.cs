@@ -11,7 +11,7 @@ namespace Weapon
             shooting = GetComponent<Shooting>();
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
             if (Input.GetMouseButtonDown(0))
             {

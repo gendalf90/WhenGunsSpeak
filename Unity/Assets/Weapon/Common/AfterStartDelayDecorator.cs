@@ -31,7 +31,7 @@ namespace Weapon.Common
         {
             return shot
                 .Do(shotInfo => delayTimer.Start())
-                .ContinueWith(delayTimer)
+                .SelectMany(delayTimer)
                 .Select(invokeInfo => new ShotInfo())
                 .Subscribe(observer);
         }
