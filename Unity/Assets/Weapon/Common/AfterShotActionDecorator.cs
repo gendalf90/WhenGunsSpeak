@@ -3,33 +3,37 @@ using UniRx;
 
 namespace Weapon.Common
 {
-    public class OnStartActionShot : IShot
+    public class AfterShotActionDecorator : IShot
     {
+        private readonly IShot shot;
         private readonly Action action;
-        private readonly Subject<ShotInfo> subject = new Subject<ShotInfo>();
 
-        public OnStartActionShot(Action action)
+        public AfterShotActionDecorator(IShot shot, Action action)
         {
+            this.shot = shot;
             this.action = action;
         }
 
         public void Start()
         {
-            action.Invoke();
-            subject.OnNext(new ShotInfo());
+            shot.Start();
         }
 
         public void Stop()
         {
+            shot.Stop();
         }
 
         public IDisposable Subscribe(IObserver<ShotInfo> observer)
         {
-            return subject.Subscribe(observer);
+            return shot
+                .Do(shotInfo => action.Invoke())
+                .Subscribe(observer);
         }
 
         public void Update()
         {
+            shot.Update();
         }
     }
 }

@@ -4,12 +4,12 @@ using Utils;
 
 namespace Weapon.Common
 {
-    public class BeforeStartDelayDecorator : IShot
+    public class AfterShotDelayDecorator : IShot
     {
         private readonly IShot shot;
         private readonly RealTimeTimer delayTimer;
 
-        public BeforeStartDelayDecorator(IShot shot, TimeSpan delay)
+        public AfterShotDelayDecorator(IShot shot, TimeSpan delay)
         {
             this.shot = shot;
 
@@ -18,7 +18,7 @@ namespace Weapon.Common
 
         public void Start()
         {
-            delayTimer.Start();
+            shot.Start();
         }
 
         public void Stop()
@@ -29,9 +29,10 @@ namespace Weapon.Common
 
         public IDisposable Subscribe(IObserver<ShotInfo> observer)
         {
-            return delayTimer
-                .Do(invokeInfo => shot.Start())
-                .SelectMany(shot)
+            return shot
+                .Do(shotInfo => delayTimer.Start())
+                .SelectMany(delayTimer)
+                .Select(invokeInfo => new ShotInfo())
                 .Subscribe(observer);
         }
 

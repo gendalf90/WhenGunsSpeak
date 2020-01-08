@@ -1,45 +1,50 @@
 ﻿using System;
 using UniRx;
-using Utils;
 
 namespace Weapon.Common
 {
-    public class AfterStartDelayDecorator : IShot
+    public class RepeatShotDecorator : IShot
     {
         private readonly IShot shot;
-        private readonly RealTimeTimer delayTimer;
+        private bool needRepeat;
+        private bool hasStarted;
 
-        public AfterStartDelayDecorator(IShot shot, TimeSpan delay)
+        public RepeatShotDecorator(IShot shot)
         {
             this.shot = shot;
-
-            delayTimer = new RealTimeTimer(delay);
         }
 
         public void Start()
         {
             shot.Start();
+
+            hasStarted = true;
         }
 
         public void Stop()
         {
             shot.Stop();
-            delayTimer.Stop();
+
+            hasStarted = false;
         }
 
         public IDisposable Subscribe(IObserver<ShotInfo> observer)
         {
             return shot
-                .Do(shotInfo => delayTimer.Start())
-                .SelectMany(delayTimer)
-                .Select(invokeInfo => new ShotInfo())
+                .Do(shotInfo => needRepeat = hasStarted)
                 .Subscribe(observer);
         }
 
         public void Update()
         {
-            delayTimer.Update();
             shot.Update();
+
+            if (hasStarted && needRepeat)
+            {
+                shot.Start();
+            }
+
+            needRepeat = false;
         }
     }
 }

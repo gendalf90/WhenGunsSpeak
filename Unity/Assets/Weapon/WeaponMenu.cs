@@ -10,12 +10,12 @@ namespace Weapon
         private Dropdown firstWeaponDropdown;
         private Listing listing;
         private Spawning spawning;
+        private GameObject canvas;
 
         private void Awake()
         {
-            firstWeaponDropdown = transform
-                .GetComponentsInChildren<Dropdown>()
-                .First(component => component.name == "WeaponDropdown");
+            firstWeaponDropdown = GetComponentsInChildren<Dropdown>(true).First(component => component.name == "WeaponDropdown");
+            canvas = transform.Find("Canvas").gameObject;
             listing = GetComponentInParent<Listing>();
             spawning = GetComponentInParent<Spawning>();
         }
@@ -37,12 +37,12 @@ namespace Weapon
 
         public void Show()
         {
-            gameObject.SetActive(true);
+            canvas.SetActive(true);
         }
 
         public void Hide()
         {
-            gameObject.SetActive(false);
+            canvas.SetActive(false);
         }
 
         public void ChooseSelectedFirstWeapon()

@@ -19,14 +19,19 @@ namespace Weapon
 
         private IShot shot;
 
+        private Subject<ShotData> shotSubject = new Subject<ShotData>();
+
         public AKM()
         {
-            var actionShot = new OnStartActionShot(MakeShot);
-            var delayShot = new AfterStartDelayDecorator(actionShot, beetwenShotsDelay);
+            var emptyShot = new EmptyShot();
+            var actionShot = new AfterShotActionDecorator(emptyShot, MakeShot);
+            var delayShot = new AfterShotDelayDecorator(actionShot, beetwenShotsDelay);
+            var trottling = new TrottleUntilShotDecorator(delayShot);
+            var repeatShot = new RepeatShotDecorator(trottling);
 
-            shot = delayShot;
+            shot = repeatShot;
 
-            shot.Subscribe(shotInfo => shot.Start());
+            shot.Subscribe();
         }
 
         private void Awake()
@@ -68,6 +73,14 @@ namespace Weapon
         private void MakeShot()
         {
             //отдача, вспышка и т.д.
+
+            shotSubject.OnNext(new ShotData
+            {
+                ShellId = IdGenerator.Generate(),
+                ShellKey = ShellKey,
+                Position = barrelTransform.position,
+                Rotation = transform.rotation.eulerAngles.z
+            });
         }
 
         public void SpawnIfNameIs(string name)
@@ -88,15 +101,7 @@ namespace Weapon
 
         public IDisposable Subscribe(IObserver<ShotData> observer)
         {
-            return shot
-                .Select(shotInfo => new ShotData
-                {
-                    ShellId = IdGenerator.Generate(),
-                    ShellKey = ShellKey,
-                    //Position = barrelTransform.position,
-                    //Rotation = transform.rotation.z
-                })
-                .Subscribe(observer);
+            return shotSubject.Subscribe(observer);
         }
     }
 }
